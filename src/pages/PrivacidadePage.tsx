@@ -104,13 +104,6 @@ export const PrivacidadePage = () => {
       </section>
 
       <Footer />
-      <FloatingButtons
-        containerVariant="z-50 right-6 bottom-6"
-        innerVariant="relative"
-        iconUrl="https://c.animaapp.com/mfxz26rhnSsSP4/assets/icon-33.svg"
-        iconClassName="box-border caret-transparent shrink-0 h-4 outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] text-nowrap w-4"
-        hasButton={true}
-      />
     </div>
   );
 };

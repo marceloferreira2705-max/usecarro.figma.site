@@ -32,20 +32,6 @@ export const App = () => {
                 <FAQSection />
                 <ContactSection />
                 <Footer />
-                <FloatingButtons
-                  containerVariant="z-50 right-6 bottom-6"
-                  innerVariant="relative"
-                  iconUrl="https://c.animaapp.com/mfxz26rhnSsSP4/assets/icon-33.svg"
-                  iconClassName="box-border caret-transparent shrink-0 h-4 outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] text-nowrap w-4"
-                  hasButton={true}
-                />
-                <FloatingButtons
-                  containerVariant="z-10 right-4 bottom-4"
-                  innerVariant="opacity-20"
-                  iconUrl="https://c.animaapp.com/mfxz26rhnSsSP4/assets/icon-34.svg"
-                  iconClassName="box-border caret-transparent grayscale-[1] h-[19px] outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] w-[60px]"
-                  hasButton={false}
-                />
               </div>
             </div>
           </div>
