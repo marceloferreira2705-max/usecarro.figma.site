@@ -491,11 +491,11 @@ export const VeiculosPage = () => {
     }
   ];
 
-  const filters = ["Todos", "Econômicos", "Compactos", "SUVs", "Sedans", "Picapes", "Comerciais"];
+  const filters = ["Todos", "Econômicos", "Compactos", "SUVs", "Sedans", "Picapes", "Comerciais", "Crossover Coupé"];
 
   const filteredVehicles = selectedFilter === "Todos" 
     ? allVehicles 
-    : allVehicles.filter(vehicle => vehicle.category === selectedFilter);
+    : allVehicles.filter(vehicle => vehicle.category === selectedFilter || vehicle.categoryName === selectedFilter);
 
   const displayedVehicles = filteredVehicles.slice(0, visibleVehicles);
 

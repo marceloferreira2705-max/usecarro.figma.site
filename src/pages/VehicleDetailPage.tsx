@@ -1,216 +1,48 @@
+
 import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
 import { FloatingButtons } from "@/components/FloatingButtons";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 
-// Mock data for vehicles - in a real app this would come from an API
+// Mock data for vehicles - ONLY ID "1" for now, simplified for stability
 const vehicleData: Record<string, any> = {
   "1": {
     id: "1",
-    title: "Fiat Mobi 1.0 Like Mec",
-    brand: "Fiat",
-    year: "2026",
-    category: "Econômico",
-    fuelType: "Flex",
-    transmission: "Manual",
-    seats: "5",
-    engine: "1.0",
-    color: "Branco",
-    doors: "4",
-    prices: {
-      assinatura: "R$ 1.800",
-      financiamento: "R$ 2.160",
-      consorcio: "R$ 1.440"
-    },
-    images: [
-      "https://c.animaapp.com/mfxz26rhnSsSP4/assets/fb2d708a43f9d3bf76bb477efaad4452c387b94f.png"
-    ],
-    features: [
-      "Ar condicionado",
-      "Direção hidráulica",
-      "Vidros elétricos dianteiros",
-      "Trava elétrica",
-      "Rádio com Bluetooth",
-      "Airbag duplo"
-    ],
-    description: "O Fiat Mobi é perfeito para quem busca economia e praticidade no dia a dia. Compacto e ágil, ideal para o trânsito urbano."
-  },
-  "2": {
-    id: "2",
-    title: "Fiat Argo 1.0 Drive",
-    brand: "Fiat",
-    year: "2026",
-    category: "Hatch",
-    fuelType: "Flex",
-    transmission: "Manual",
-    seats: "5",
-    engine: "1.0",
-    color: "Vermelho",
-    doors: "4",
-    prices: {
-      assinatura: "R$ 1.950",
-      financiamento: "R$ 2.340",
-      consorcio: "R$ 1.560"
-    },
-    images: [
-      "https://c.animaapp.com/mfxz26rhnSsSP4/assets/fb2d708a43f9d3bf76bb477efaad4452c387b94f.png"
-    ],
-    features: [
-      "Ar condicionado",
-      "Direção elétrica",
-      "Vidros elétricos",
-      "Trava elétrica",
-      "Central multimídia",
-      "Airbag duplo"
-    ],
-    description: "O Fiat Argo oferece design moderno e tecnologia avançada em um hatch compacto e eficiente."
-  },
-  "3": {
-    id: "3",
-    title: "Hyundai HB20 1.0 Sense",
-    brand: "Hyundai",
-    year: "2026",
-    category: "Hatch",
-    fuelType: "Flex",
-    transmission: "Manual",
-    seats: "5",
-    engine: "1.0",
-    color: "Prata",
-    doors: "4",
-    prices: {
-      assinatura: "R$ 1.950",
-      financiamento: "R$ 2.340",
-      consorcio: "R$ 1.560"
-    },
-    images: [
-      "https://c.animaapp.com/mfxz26rhnSsSP4/assets/fb2d708a43f9d3bf76bb477efaad4452c387b94f.png"
-    ],
-    features: [
-      "Ar condicionado",
-      "Direção elétrica",
-      "Vidros elétricos",
-      "Trava elétrica",
-      "Central multimídia",
-      "Airbag duplo"
-    ],
-    description: "O HB20 é conhecido por sua confiabilidade e economia, ideal para o uso urbano."
-  },
-  "4": {
-    id: "4",
-    title: "Volkswagen Polo Track",
-    brand: "Volkswagen",
-    year: "2026",
-    category: "Hatch",
-    fuelType: "Flex",
-    transmission: "Manual",
-    seats: "5",
-    engine: "1.0",
-    color: "Branco",
-    doors: "4",
-    prices: {
-      assinatura: "R$ 2.200",
-      financiamento: "R$ 2.640",
-      consorcio: "R$ 1.760"
-    },
-    images: [
-      "https://c.animaapp.com/mfxz26rhnSsSP4/assets/fb2d708a43f9d3bf76bb477efaad4452c387b94f.png"
-    ],
-    features: [
-      "Ar condicionado",
-      "Direção elétrica",
-      "Vidros elétricos",
-      "Trava elétrica",
-      "Central multimídia",
-      "Airbag duplo",
-      "Controle de estabilidade"
-    ],
-    description: "O Polo Track combina qualidade alemã com praticidade brasileira."
-  },
-  "5": {
-    id: "5",
-    title: "Fiat Argo 1.0 Drive CVT",
-    brand: "Fiat",
-    year: "2026",
-    category: "Hatch",
-    fuelType: "Flex",
-    transmission: "CVT",
-    seats: "5",
-    engine: "1.0",
-    color: "Azul",
-    doors: "4",
-    prices: {
-      assinatura: "R$ 2.100",
-      financiamento: "R$ 2.520",
-      consorcio: "R$ 1.680"
-    },
-    images: [
-      "https://c.animaapp.com/mfxz26rhnSsSP4/assets/fb2d708a43f9d3bf76bb477efaad4452c387b94f.png"
-    ],
-    features: [
-      "Ar condicionado",
-      "Direção elétrica",
-      "Vidros elétricos",
-      "Trava elétrica",
-      "Central multimídia",
-      "Airbag duplo",
-      "Transmissão CVT"
-    ],
-    description: "O Fiat Argo CVT oferece maior conforto de condução com transmissão automática."
-  },
-  "6": {
-    id: "6",
-    title: "Chevrolet Onix Plus 1.0 MT",
-    brand: "Chevrolet",
-    year: "2026",
-    category: "Sedan",
-    fuelType: "Flex",
-    transmission: "Manual",
-    seats: "5",
-    engine: "1.0 Turbo",
-    color: "Prata",
-    doors: "4",
-    prices: {
-      assinatura: "R$ 2.000",
-      financiamento: "R$ 2.400",
-      consorcio: "R$ 1.600"
-    },
-    images: [
-      "https://c.animaapp.com/mfxz26rhnSsSP4/assets/fb2d708a43f9d3bf76bb477efaad4452c387b94f.png"
-    ],
-    features: [
-      "Ar condicionado",
-      "Direção elétrica",
-      "Vidros elétricos",
-      "Trava elétrica",
-      "Central multimídia",
-      "Airbag duplo",
-      "Controle de estabilidade",
-      "Sensor de estacionamento"
-    ],
-    description: "O Chevrolet Onix Plus combina espaço interno generoso com economia de combustível. Perfeito para famílias que buscam conforto e praticidade."
-  },
-  "7": {
-    id: "7",
-    title: "Fiat Strada Endurance 1.4",
-    brand: "Fiat",
-    year: "2026",
-    category: "Picape",
+    title: "Fiat Strada",
+    brand: "FIAT",
+    version: "STRADA 1.3 CABINE PLUS ENDURANCE",
+    type: "Picape Compacta",
     fuelType: "Flex",
     transmission: "Manual",
     seats: "2",
-    engine: "1.4",
-    color: "Branco",
+    engine: "1.3",
+    color: "Branco", // Mantido nos dados, mas não exibido no card de especificações
     doors: "2",
+    year: "2026",
+    clientType: "Pessoa Jurídica",
     prices: {
-      assinatura: "R$ 2.300",
-      financiamento: "R$ 2.760",
-      consorcio: "R$ 1.840"
+      assinatura: {
+        monthly: "R$ 2.249,00",
+        term: "36 meses",
+        mileage: "1.000 km/mês",
+        details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
+      },
+      financiamento: {
+        monthly: "R$ 2.698,80",
+        term: "60 meses",
+        details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
+      },
+      consorcio: {
+        monthly: "R$ 1.799,20",
+        term: "120 meses",
+        details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
+      }
     },
     images: [
-      "https://c.animaapp.com/mfxz26rhnSsSP4/assets/fb2d708a43f9d3bf76bb477efaad4452c387b94f.png"
+      "https://c.animaapp.com/mfxz26rhnSsSP4/img/hb20.png" // Placeholder image
     ],
-    features: [
+    features: [ // Mantido nos dados, mas seções de exibição removidas
       "Ar condicionado",
       "Direção hidráulica",
       "Vidros elétricos",
@@ -218,43 +50,9 @@ const vehicleData: Record<string, any> = {
       "Caçamba",
       "Airbag duplo"
     ],
-    description: "A Fiat Strada é ideal para trabalho e lazer, oferecendo robustez e economia."
-  },
-  "16": {
-    id: "16",
-    title: "Chevrolet Tracker 1.0 Turbo LT Auto",
-    brand: "Chevrolet",
-    year: "2025",
-    category: "SUV Compacto",
-    fuelType: "Flex",
-    transmission: "Automático",
-    seats: "5",
-    engine: "1.0 Turbo",
-    color: "Azul",
-    doors: "4",
-    prices: {
-      assinatura: "R$ 2.859",
-      financiamento: "R$ 3.431",
-      consorcio: "R$ 2.287"
-    },
-    images: [
-      "https://c.animaapp.com/mfxz26rhnSsSP4/assets/fb2d708a43f9d3bf76bb477efaad4452c387b94f.png"
-    ],
-    features: [
-      "Ar condicionado automático",
-      "Direção elétrica",
-      "Vidros elétricos",
-      "Trava elétrica",
-      "Central multimídia com Android Auto/Apple CarPlay",
-      "Airbags múltiplos",
-      "Controle de estabilidade",
-      "Sensor de estacionamento",
-      "Câmera de ré",
-      "Rodas de liga leve",
-      "Faróis de LED"
-    ],
-    description: "O Chevrolet Tracker é um SUV compacto que oferece versatilidade, tecnologia e segurança. Ideal para aventuras urbanas e viagens em família."
+    description: "Parceira ideal para quem trabalha com cargas leves e entregas. Picape robusta, líder em economia e conhecida pela confiabilidade no dia a dia."
   }
+  // Outros veículos serão adicionados aqui em uma etapa posterior
 };
 
 export const VehicleDetailPage = () => {
@@ -283,7 +81,7 @@ export const VehicleDetailPage = () => {
     );
   }
 
-  const getPriceByTab = (tab: string) => {
+  const getPriceDataByTab = (tab: string) => {
     switch (tab) {
       case "Assinatura":
         return vehicle.prices.assinatura;
@@ -296,18 +94,7 @@ export const VehicleDetailPage = () => {
     }
   };
 
-  const getTabDescription = (tab: string) => {
-    switch (tab) {
-      case "Assinatura":
-        return "/mês - Tudo incluso";
-      case "Financiamento":
-        return "/mês (60x)";
-      case "Consórcio":
-        return "/mês (grupo)";
-      default:
-        return "/mês";
-    }
-  };
+  const currentPriceData = getPriceDataByTab(activeTab);
 
   return (
     <div className="min-h-screen bg-white">
@@ -329,24 +116,29 @@ export const VehicleDetailPage = () => {
       {/* Vehicle Details */}
       <section className="py-12 bg-white">
         <div className="max-w-screen-xl mx-auto px-6 md:px-8">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Images */}
-            <div>
-              <div className="bg-gray-100 rounded-2xl p-8 mb-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Left Column: Image and Description */}
+            <div className="flex flex-col items-center">
+              <div className="bg-gray-100 rounded-2xl p-8 mb-4 flex justify-center items-center min-h-[320px] w-full max-w-lg">
                 <img
                   src={vehicle.images[currentImageIndex]}
                   alt={vehicle.title}
-                  className="w-full h-80 object-contain"
+                  className="w-full max-h-80 object-contain"
                 />
               </div>
+              <div className="bg-white rounded-lg p-6 shadow-md w-full max-w-lg mb-6">
+                <p className="text-gray-600 leading-relaxed text-center">
+                  {vehicle.description}
+                </p>
+              </div>
               {vehicle.images.length > 1 && (
-                <div className="flex space-x-2">
+                <div className="flex space-x-2 justify-center mt-4">
                   {vehicle.images.map((image: string, index: number) => (
                     <button
                       key={index}
                       onClick={() => setCurrentImageIndex(index)}
-                      className={`w-20 h-20 rounded-lg overflow-hidden ${
-                        currentImageIndex === index ? 'ring-2 ring-green-600' : ''
+                      className={`w-20 h-20 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                        currentImageIndex === index ? 'border-green-600 ring-2 ring-green-300' : 'border-gray-200 hover:border-gray-400'
                       }`}
                     >
                       <img src={image} alt={`${vehicle.title} ${index + 1}`} className="w-full h-full object-cover" />
@@ -356,47 +148,52 @@ export const VehicleDetailPage = () => {
               )}
             </div>
 
-            {/* Vehicle Info */}
+            {/* Right Column: Vehicle Info, Specs, Price Tabs, CTA */}
             <div>
               <div className="mb-6">
-                <span className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium mb-4">
-                  {vehicle.category}
-                </span>
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                    {vehicle.type}
+                  </span>
+                  <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                    {vehicle.clientType}
+                  </span>
+                </div>
                 <h1 className="text-3xl md:text-4xl font-bold mb-2">{vehicle.title}</h1>
-                <p className="text-gray-600 text-lg">{vehicle.brand} • {vehicle.year}</p>
+                <p className="text-gray-600 text-lg">{vehicle.brand} • {vehicle.version}</p>
               </div>
 
               {/* Specifications */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                <div className="text-center p-4 bg-gray-50 rounded-lg shadow-sm">
                   <div className="text-2xl mb-2">⛽</div>
                   <div className="text-sm text-gray-600">Combustível</div>
-                  <div className="font-semibold">{vehicle.fuelType}</div>
+                  <div className="font-semibold text-gray-800">{vehicle.fuelType}</div>
                 </div>
-                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                <div className="text-center p-4 bg-gray-50 rounded-lg shadow-sm">
                   <div className="text-2xl mb-2">⚙️</div>
                   <div className="text-sm text-gray-600">Transmissão</div>
-                  <div className="font-semibold">{vehicle.transmission}</div>
+                  <div className="font-semibold text-gray-800">{vehicle.transmission}</div>
                 </div>
-                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                <div className="text-center p-4 bg-gray-50 rounded-lg shadow-sm">
                   <div className="text-2xl mb-2">👥</div>
                   <div className="text-sm text-gray-600">Lugares</div>
-                  <div className="font-semibold">{vehicle.seats}</div>
+                  <div className="font-semibold text-gray-800">{vehicle.seats}</div>
                 </div>
-                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                <div className="text-center p-4 bg-gray-50 rounded-lg shadow-sm">
                   <div className="text-2xl mb-2">🔧</div>
                   <div className="text-sm text-gray-600">Motor</div>
-                  <div className="font-semibold">{vehicle.engine}</div>
+                  <div className="font-semibold text-gray-800">{vehicle.engine}</div>
                 </div>
-                <div className="text-center p-4 bg-gray-50 rounded-lg">
-                  <div className="text-2xl mb-2">🎨</div>
-                  <div className="text-sm text-gray-600">Cor</div>
-                  <div className="font-semibold">{vehicle.color}</div>
+                <div className="text-center p-4 bg-gray-50 rounded-lg shadow-sm">
+                  <div className="text-2xl mb-2">🗓️</div>
+                  <div className="text-sm text-gray-600">Ano</div>
+                  <div className="font-semibold text-gray-800">{vehicle.year}</div>
                 </div>
-                <div className="text-center p-4 bg-gray-50 rounded-lg">
+                <div className="text-center p-4 bg-gray-50 rounded-lg shadow-sm">
                   <div className="text-2xl mb-2">🚪</div>
                   <div className="text-sm text-gray-600">Portas</div>
-                  <div className="font-semibold">{vehicle.doors}</div>
+                  <div className="font-semibold text-gray-800">{vehicle.doors}</div>
                 </div>
               </div>
 
@@ -431,7 +228,7 @@ export const VehicleDetailPage = () => {
                     ? "bg-green-50 border-green-300 shadow-lg shadow-green-100"
                     : "bg-gradient-to-r from-green-50 to-blue-50 border-transparent"
                 }`}>
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center mb-4">
                     <div>
                       <div className={`text-sm font-semibold ${
                         activeTab === "Assinatura" 
@@ -441,7 +238,7 @@ export const VehicleDetailPage = () => {
                           : activeTab === "Consórcio"
                           ? "text-green-700"
                           : "text-gray-600"
-                      }`}>{activeTab}</div>
+                      }`}>{activeTab === "Assinatura" ? "Plano de Assinatura" : activeTab}</div>
                       <div className={`text-sm ${
                         activeTab === "Assinatura" 
                           ? "text-blue-600" 
@@ -450,7 +247,7 @@ export const VehicleDetailPage = () => {
                           : activeTab === "Consórcio"
                           ? "text-green-600"
                           : "text-gray-500"
-                      }`}>{getTabDescription(activeTab)}</div>
+                      }`}>{currentPriceData.term} • {currentPriceData.mileage}</div>
                     </div>
                     <div className={`text-3xl font-bold ${
                       activeTab === "Assinatura" 
@@ -461,14 +258,22 @@ export const VehicleDetailPage = () => {
                         ? "text-green-700"
                         : "text-green-600"
                     }`}>
-                      {getPriceByTab(activeTab)}
+                      {currentPriceData.monthly}
+                      <span className="text-base font-normal ml-1">/mês</span>
                     </div>
                   </div>
+                  <ul className="space-y-2 text-gray-600">
+                    {currentPriceData.details.map((detail: string, index: number) => (
+                      <li key={index} className="flex items-center">
+                        <span className="text-green-600 mr-2">✓</span> {detail}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
 
               {/* CTA Buttons */}
-              <div className="space-y-3">
+              <div className="space-y-3 mb-8">
                 <button 
                   onClick={() => window.location.href = "/contato"}
                   className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white font-semibold py-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
@@ -482,89 +287,19 @@ export const VehicleDetailPage = () => {
                   Falar com Especialista
                 </button>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Description and Features */}
-      <section className="py-12 bg-gray-50">
-        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Description */}
-            <div>
-              <h2 className="text-2xl font-bold mb-6">Sobre este veículo</h2>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                {vehicle.description}
-              </p>
-              
-              <div className="bg-white rounded-lg p-6">
-                <h3 className="text-lg font-semibold mb-4">Por que escolher {activeTab.toLowerCase()}?</h3>
-                {activeTab === "Assinatura" && (
-                  <ul className="space-y-2 text-gray-600">
-                    <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> Seguro incluso</li>
-                    <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> Manutenção inclusa</li>
-                    <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> IPVA incluso</li>
-                    <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> Assistência 24h</li>
-                    <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> Sem entrada</li>
-                  </ul>
-                )}
-                {activeTab === "Financiamento" && (
-                  <ul className="space-y-2 text-gray-600">
-                    <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> Taxas competitivas</li>
-                    <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> Aprovação rápida</li>
-                    <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> Processo 100% digital</li>
-                    <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> Parcelas fixas</li>
-                    <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> Carro fica em seu nome</li>
-                  </ul>
-                )}
-                {activeTab === "Consórcio" && (
-                  <ul className="space-y-2 text-gray-600">
-                    <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> Sem juros</li>
-                    <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> Planejamento financeiro</li>
-                    <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> Flexibilidade de escolha</li>
-                    <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> Investimento protegido</li>
-                    <li className="flex items-center"><span className="text-green-600 mr-2">✓</span> Grupos confiáveis</li>
-                  </ul>
-                )}
-              </div>
-            </div>
-
-            {/* Features */}
-            <div>
-              <h2 className="text-2xl font-bold mb-6">Equipamentos e Opcionais</h2>
-              <div className="bg-white rounded-lg p-6">
-                <div className="grid grid-cols-1 gap-3">
-                  {vehicle.features.map((feature: string, index: number) => (
-                    <div key={index} className="flex items-center">
-                      <span className="text-green-600 mr-3">✓</span>
-                      <span className="text-gray-700">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Safety */}
-              <div className="mt-8 bg-white rounded-lg p-6">
-                <h3 className="text-lg font-semibold mb-4">Segurança</h3>
-                <div className="grid grid-cols-1 gap-3">
-                  <div className="flex items-center">
-                    <span className="text-green-600 mr-3">🛡️</span>
-                    <span className="text-gray-700">Airbag duplo</span>
-                  </div>
-                  <div className="flex items-center">
-                    <span className="text-green-600 mr-3">🛡️</span>
-                    <span className="text-gray-700">Freios ABS</span>
-                  </div>
-                  <div className="flex items-center">
-                    <span className="text-green-600 mr-3">🛡️</span>
-                    <span className="text-gray-700">Controle de estabilidade</span>
-                  </div>
-                  <div className="flex items-center">
-                    <span className="text-green-600 mr-3">🛡️</span>
-                    <span className="text-gray-700">Cintos de segurança com pré-tensionador</span>
-                  </div>
-                </div>
+              {/* Informações para Pessoa Jurídica */}
+              <div className="bg-gray-50 rounded-lg p-6 shadow-md">
+                <h3 className="text-lg font-semibold mb-4">Informações para Pessoa Jurídica</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Se você possui CNPJ, temos condições especiais e planos personalizados para sua empresa. Fale com um de nossos consultores para saber mais.
+                </p>
+                <button 
+                  onClick={() => window.location.href = "/contato"}
+                  className="mt-4 bg-green-600 text-white font-semibold px-6 py-3 rounded-lg text-sm hover:bg-green-700 transition-colors"
+                >
+                  Falar com Consultor PJ
+                </button>
               </div>
             </div>
           </div>
@@ -597,3 +332,461 @@ export const VehicleDetailPage = () => {
     </div>
   );
 };
+
+</file_content>
+
+<file_content filePath="src/pages/SobrePage.tsx">
+
+  import { Header } from "@/sections/Header";
+import { Footer } from "@/sections/Footer";
+import { FloatingButtons } from "@/components/FloatingButtons";
+
+export const SobrePage = () => {
+  return (
+    <div className="min-h-screen bg-white">
+      <Header />
+      
+      {/* Hero Section */}
+      <section className="bg-[linear-gradient(to_right_bottom,rgb(255,255,255)_0%,oklch(0.985_0.002_247.839)_100%)] pt-32 pb-20">
+        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
+          <div className="text-center mb-16">
+            <h1 className="text-4xl md:text-6xl font-black leading-tight mb-6">
+              Sobre a <span className="text-green-600">Use Carro</span>
+            </h1>
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+              Conheça nossa história, missão e os valores que nos movem para revolucionar o mercado automotivo brasileiro.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Company Story Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                Nossa História
+              </h2>
+              <p className="text-lg text-gray-600 mb-6">
+                Nascemos da experiência. Nossa equipe é formada por executivos que ajudaram a moldar o mercado de carros por assinatura no Brasil.
+              </p>
+              <p className="text-lg text-gray-600 mb-6">
+                Com um profundo conhecimento e uma paixão pela inovação, unimos a experiência pioneira em assinaturas com uma sólida base no mercado financeiro.
+              </p>
+              <p className="text-lg text-gray-600 mb-6">
+                Mas percebemos que um único produto não serve para todo mundo. Por isso, nossa missão vai além da assinatura.
+              </p>
+              <p className="text-lg text-gray-600 mb-6">
+                Nosso propósito é te ajudar a encontrar a melhor solução de mobilidade para o seu momento de vida.
+              </p>
+              <p className="text-lg text-gray-600 mb-6">
+                Se você busca flexibilidade, a assinatura é a resposta ideal.
+              </p>
+              <p className="text-lg text-gray-600 mb-6">
+                Para quem quer ter o carro como um patrimônio rapidamente, o financiamento é a melhor opção.
+              </p>
+              <p className="text-lg text-gray-600 mb-6">
+                E para quem prefere planejar com calma e segurança, o consórcio é o caminho.
+              </p>
+              <p className="text-lg text-gray-600">
+                Com essa visão de que o cliente está em primeiro lugar, oferecemos as soluções mais competitivas do mercado. Nosso compromisso é transformar a maneira como você se relaciona com seu carro, garantindo que a escolha certa seja sempre a sua.
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <div className="relative">
+                <img
+                  src="https://c.animaapp.com/mfxz26rhnSsSP4/img/0c7523457f58ad84086d9881698a4e981695743f.png"
+                  alt="Equipe Use Carro"
+                  className="h-80 object-cover rounded-2xl"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-green-600/10 to-transparent rounded-2xl"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission, Vision, Values */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
+          <div className="grid md:grid-cols-3 gap-12">
+            {/* Mission */}
+            <div className="text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-green-600 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <span className="text-white text-3xl">🎯</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Missão</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Democratizar o acesso a veículos através de soluções inteligentes e personalizadas, utilizando tecnologia para conectar pessoas aos seus carros ideais de forma simples e transparente.
+              </p>
+            </div>
+
+            {/* Vision */}
+            <div className="text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <span className="text-white text-3xl">🔮</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Visão</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Ser a principal plataforma de soluções automotivas do Brasil, reconhecida pela inovação, confiabilidade e pela capacidade de transformar a experiência de ter um veículo.
+              </p>
+            </div>
+
+            {/* Values */}
+            <div className="text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-green-600 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <span className="text-white text-3xl">💎</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Valores</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Transparência, inovação, excelência no atendimento, responsabilidade social e compromisso com a satisfação do cliente são os pilares que guiam todas as nossas decisões.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Leadership Team */}
+      <section className="py-20 bg-white">
+        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Nossa Liderança
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Conheça os profissionais que lideram a Use Carro e trabalham incansavelmente para revolucionar o mercado automotivo brasileiro.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12">
+            {/* Marcelo Rosal - CEO & Fundador */}
+            <div className="text-center">
+              <div className="w-40 h-40 bg-gradient-to-br from-blue-600 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6 overflow-hidden">
+                <img
+                  src="https://c.animaapp.com/mfxz26rhnSsSP4/img/rosal.avif"
+                  alt="Marcelo Rosal"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Marcelo Rosal</h3>
+              <p className="text-green-600 font-semibold mb-4">CEO & Fundador</p>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Especialista em mercado automotivo com experiência pioneira em carros por assinatura.
+              </p>
+            </div>
+
+            {/* Gedson Santin - Diretor Comercial & Co-fundador */}
+            <div className="text-center">
+              <div className="w-40 h-40 bg-gradient-to-br from-green-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 overflow-hidden">
+                <img
+                  src="https://c.animaapp.com/mfxz26rhnSsSP4/img/gedson.png"
+                  alt="Gedson Santin"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="text-xl font-bold mb-2">Gedson Santin</h3>
+              <p className="text-green-600 font-semibold mb-4">Diretor Comercial & Co-fundador</p>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Expert em soluções de mobilidade e relacionamento com clientes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Company Numbers */}
+      <section className="py-20 bg-gradient-to-br from-green-600 to-blue-600">
+        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              Use Carro em Números
+            </h2>
+            <p className="text-xl text-white/90 max-w-2xl mx-auto">
+              Nosso crescimento reflete o impacto positivo que geramos na vida das pessoas
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="text-5xl md:text-6xl font-black text-white mb-4">25k+</div>
+              <div className="text-white/90 text-lg font-medium">Clientes Atendidos</div>
+              <div className="text-white/70 text-sm mt-2">Desde nossa fundação</div>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl md:text-6xl font-black text-white mb-4">10+</div>
+              <div className="text-white/90 text-lg font-medium">Parceiros Ativos</div>
+              <div className="text-white/70 text-sm mt-2">Concessionárias e seguradoras</div>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl md:text-6xl font-black text-white mb-4">180+</div>
+              <div className="text-white/90 text-lg font-medium">Cidades Atendidas</div>
+              <div className="text-white/70 text-sm mt-2">Em todo território nacional</div>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl md:text-6xl font-black text-white mb-4">98%</div>
+              <div className="text-white/90 text-lg font-medium">Satisfação</div>
+              <div className="text-white/70 text-sm mt-2">Índice de clientes satisfeitos</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      {/* Join Us CTA */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-screen-xl mx-auto px-6 md:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            Faça Parte da Nossa História
+          </h2>
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Estamos sempre em busca de talentos que compartilhem nossa paixão por inovação e excelência no atendimento.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button 
+              onClick={() => window.location.href = "/contato"}
+              className="bg-gradient-to-r from-green-600 to-blue-600 text-white font-semibold px-8 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+            >
+              Ver Vagas Abertas
+            </button>
+            <button 
+              onClick={() => window.location.href = "/contato"}
+              className="border-2 border-green-600 text-green-600 font-semibold px-8 py-4 rounded-2xl text-lg hover:bg-green-600 hover:text-white transition-colors cursor-pointer"
+            >
+              Enviar Currículo
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+      <FloatingButtons
+        containerVariant="z-50 right-6 bottom-6"
+        innerVariant="relative"
+        iconUrl="https://c.animaapp.com/mfxz26rhnSsSP4/assets/icon-33.svg"
+        iconClassName="box-border caret-transparent shrink-0 h-4 outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] text-nowrap w-4"
+        hasButton={true}
+      />
+    </div>
+  );
+};
+
+</file_content>
+
+<file_content filePath="src/pages/ContatoPage.tsx">
+
+  import { Header } from "@/sections/Header";
+import { Footer } from "@/sections/Footer";
+import { FloatingButtons } from "@/components/FloatingButtons";
+
+export const ContatoPage = () => {
+  return (
+    <div className="min-h-screen bg-white">
+      <Header />
+      
+      {/* Hero Section */}
+      <section className="bg-[linear-gradient(to_right_bottom,rgb(255,255,255)_0%,oklch(0.985_0.002_247.839)_100%)] pt-32 pb-20">
+        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
+          <div className="text-center mb-16">
+            <h1 className="text-4xl md:text-6xl font-black leading-tight mb-6">
+              Entre em <span className="text-green-600">Contato</span>
+            </h1>
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+              Estamos aqui para ajudar você a encontrar a melhor solução automotiva. Fale conosco através dos canais abaixo.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Info & Form */}
+      <section className="py-20 bg-white">
+        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
+          <div className="grid lg:grid-cols-2 gap-16">
+            {/* Contact Information */}
+            <div>
+              <h2 className="text-3xl font-bold mb-8">Fale Conosco</h2>
+              
+              <div className="space-y-6">
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-xl">📞</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold mb-2">Telefone</h3>
+                    <p className="text-gray-600">(11) 4000-1234</p>
+                    <p className="text-sm text-gray-500">Segunda a Sexta: 8h às 18h</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-xl">📧</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold mb-2">E-mail</h3>
+                    <p className="text-gray-600">vendas@usecarro.com.br</p>
+                    <p className="text-sm text-gray-500">Resposta em até 24h</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-xl">📍</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold mb-2">Endereço</h3>
+                    <p className="text-gray-600">
+                      Av. Nove de Julho, nº 95 - Sala 21<br />
+                      Vila Adyana, São José dos Campos - SP<br />
+                      CEP: 12243-000
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-xl">💬</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold mb-2">WhatsApp</h3>
+                    <p className="text-gray-600">(11) 99999-9999</p>
+                    <p className="text-sm text-gray-500">Atendimento rápido via WhatsApp</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Social Media */}
+              <div className="mt-8">
+                <h3 className="text-lg font-semibold mb-4">Redes Sociais</h3>
+                <div className="flex space-x-4">
+                  <a href="#" className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                    <span className="text-white">📘</span>
+                  </a>
+                  <a href="#" className="w-10 h-10 bg-pink-600 rounded-lg flex items-center justify-center">
+                    <span className="text-white">📷</span>
+                  </a>
+                  <a href="#" className="w-10 h-10 bg-blue-400 rounded-lg flex items-center justify-center">
+                    <span className="text-white">🐦</span>
+                  </a>
+                  <a href="#" className="w-10 h-10 bg-blue-700 rounded-lg flex items-center justify-center">
+                    <span className="text-white">💼</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Contact Form */}
+            <div className="bg-gray-50 rounded-2xl p-8">
+              <h2 className="text-2xl font-bold mb-6">Envie sua Mensagem</h2>
+              
+              <form className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Nome Completo
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                      placeholder="Seu nome completo"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      E-mail
+                    </label>
+                    <input
+                      type="email"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                      placeholder="seu@email.com"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Telefone
+                    </label>
+                    <input
+                      type="tel"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                      placeholder="(11) 99999-9999"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Assunto
+                    </label>
+                    <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent">
+                      <option>Selecione um assunto</option>
+                      <option>Assinatura de Veículos</option>
+                      <option>Consórcio</option>
+                      <option>Financiamento</option>
+                      <option>Dúvidas Gerais</option>
+                      <option>Suporte</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Mensagem
+                  </label>
+                  <textarea
+                    rows={6}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                    placeholder="Descreva como podemos ajudar você..."
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    alert("Mensagem enviada com sucesso! Entraremos em contato em breve.");
+                  }}
+                  className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white font-semibold py-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+                >
+                  Enviar Mensagem
+                </button>
+
+                <p className="text-sm text-gray-500 text-center">
+                  Ao enviar, você concorda com nossa política de privacidade
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
+          <h2 className="text-3xl font-bold text-center mb-12">Nossa Localização</h2>
+          <div className="bg-gray-300 rounded-2xl h-96 flex items-center justify-center">
+            <div className="text-center">
+              <div className="text-6xl mb-4">🗺️</div>
+              <p className="text-gray-600">Mapa interativo em breve</p>
+              <p className="text-sm text-gray-500 mt-2">
+                Av. Nove de Julho, nº 95 - Sala 21<br />
+                Vila Adyana, São José dos Campos - SP
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+      <FloatingButtons
+        containerVariant="z-50 right-6 bottom-6"
+        innerVariant="relative"
+        iconUrl="https://c.animaapp.com/mfxz26rhnSsSP4/assets/icon-33.svg"
+        iconClassName="box-border caret-transparent shrink-0 h-4 outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] text-nowrap w-4"
+        hasButton={true}
+      />
+    </div>
+  );
+};
+
+</file_content>

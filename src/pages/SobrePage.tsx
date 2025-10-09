@@ -30,21 +30,36 @@ export const SobrePage = () => {
                 Nossa História
               </h2>
               <p className="text-lg text-gray-600 mb-6">
-                A Use Carro nasceu em 2020 com uma missão clara: democratizar o acesso a veículos no Brasil através da tecnologia e inovação. Fundada por especialistas do mercado automotivo e tecnológico, nossa empresa surgiu da necessidade de simplificar e personalizar a experiência de ter um carro.
+                Nascemos da experiência. Nossa equipe é formada por executivos que ajudaram a moldar o mercado de carros por assinatura no Brasil.
               </p>
               <p className="text-lg text-gray-600 mb-6">
-                Percebemos que cada pessoa tem necessidades únicas quando se trata de mobilidade. Por isso, desenvolvemos uma plataforma inteligente que analisa o perfil de cada cliente e recomenda a melhor solução: assinatura, consórcio ou financiamento.
+                Com um profundo conhecimento e uma paixão pela inovação, unimos a experiência pioneira em assinaturas com uma sólida base no mercado financeiro.
+              </p>
+              <p className="text-lg text-gray-600 mb-6">
+                Mas percebemos que um único produto não serve para todo mundo. Por isso, nossa missão vai além da assinatura.
+              </p>
+              <p className="text-lg text-gray-600 mb-6">
+                Nosso propósito é te ajudar a encontrar a melhor solução de mobilidade para o seu momento de vida.
+              </p>
+              <p className="text-lg text-gray-600 mb-6">
+                Se você busca flexibilidade, a assinatura é a resposta ideal.
+              </p>
+              <p className="text-lg text-gray-600 mb-6">
+                Para quem quer ter o carro como um patrimônio rapidamente, o financiamento é a melhor opção.
+              </p>
+              <p className="text-lg text-gray-600 mb-6">
+                E para quem prefere planejar com calma e segurança, o consórcio é o caminho.
               </p>
               <p className="text-lg text-gray-600">
-                Hoje, somos referência em soluções automotivas personalizadas, atendendo milhares de clientes em todo o país com transparência, agilidade e tecnologia de ponta.
+                Com essa visão de que o cliente está em primeiro lugar, oferecemos as soluções mais competitivas do mercado. Nosso compromisso é transformar a maneira como você se relaciona com seu carro, garantindo que a escolha certa seja sempre a sua.
               </p>
             </div>
             <div className="flex justify-center">
               <div className="relative">
                 <img
-                  src="https://c.animaapp.com/mfxz26rhnSsSP4/assets/6acf225b678e2ac6faff243270c8d2c0abf86127.png"
-                  alt="Use Carro - Nossa História"
-                  className="h-80 object-contain"
+                  src="https://c.animaapp.com/mfxz26rhnSsSP4/img/0c7523457f58ad84086d9881698a4e981695743f.png"
+                  alt="Equipe Use Carro"
+                  className="h-80 object-cover rounded-2xl"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-green-600/10 to-transparent rounded-2xl"></div>
               </div>
@@ -105,76 +120,36 @@ export const SobrePage = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {/* CEO */}
+          <div className="grid md:grid-cols-2 gap-12">
+            {/* Marcelo Rosal - CEO & Fundador */}
             <div className="text-center">
-              <div className="w-40 h-40 bg-gradient-to-br from-blue-600 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-white text-6xl">👨‍💼</span>
+              <div className="w-40 h-40 bg-gradient-to-br from-blue-600 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6 overflow-hidden">
+                <img
+                  src="https://c.animaapp.com/mfxz26rhnSsSP4/img/rosal.avif"
+                  alt="Marcelo Rosal"
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <h3 className="text-xl font-bold mb-2">Carlos Eduardo Silva</h3>
+              <h3 className="text-xl font-bold mb-2">Marcelo Rosal</h3>
               <p className="text-green-600 font-semibold mb-4">CEO & Fundador</p>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Mais de 15 anos de experiência no mercado automotivo. Formado em Administração pela FGV, com MBA em Gestão Estratégica. Liderou projetos de transformação digital em grandes montadoras antes de fundar a Use Carro.
+                Especialista em mercado automotivo com experiência pioneira em carros por assinatura.
               </p>
             </div>
 
-            {/* CTO */}
+            {/* Gedson Santin - Diretor Comercial & Co-fundador */}
             <div className="text-center">
-              <div className="w-40 h-40 bg-gradient-to-br from-green-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-white text-6xl">👩‍💻</span>
+              <div className="w-40 h-40 bg-gradient-to-br from-green-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 overflow-hidden">
+                <img
+                  src="https://c.animaapp.com/mfxz26rhnSsSP4/img/gedson.png"
+                  alt="Gedson Santin"
+                  className="w-full h-full object-cover"
+                />
               </div>
-              <h3 className="text-xl font-bold mb-2">Ana Carolina Costa</h3>
-              <p className="text-green-600 font-semibold mb-4">CTO & Co-fundadora</p>
+              <h3 className="text-xl font-bold mb-2">Gedson Santin</h3>
+              <p className="text-green-600 font-semibold mb-4">Diretor Comercial & Co-fundador</p>
               <p className="text-gray-600 text-sm leading-relaxed">
-                Especialista em Inteligência Artificial e Machine Learning. Doutora em Ciência da Computação pela USP. Responsável pelo desenvolvimento da IA Clara e toda a arquitetura tecnológica da plataforma.
-              </p>
-            </div>
-
-            {/* CFO */}
-            <div className="text-center">
-              <div className="w-40 h-40 bg-gradient-to-br from-blue-600 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-white text-6xl">👨‍💼</span>
-              </div>
-              <h3 className="text-xl font-bold mb-2">Roberto Mendes Santos</h3>
-              <p className="text-green-600 font-semibold mb-4">CFO</p>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Contador e economista com mais de 12 anos de experiência em fintechs e empresas de tecnologia. Especialista em estruturação financeira e parcerias estratégicas no setor automotivo.
-              </p>
-            </div>
-
-            {/* CMO */}
-            <div className="text-center">
-              <div className="w-40 h-40 bg-gradient-to-br from-green-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-white text-6xl">👩‍💼</span>
-              </div>
-              <h3 className="text-xl font-bold mb-2">Mariana Oliveira</h3>
-              <p className="text-green-600 font-semibold mb-4">CMO</p>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Especialista em marketing digital e growth hacking. Formada em Publicidade e Propaganda, com pós-graduação em Marketing Digital. Responsável por toda estratégia de crescimento e relacionamento com clientes.
-              </p>
-            </div>
-
-            {/* COO */}
-            <div className="text-center">
-              <div className="w-40 h-40 bg-gradient-to-br from-blue-600 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-white text-6xl">👨‍💼</span>
-              </div>
-              <h3 className="text-xl font-bold mb-2">Felipe Rodrigues</h3>
-              <p className="text-green-600 font-semibold mb-4">COO</p>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Engenheiro de produção com vasta experiência em operações e logística. Responsável por otimizar todos os processos operacionais e garantir a excelência na entrega dos serviços.
-              </p>
-            </div>
-
-            {/* Head of Customer Success */}
-            <div className="text-center">
-              <div className="w-40 h-40 bg-gradient-to-br from-green-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-white text-6xl">👩‍💼</span>
-              </div>
-              <h3 className="text-xl font-bold mb-2">Juliana Ferreira</h3>
-              <p className="text-green-600 font-semibold mb-4">Head of Customer Success</p>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                Psicóloga organizacional com especialização em experiência do cliente. Lidera a equipe de sucesso do cliente e garante que cada pessoa tenha a melhor experiência possível com nossos serviços.
+                Expert em soluções de mobilidade e relacionamento com clientes.
               </p>
             </div>
           </div>
@@ -200,7 +175,7 @@ export const SobrePage = () => {
               <div className="text-white/70 text-sm mt-2">Desde nossa fundação</div>
             </div>
             <div className="text-center">
-              <div className="text-5xl md:text-6xl font-black text-white mb-4">500+</div>
+              <div className="text-5xl md:text-6xl font-black text-white mb-4">10+</div>
               <div className="text-white/90 text-lg font-medium">Parceiros Ativos</div>
               <div className="text-white/70 text-sm mt-2">Concessionárias e seguradoras</div>
             </div>
@@ -218,53 +193,6 @@ export const SobrePage = () => {
         </div>
       </section>
 
-      {/* Awards and Recognition */}
-      <section className="py-20 bg-white">
-        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Reconhecimentos
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Nosso trabalho tem sido reconhecido por importantes instituições do mercado automotivo e tecnológico
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="bg-gray-50 rounded-2xl p-8 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-2xl">🏆</span>
-              </div>
-              <h3 className="font-bold mb-2">Startup do Ano</h3>
-              <p className="text-gray-600 text-sm">Prêmio ABVCAP 2023</p>
-            </div>
-
-            <div className="bg-gray-50 rounded-2xl p-8 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-2xl">🚀</span>
-              </div>
-              <h3 className="font-bold mb-2">Inovação em IA</h3>
-              <p className="text-gray-600 text-sm">Tech Innovation Awards 2023</p>
-            </div>
-
-            <div className="bg-gray-50 rounded-2xl p-8 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-2xl">⭐</span>
-              </div>
-              <h3 className="font-bold mb-2">Melhor Experiência</h3>
-              <p className="text-gray-600 text-sm">Customer Experience Brasil 2023</p>
-            </div>
-
-            <div className="bg-gray-50 rounded-2xl p-8 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-2xl">💡</span>
-              </div>
-              <h3 className="font-bold mb-2">Fintech Emergente</h3>
-              <p className="text-gray-600 text-sm">Fintech Awards 2022</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Join Us CTA */}
       <section className="py-20 bg-gray-50">
