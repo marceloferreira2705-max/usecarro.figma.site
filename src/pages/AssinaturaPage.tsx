@@ -1,6 +1,6 @@
 import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
-import { FloatingButtons } from "@/components/FloatingButtons";
+import { ChatSection } from "@/sections/ChatSection";
 
 export const AssinaturaPage = () => {
   return (
@@ -131,24 +131,7 @@ export const AssinaturaPage = () => {
         </div>
       </section>
 
-      {/* CTA Section: Pronto para ter um carro? */}
-      <section className="py-20 bg-gradient-to-br from-green-600 to-blue-600">
-        <div className="max-w-screen-xl mx-auto px-6 md:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Pronto para ter um carro?
-          </h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Nossa IA Clara vai analisar seu perfil e encontrar o plano perfeito para você.
-          </p>
-          <button 
-            onClick={() => window.location.href = "/contato"}
-            className="bg-white text-green-600 font-semibold px-8 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
-          >
-            Falar com Clara
-          </button>
-        </div>
-      </section>
-
+      <ChatSection />
       <Footer />
     </div>
   );

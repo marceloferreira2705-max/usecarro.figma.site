@@ -1,6 +1,10 @@
 import { VehicleCard } from "@/sections/VehiclesSection/components/VehicleCard";
+import { vehiclesData } from "@/data/vehiclesData";
 
 export const VehiclesSection = () => {
+  // Get the first 3 vehicles for the featured section
+  const featuredVehicles = Object.values(vehiclesData).slice(0, 3);
+
   return (
     <section className="bg-white box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] py-20">
       <div className="box-border caret-transparent max-w-none outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] w-full mx-auto px-6 md:max-w-screen-xl md:px-8">
@@ -13,48 +17,25 @@ export const VehiclesSection = () => {
           </p>
         </div>
         <div className="box-border caret-transparent gap-x-8 grid grid-cols-none outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] gap-y-8 md:grid-cols-[repeat(3,minmax(0px,1fr))]">
-          <VehicleCard
-            vehicleIcon="🚗"
-            categoryName="Econômico"
-            categoryVariant="bg-[linear-gradient(to_right_bottom,oklch(0.623_0.214_259.815)_0%,oklch(0.546_0.245_262.881)_100%)]"
-            popularityLabel="Econômico"
-            popularityVariant="bg-[oklch(0.546_0.245_262.881)] right-4"
-            vehicleTitle="Fiat Mobi 1.0 Like Mec"
-            vehicleDescription="Fiat • 2026 • Econômico"
-            fuelType="Flex"
-            transmissionType="Manual"
-            seatingCapacity="5"
-            monthlyPrice="R$ 1.800"
-            vehicleId="1"
-          />
-          <VehicleCard
-            vehicleIcon="🚗"
-            categoryName="Hatch"
-            categoryVariant="bg-[linear-gradient(to_right_bottom,oklch(0.623_0.214_259.815)_0%,oklch(0.546_0.245_262.881)_100%)]"
-            popularityLabel="Econômico"
-            popularityVariant="bg-[oklch(0.546_0.245_262.881)] right-4"
-            vehicleTitle="Fiat Argo 1.0 Drive"
-            vehicleDescription="Fiat • 2026 • Hatch"
-            fuelType="Flex"
-            transmissionType="Manual"
-            seatingCapacity="5"
-            monthlyPrice="R$ 1.950"
-            vehicleId="2"
-          />
-          <VehicleCard
-            vehicleIcon="🚗"
-            categoryName="Hatch"
-            categoryVariant="bg-[linear-gradient(to_right_bottom,oklch(0.623_0.214_259.815)_0%,oklch(0.546_0.245_262.881)_100%)]"
-            popularityLabel="Econômico"
-            popularityVariant="bg-blue-600 right-4"
-            vehicleTitle="Hyundai HB20 1.0 Sense"
-            vehicleDescription="Hyundai • 2026 • Hatch"
-            fuelType="Flex"
-            transmissionType="Manual"
-            seatingCapacity="5"
-            monthlyPrice="R$ 1.950"
-            vehicleId="3"
-          />
+          {featuredVehicles.map((vehicle) => (
+            <VehicleCard
+              key={vehicle.id}
+              vehicleIcon={vehicle.type === "SUV Compacto" ? "🚙" : vehicle.type === "Picape Compacta" ? "🚚" : "🚗"}
+              vehicleImage={vehicle.images[0]} // Usar a primeira imagem do array
+              categoryName={vehicle.type}
+              categoryVariant="bg-[linear-gradient(to_right_bottom,oklch(0.623_0.214_259.815)_0%,oklch(0.546_0.245_262.881)_100%)]" // Placeholder, adjust as needed
+              popularityLabel={vehicle.type} // Placeholder, adjust as needed
+              popularityVariant="bg-green-600 right-4" // Placeholder, adjust as needed
+              vehicleTitle={vehicle.title}
+              vehicleDescription={`${vehicle.brand} • ${vehicle.year} • ${vehicle.type}`}
+              fuelType={vehicle.fuelType}
+              transmissionType={vehicle.transmission}
+              seatingCapacity={vehicle.seats}
+              monthlyPrice={vehicle.prices.assinatura.monthly}
+              vehicleId={vehicle.id}
+              category={vehicle.type}
+            />
+          ))}
         </div>
         <div className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] text-center mt-12">
           <a

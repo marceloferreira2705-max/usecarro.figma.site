@@ -1,20 +1,11 @@
 import { useState } from "react";
 
-export const BenefitTabs = () => {
-  const [activeTab, setActiveTab] = useState("Assinatura");
+export type BenefitTabsProps = {
+  activeTab: string;
+  onTabChange: (tab: string) => void;
+};
 
-  const handleTabClick = (tab: string) => {
-    setActiveTab(tab);
-    // Navigate to respective page
-    if (tab === "Consórcio") {
-      window.location.href = "/consorcio";
-    } else if (tab === "Financiamento") {
-      window.location.href = "/financiamento";
-    } else if (tab === "Assinatura") {
-      window.location.href = "/assinatura";
-    }
-  };
-
+export const BenefitTabs = ({ activeTab, onTabChange }: BenefitTabsProps) => {
   return (
     <div
       role="tablist"
@@ -23,11 +14,11 @@ export const BenefitTabs = () => {
       <button
         type="button"
         role="tab"
-        onClick={() => handleTabClick("Assinatura")}
+        onClick={() => onTabChange("Assinatura")}
         className={`text-sm font-medium items-center caret-transparent gap-x-1.5 flex basis-[0%] grow h-[calc(100%_-_1px)] justify-center leading-5 outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] gap-y-1.5 text-nowrap border px-2 py-1 rounded-[14px] border-solid border-transparent ${
           activeTab === "Assinatura"
             ? "text-white bg-transparent bg-[linear-gradient(to_right,oklch(0.546_0.245_262.881)_0%,rgb(0,156,73)_100%)]"
-            : "text-blue-950 bg-transparent"
+            : "text-blue-950 bg-transparent hover:bg-gray-100"
         }`}
       >
         Assinatura
@@ -35,11 +26,11 @@ export const BenefitTabs = () => {
       <button
         type="button"
         role="tab"
-        onClick={() => handleTabClick("Consórcio")}
+        onClick={() => onTabChange("Consórcio")}
         className={`text-sm font-medium items-center caret-transparent gap-x-1.5 flex basis-[0%] grow h-[calc(100%_-_1px)] justify-center leading-5 outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] gap-y-1.5 text-nowrap border px-2 py-1 rounded-[14px] border-solid border-transparent ${
           activeTab === "Consórcio"
             ? "text-white bg-transparent bg-[linear-gradient(to_right,oklch(0.546_0.245_262.881)_0%,rgb(0,156,73)_100%)]"
-            : "text-blue-950 bg-transparent"
+            : "text-blue-950 bg-transparent hover:bg-gray-100"
         }`}
       >
         Consórcio
@@ -47,11 +38,11 @@ export const BenefitTabs = () => {
       <button
         type="button"
         role="tab"
-        onClick={() => handleTabClick("Financiamento")}
+        onClick={() => onTabChange("Financiamento")}
         className={`text-sm font-medium items-center caret-transparent gap-x-1.5 flex basis-[0%] grow h-[calc(100%_-_1px)] justify-center leading-5 outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] gap-y-1.5 text-nowrap border px-2 py-1 rounded-[14px] border-solid border-transparent ${
           activeTab === "Financiamento"
             ? "text-white bg-transparent bg-[linear-gradient(to_right,oklch(0.546_0.245_262.881)_0%,rgb(0,156,73)_100%)]"
-            : "text-blue-950 bg-transparent"
+            : "text-blue-950 bg-transparent hover:bg-gray-100"
         }`}
       >
         Financiamento

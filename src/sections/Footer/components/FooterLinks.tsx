@@ -31,7 +31,7 @@ export const FooterLinks = () => {
               className="text-green-600 box-border caret-transparent h-4 outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] w-4 mr-3"
             />
             <span className="text-[oklch(0.707_0.022_261.325)] box-border caret-transparent block outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)]">
-              (11) 4000-1234
+              (12) 98290-0169
             </span>
           </div>
           <div className="items-start box-border caret-transparent flex outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] mb-3">

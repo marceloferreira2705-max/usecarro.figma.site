@@ -18,19 +18,16 @@ export const App = () => {
       <div className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)]">
         <div className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)]">
           <div className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)]">
-            <div className="relative box-border caret-transparent basis-0 grow shrink-0 h-[1000px] min-h-px min-w-px outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] w-full">
-              <div className="bg-white box-border caret-transparent min-h-[1000px] outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)]">
+            <div className="relative box-border caret-transparent basis-0 grow shrink-0 min-h-px min-w-px outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] w-full">
+              <div className="bg-white box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)]">
                 <Header />
                 <HeroSection />
-                <AboutSection />
-                <ChatSection />
                 <OptionsSection />
-                <VehiclesSection />
-                <ProcessSection />
                 <BenefitsSection />
+                <VehiclesSection />
+                <ChatSection />
                 <PartnersSection />
                 <FAQSection />
-                <ContactSection />
                 <Footer />
               </div>
             </div>

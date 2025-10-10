@@ -36,7 +36,7 @@ export const ContatoPage = () => {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold mb-2">Telefone</h3>
-                    <p className="text-gray-600">(11) 4000-1234</p>
+                    <p className="text-gray-600">(12) 98290-0169</p>
                     <p className="text-sm text-gray-500">Segunda a Sexta: 8h às 18h</p>
                   </div>
                 </div>
@@ -72,7 +72,14 @@ export const ContatoPage = () => {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold mb-2">WhatsApp</h3>
-                    <p className="text-gray-600">(11) 99999-9999</p>
+                    <a 
+                      href="https://api.whatsapp.com/send/?phone=5512982900169&text=Quero+saber+mais+sobre+as+condicoes+da+UseCarro&type=phone_number&app_absent=0" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-gray-600 hover:text-green-700 transition-colors"
+                    >
+                      (12) 98290-0169
+                    </a>
                     <p className="text-sm text-gray-500">Atendimento rápido via WhatsApp</p>
                   </div>
                 </div>
@@ -131,11 +138,11 @@ export const ContatoPage = () => {
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Telefone
                     </label>
-                    <input
-                      type="tel"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                      placeholder="(11) 99999-9999"
-                    />
+                  <input
+                    type="tel"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                    placeholder="(12) 98290-0169"
+                  />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">

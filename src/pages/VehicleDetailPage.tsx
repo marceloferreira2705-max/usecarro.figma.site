@@ -2,192 +2,14 @@ import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-
-// Mock data for vehicles
-const vehicleData: Record<string, any> = {
-  "1": {
-    id: "1",
-    title: "Fiat Mobi 1.0 Like Mec",
-    brand: "FIAT",
-    version: "MOBI 1.0 LIKE MEC",
-    type: "Econômico",
-    clientType: "Pessoa Física",
-    fuelType: "Flex",
-    transmission: "Manual",
-    seats: "5",
-    engine: "1.0",
-    color: "Diversas",
-    doors: "4",
-    year: "2026",
-    prices: {
-      assinatura: {
-        monthly: "R$ 1.800,00",
-        term: "36 meses",
-        mileage: "1.000 km/mês",
-        details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
-      },
-      financiamento: {
-        monthly: "R$ 2.160,00",
-        term: "60 meses",
-        details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
-      },
-      consorcio: {
-        monthly: "R$ 1.440,00",
-        term: "120 meses",
-        details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
-      }
-    },
-    images: ["https://c.animaapp.com/mfxz26rhnSsSP4/img/hb20.png"],
-    description: "O carro mais compacto e prático da lista, perfeito para enfrentar o trânsito intenso e a dificuldade de estacionar nas grandes cidades."
-  },
-  "2": {
-    id: "2",
-    title: "Fiat Argo 1.0 Drive",
-    brand: "FIAT",
-    version: "ARGO 1.0 DRIVE",
-    type: "Hatch",
-    clientType: "Pessoa Física",
-    fuelType: "Flex",
-    transmission: "Manual",
-    seats: "5",
-    engine: "1.0",
-    color: "Diversas",
-    doors: "4",
-    year: "2026",
-    prices: {
-      assinatura: {
-        monthly: "R$ 1.950,00",
-        term: "36 meses",
-        mileage: "1.000 km/mês",
-        details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
-      },
-      financiamento: {
-        monthly: "R$ 2.340,00",
-        term: "60 meses",
-        details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
-      },
-      consorcio: {
-        monthly: "R$ 1.560,00",
-        term: "120 meses",
-        details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
-      }
-    },
-    images: ["https://c.animaapp.com/mfxz26rhnSsSP4/img/hb20.png"],
-    description: "Hatch moderno e econômico com o consagrado motor Firefly, ideal para quem busca simplicidade e baixo custo."
-  },
-  "3": {
-    id: "3",
-    title: "Hyundai HB20 1.0 Sense",
-    brand: "HYUNDAI",
-    version: "HB20 1.0 SENSE",
-    type: "Hatch",
-    clientType: "Pessoa Física",
-    fuelType: "Flex",
-    transmission: "Manual",
-    seats: "5",
-    engine: "1.0",
-    color: "Diversas",
-    doors: "4",
-    year: "2026",
-    prices: {
-      assinatura: {
-        monthly: "R$ 1.950,00",
-        term: "36 meses",
-        mileage: "1.000 km/mês",
-        details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
-      },
-      financiamento: {
-        monthly: "R$ 2.340,00",
-        term: "60 meses",
-        details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
-      },
-      consorcio: {
-        monthly: "R$ 1.560,00",
-        term: "120 meses",
-        details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
-      }
-    },
-    images: ["https://c.animaapp.com/mfxz26rhnSsSP4/img/hb20.png"],
-    description: "Hatch de entrada focado em baixo custo operacional e alta conectividade. Uma escolha inteligente e confiável para o uso diário."
-  },
-  "4": {
-    id: "4",
-    title: "VW Polo Track MT 5P",
-    brand: "VW",
-    version: "POLO TRACK MT 5P",
-    type: "Hatch Compacto",
-    clientType: "Pessoa Física",
-    fuelType: "Flex",
-    transmission: "Manual",
-    seats: "5",
-    engine: "1.0",
-    color: "Diversas",
-    doors: "4",
-    year: "2026",
-    prices: {
-      assinatura: {
-        monthly: "R$ 2.200,00",
-        term: "36 meses",
-        mileage: "1.000 km/mês",
-        details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
-      },
-      financiamento: {
-        monthly: "R$ 2.640,00",
-        term: "60 meses",
-        details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
-      },
-      consorcio: {
-        monthly: "R$ 1.760,00",
-        term: "120 meses",
-        details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
-      }
-    },
-    images: ["https://c.animaapp.com/mfxz26rhnSsSP4/img/hb20.png"],
-    description: "Hatch de entrada robusto, construído na plataforma MQB, oferecendo maior segurança e um desempenho confiável."
-  },
-  "21": {
-    id: "21",
-    title: "Fiat Pulse Audace Hybrid",
-    brand: "FIAT",
-    version: "PULSE 1.0 TURBO 200 HYBRID AT",
-    type: "SUV Compacto",
-    clientType: "Pessoa Física",
-    fuelType: "Flex/Híbrido",
-    transmission: "Automático (CVT)",
-    seats: "5",
-    engine: "1.0 Turbo",
-    color: "Diversas",
-    doors: "4",
-    year: "2025",
-    prices: {
-      assinatura: {
-        monthly: "R$ 2.899,99",
-        term: "36 meses",
-        mileage: "1.000 km/mês",
-        details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
-      },
-      financiamento: {
-        monthly: "R$ 3.479,99",
-        term: "60 meses",
-        details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
-      },
-      consorcio: {
-        monthly: "R$ 2.319,99",
-        term: "120 meses",
-        details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
-      }
-    },
-    images: ["https://c.animaapp.com/mfxz26rhnSsSP4/img/pulse_audace_turbo200_hybrid_2026_prata_bari.png"],
-    description: "Um dos SUVs mais vendidos. O motor 1.0 Turbo oferece excelente torque, com o adicional de eficiência do sistema micro-híbrido."
-  }
-};
+import { vehiclesData, VehicleData } from "@/data/vehiclesData"; // Import VehicleData type
 
 export const VehicleDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const [activeTab, setActiveTab] = useState("Assinatura");
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const vehicle = id ? vehicleData[id] : null;
+  const vehicle: VehicleData | undefined = id ? vehiclesData[id] : undefined;
 
   if (!vehicle) {
     return (
@@ -389,7 +211,7 @@ export const VehicleDetailPage = () => {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <button 
-                  onClick={() => window.location.href = "/contato"}
+                  onClick={() => window.open("https://api.whatsapp.com/send/?phone=5512982900169&text=Quero+saber+mais+sobre+as+condicoes+da+UseCarro&type=phone_number&app_absent=0", "_blank")}
                   className={`flex-1 font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer text-white ${
                     activeTab === "Assinatura" 
                       ? "bg-gradient-to-r from-blue-600 to-blue-700" 
@@ -398,10 +220,10 @@ export const VehicleDetailPage = () => {
                       : "bg-gradient-to-r from-green-600 to-green-700"
                   }`}
                 >
-                  Solicitar Proposta
+                  Fale com Especialista
                 </button>
                 <button 
-                  onClick={() => window.location.href = "/contato"}
+                  onClick={() => window.open("https://www.chatbase.co/chatbot-iframe/Ey1TW94MhZcS3j_kJfNd7", "_blank")}
                   className={`flex-1 font-bold py-4 rounded-xl border-2 transition-all cursor-pointer ${
                     activeTab === "Assinatura" 
                       ? "border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white" 
@@ -410,7 +232,7 @@ export const VehicleDetailPage = () => {
                       : "border-green-600 text-green-600 hover:bg-green-600 hover:text-white"
                   }`}
                 >
-                  Falar com Clara
+                  Falar com a IA - Clara
                 </button>
               </div>
             </div>
@@ -428,10 +250,10 @@ export const VehicleDetailPage = () => {
             Nossa IA Clara vai analisar seu perfil e encontrar o plano perfeito para você.
           </p>
           <button 
-            onClick={() => window.location.href = "/contato"}
+            onClick={() => window.open("https://api.whatsapp.com/send/?phone=5512982900169&text=Quero+saber+mais+sobre+as+condicoes+da+UseCarro&type=phone_number&app_absent=0", "_blank")}
             className="bg-white text-green-600 font-bold px-10 py-5 rounded-2xl text-lg shadow-xl hover:shadow-2xl transition-shadow cursor-pointer"
           >
-            Falar com Clara Agora
+            Fale com Especialista Agora
           </button>
         </div>
       </section>

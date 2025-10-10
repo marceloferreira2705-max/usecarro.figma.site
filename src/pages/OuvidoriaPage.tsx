@@ -82,7 +82,7 @@ export const OuvidoriaPage = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Telefone</h4>
-                    <p className="text-gray-600">0800-123-4567 (gratuito)</p>
+                    <p className="text-gray-600">(12) 98290-0169 (gratuito)</p>
                     <p className="text-sm text-gray-500">Segunda a Sexta: 8h às 18h</p>
                   </div>
                 </div>
@@ -151,11 +151,11 @@ export const OuvidoriaPage = () => {
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Telefone
                     </label>
-                    <input
-                      type="tel"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                      placeholder="(11) 99999-9999"
-                    />
+                  <input
+                    type="tel"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                    placeholder="(12) 98290-0169"
+                  />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">

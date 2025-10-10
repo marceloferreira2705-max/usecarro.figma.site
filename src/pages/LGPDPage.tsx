@@ -61,7 +61,7 @@ export const LGPDPage = () => {
             </p>
             <ul className="list-disc pl-6 mb-6">
               <li>Enviar e-mail para: lgpd@usecarro.com.br</li>
-              <li>Ligar para: (11) 4000-1234</li>
+              <li>Ligar para: (12) 98290-0169</li>
               <li>Acessar nossa plataforma e utilizar as opções de privacidade</li>
               <li>Enviar correspondência para nosso endereço físico</li>
             </ul>
