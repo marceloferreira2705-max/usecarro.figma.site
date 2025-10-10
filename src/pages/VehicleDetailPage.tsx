@@ -1,7 +1,7 @@
 import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react"; // Import useEffect
 import { vehiclesData, VehicleData } from "@/data/vehiclesData"; // Import VehicleData type
 
 export const VehicleDetailPage = () => {
@@ -10,6 +10,13 @@ export const VehicleDetailPage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const vehicle: VehicleData | undefined = id ? vehiclesData[id] : undefined;
+
+  useEffect(() => {
+    console.log("VehicleDetailPage mounted for ID:", id);
+    if (!vehicle) {
+      console.error("Vehicle not found for ID:", id);
+    }
+  }, [id, vehicle]);
 
   if (!vehicle) {
     return (
@@ -246,9 +253,6 @@ export const VehicleDetailPage = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
             Pronto para ter este veículo?
           </h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Nossa IA Clara vai analisar seu perfil e encontrar o plano perfeito para você.
-          </p>
           <button 
             onClick={() => window.open("https://api.whatsapp.com/send/?phone=5512982900169&text=Quero+saber+mais+sobre+as+condicoes+da+UseCarro&type=phone_number&app_absent=0", "_blank")}
             className="bg-white text-green-600 font-bold px-10 py-5 rounded-2xl text-lg shadow-xl hover:shadow-2xl transition-shadow cursor-pointer"
