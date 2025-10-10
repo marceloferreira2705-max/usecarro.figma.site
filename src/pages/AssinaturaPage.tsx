@@ -1,6 +1,6 @@
 import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
-import { ChatSection } from "@/sections/ChatSection";
+import { ChatSection } from "@/sections/ChatSection"; // Garante que ChatSection está importado
 
 export const AssinaturaPage = () => {
   return (
