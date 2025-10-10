@@ -1,8 +1,8 @@
 import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react"; // Import useEffect
-import { vehiclesData, VehicleData } from "@/data/vehiclesData"; // Import VehicleData type
+import { useState, useEffect } from "react";
+import { vehiclesData, VehicleData } from "@/data/vehiclesData";
 
 export const VehicleDetailPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -12,9 +12,11 @@ export const VehicleDetailPage = () => {
   const vehicle: VehicleData | undefined = id ? vehiclesData[id] : undefined;
 
   useEffect(() => {
-    console.log("VehicleDetailPage mounted for ID:", id);
+    console.log("VehicleDetailPage: Componente montado. ID recebido:", id);
     if (!vehicle) {
-      console.error("Vehicle not found for ID:", id);
+      console.error("VehicleDetailPage: Veículo não encontrado para o ID:", id);
+    } else {
+      console.log("VehicleDetailPage: Dados do veículo carregados:", vehicle);
     }
   }, [id, vehicle]);
 
@@ -42,15 +44,38 @@ export const VehicleDetailPage = () => {
       case "Assinatura":
         return vehicle.prices.assinatura;
       case "Financiamento":
-        return vehicle.prices.financiamento;
+      // Adicione uma verificação para garantir que 'financiamento' existe
+        return vehicle.prices.financiamento || vehicle.prices.assinatura; 
       case "Consórcio":
-        return vehicle.prices.consorcio;
+      // Adicione uma verificação para garantir que 'consorcio' existe
+        return vehicle.prices.consorcio || vehicle.prices.assinatura;
       default:
         return vehicle.prices.assinatura;
     }
   };
 
   const currentPriceData = getPriceDataByTab(activeTab);
+
+  // Adicione uma verificação para currentPriceData
+  if (!currentPriceData) {
+    console.error("VehicleDetailPage: currentPriceData é undefined para o veículo:", vehicle.id, "e aba:", activeTab);
+    return (
+      <div className="min-h-screen bg-white">
+        <Header />
+        <div className="pt-32 pb-20 text-center">
+          <h1 className="text-4xl font-bold mb-4">Erro ao carregar dados de preço</h1>
+          <p className="text-gray-600 mb-8">Não foi possível encontrar os dados de preço para a modalidade selecionada.</p>
+          <button 
+            onClick={() => window.location.href = "/veiculos"}
+            className="bg-green-600 text-white px-6 py-3 rounded-lg cursor-pointer hover:bg-green-700 transition-colors"
+          >
+            Voltar para Veículos
+          </button>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white">
