@@ -203,7 +203,7 @@ export const VehicleCard = (props: VehicleCardProps) => {
           </div>
         </div>
         <button 
-          onClick={() => window.location.href = `/veiculo/${props.vehicleId}`}
+          onClick={() => window.location.href = `/veiculo/${props.vehicleId}/${props.vehicleTitle.replace(/\s+/g, '-')}`}
           className="text-white text-sm font-medium items-center bg-transparent bg-[linear-gradient(to_right,oklch(0.546_0.245_262.881)_0%,rgb(0,156,73)_100%)] caret-transparent gap-x-2 inline-flex shrink-0 h-9 justify-center leading-5 outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] gap-y-2 text-nowrap w-full px-4 py-2 rounded-[14px] hover:shadow-lg transition-shadow cursor-pointer"
         >
           Ver detalhes

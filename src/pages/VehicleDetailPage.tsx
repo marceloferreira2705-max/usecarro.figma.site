@@ -5,21 +5,21 @@ import { useState, useEffect } from "react";
 import { vehiclesData, VehicleData } from "@/data/vehiclesData";
 
 export const VehicleDetailPage = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id, name } = useParams<{ id: string; name?: string }>(); // Adiciona 'name'
   const [activeTab, setActiveTab] = useState("Assinatura");
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [error, setError] = useState<string | null>(null); // Novo estado para capturar erros
+  const [error, setError] = useState<string | null>(null);
 
   const vehicle: VehicleData | undefined = id ? vehiclesData[id] : undefined;
 
   useEffect(() => {
-    console.log("VehicleDetailPage: Componente montado. ID recebido:", id);
+    console.log("VehicleDetailPage: Componente montado. ID recebido:", id, "Nome:", name);
     if (!vehicle) {
       console.error("VehicleDetailPage: Veículo não encontrado para o ID:", id);
     } else {
       console.log("VehicleDetailPage: Dados do veículo carregados:", vehicle);
     }
-  }, [id, vehicle]);
+  }, [id, name, vehicle]);
 
   if (!vehicle) {
     return (
@@ -79,11 +79,10 @@ export const VehicleDetailPage = () => {
     );
   }
 
-  // Tenta renderizar o componente, capturando erros
   try {
     const imageUrl = (vehicle.images && vehicle.images.length > 0 && currentImageIndex < vehicle.images.length) 
       ? vehicle.images[currentImageIndex] 
-      : "https://via.placeholder.com/600x400?text=Imagem+não+disponível"; // Fallback image
+      : "https://via.placeholder.com/600x400?text=Imagem+não+disponível";
 
     return (
       <div className="min-h-screen bg-white">
@@ -256,7 +255,6 @@ export const VehicleDetailPage = () => {
                   </div>
                 </div>
                 
-                {/* Adiciona verificação para currentPriceData.details */}
                 {currentPriceData.details && Array.isArray(currentPriceData.details) && currentPriceData.details.length > 0 && (
                   <div className="grid md:grid-cols-2 gap-3 mb-8">
                     {currentPriceData.details.map((detail: string, index: number) => (
