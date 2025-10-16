@@ -12,7 +12,7 @@ import { LGPDPage } from './pages/LGPDPage';
 import { CookiesPage } from './pages/CookiesPage';
 import { OuvidoriaPage } from './pages/OuvidoriaPage';
 import { VehicleDetailPage } from './pages/VehicleDetailPage';
-import { SuccessPage } from './pages/SuccessPage'; // Importa a nova página de sucesso
+// import { SuccessPage } from './pages/SuccessPage'; // Removido
 
 export const AppRouter = () => {
   return (
@@ -31,7 +31,7 @@ export const AppRouter = () => {
         <Route path="/lgpd" element={<LGPDPage />} />
         <Route path="/cookies" element={<CookiesPage />} />
         <Route path="/ouvidoria" element={<OuvidoriaPage />} />
-        <Route path="/success" element={<SuccessPage />} /> {/* Adiciona a rota para a página de sucesso */}
+        {/* <Route path="/success" element={<SuccessPage />} /> Removido */}
       </Routes>
     </Router>
   );

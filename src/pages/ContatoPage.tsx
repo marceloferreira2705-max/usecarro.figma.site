@@ -1,8 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react'; // Importa useState
 import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
 
 export const ContatoPage = () => {
+  const [submitted, setSubmitted] = useState(false); // Estado para controlar o envio
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setSubmitted(true); // Define o estado de sucesso
+        form.reset(); // Limpa o formulário
+      } else {
+        const data = await response.json();
+        if (data.errors) {
+          alert(data.errors.map((error: any) => error.message).join(", "));
+        } else {
+          alert("Ocorreu um erro ao enviar o formulário.");
+        }
+      }
+    } catch (error) {
+      alert("Ocorreu um erro de rede ao enviar o formulário.");
+      console.error("Erro de envio:", error);
+    }
+  };
+
+  if (submitted) {
+    return (
+      <div className="min-h-screen bg-white flex flex-col">
+        <Header />
+        <div className="flex-1 flex items-center justify-center p-6 text-center">
+          <div>
+            <h1 className="text-4xl font-bold text-green-600 mb-4">Mensagem Enviada com Sucesso!</h1>
+            <p className="text-gray-700 mb-6">Agradecemos seu contato. Em breve, um de nossos especialistas entrará em contato com você.</p>
+            <button
+              onClick={() => setSubmitted(false)} // Permite enviar novamente
+              className="bg-gradient-to-r from-green-600 to-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer text-sm"
+            >
+              Enviar Nova Mensagem
+            </button>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -109,10 +163,10 @@ export const ContatoPage = () => {
             <div className="bg-gray-50 rounded-2xl p-8">
               <h2 className="text-2xl font-bold mb-6">Envie sua Mensagem</h2>
               
-              {/* Revertido para Formspree HTML POST */}
-              <form action="https://formspree.io/f/xgvndwrv" method="POST" className="space-y-6">
+              <form onSubmit={handleSubmit} action="https://formspree.io/f/xgvndwrv" method="POST" className="space-y-6">
                 <input type="hidden" name="_subject" value="Nova Mensagem - Use Carro (Contato)" />
-                <input type="hidden" name="_next" value="https://usecarro.figma.site/success" /> {/* Redireciona para a página de sucesso */}
+                <input type="hidden" name="_next" value="https://SEU_DOMINIO_AQUI.com/" /> {/* Redireciona para a Home do seu site */}
+                <input type="hidden" name="_gotcha" style={{display: 'none'}} /> {/* Campo honeypot para spam */}
                 <input type="hidden" name="Tipo de Manifestacao" value="Solicitação de Informação" /> {/* Campo oculto */}
 
                 <div className="grid md:grid-cols-2 gap-6">
@@ -123,7 +177,7 @@ export const ContatoPage = () => {
                     <input
                       type="text"
                       name="Nome Completo"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
                       placeholder="Seu nome completo"
                       required
                     />
