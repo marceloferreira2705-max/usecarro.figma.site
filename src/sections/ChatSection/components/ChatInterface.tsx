@@ -24,14 +24,15 @@ export const ChatInterface = () => {
       </div>
       
       {/* Chatbase Iframe */}
-      <div className="w-full" style={{ height: '100%', minHeight: '650px', maxHeight: '700px' }}> {/* Aumentado min-height e max-height */}
+      {/* Removido min-height do div pai, deixado height:100% e max-height para controle */}
+      <div className="w-full h-full" style={{ maxHeight: '550px' }}> {/* Altura máxima para o card da IA */}
         <iframe
           src="https://www.chatbase.co/chatbot-iframe/5fRwrAroJGoXqpBWFMTyB"
           width="100%"
-          style={{ height: '100%', minHeight: '650px' }} // Aumentado min-height
+          style={{ height: '100%', minHeight: '100%' }} // Iframe ocupa 100% do pai, com scroll interno se necessário
           frameBorder="0"
           title="Clara - IA Assistente"
-        />
+        ></iframe>
       </div>
     </div>
   );

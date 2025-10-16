@@ -9,7 +9,7 @@ export const ChatSection = () => {
       <div className="box-border caret-transparent max-w-none outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] w-full mx-auto px-6 md:max-w-screen-xl md:px-8">
         <ChatSidebar />
         
-        <div className="box-border caret-transparent gap-x-6 grid grid-cols-none outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] gap-y-6 mt-12 md:grid-cols-[repeat(3,minmax(0px,1fr))]">
+        <div className="box-border caret-transparent gap-x-6 grid grid-cols-none outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] gap-y-6 mt-12 md:grid-cols-[repeat(3,minmax(0px,1fr))] items-stretch"> {/* Adicionado items-stretch */}
           <ChatInterface />
           <ContactForm />
           <WhatsAppContact />
