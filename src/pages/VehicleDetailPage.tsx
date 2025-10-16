@@ -1,7 +1,7 @@
 import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom"; // Import useNavigate
+import { useState, useEffect, useRef } from "react"; // Import useRef
 import { vehiclesData, VehicleData } from "@/data/vehiclesData";
 
 export const VehicleDetailPage = () => {
@@ -12,6 +12,9 @@ export const VehicleDetailPage = () => {
 
   const vehicle: VehicleData | undefined = id ? vehiclesData[id] : undefined;
 
+  const navigate = useNavigate(); // Inicializa useNavigate
+  const iaSectionRef = useRef<HTMLDivElement>(null); // Ref para a seção IA
+
   useEffect(() => {
     console.log("VehicleDetailPage: Componente montado. ID recebido:", id, "Nome:", name);
     if (!vehicle) {
@@ -19,7 +22,18 @@ export const VehicleDetailPage = () => {
     } else {
       console.log("VehicleDetailPage: Dados do veículo carregados:", vehicle);
     }
+
+    // Lógica para rolar para a seção IA se o hash estiver presente
+    if (window.location.hash === "#ia-clara-section" && iaSectionRef.current) {
+      iaSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   }, [id, name, vehicle]);
+
+  // Função para navegar e rolar para a seção IA
+  const handleGoToIaSection = () => {
+    navigate("/#ia-clara-section");
+    // A rolagem será tratada pelo useEffect na Home (App.tsx)
+  };
 
   if (!vehicle) {
     return (
@@ -276,16 +290,16 @@ export const VehicleDetailPage = () => {
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button 
-                    onClick={() => window.open("https://api.whatsapp.com/send/?phone=5512982900169&text=Quero+saber+mais+sobre+as+condicoes+da+UseCarro&type=phone_number&app_absent=0", "_blank")}
-                    className={`flex-1 font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer text-white ${
+                    onClick={handleGoToIaSection} // Usa a nova função de navegação
+                    className={`flex-1 font-bold py-4 rounded-xl border-2 transition-all cursor-pointer ${
                       activeTab === "Assinatura" 
-                        ? "bg-gradient-to-r from-blue-600 to-blue-700" 
+                        ? "border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white" 
                         : activeTab === "Financiamento"
-                        ? "bg-gradient-to-r from-blue-900 to-blue-800"
-                        : "bg-gradient-to-r from-green-600 to-green-700"
+                        ? "border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white"
+                        : "border-green-600 text-green-600 hover:bg-green-600 hover:text-white"
                     }`}
                   >
-                    Fale com Especialista
+                    Falar com a IA - Clara
                   </button>
                   <button 
                     onClick={() => window.location.href = "/#ia-clara-section"} // Link para a seção na Home

@@ -1,8 +1,32 @@
+import React from 'react';
+import { useForm, ValidationError } from '@formspree/react';
 import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
-import { FloatingButtons } from "@/components/FloatingButtons";
 
 export const ContatoPage = () => {
+  const [state, handleSubmit] = useForm("xgvndwrv"); // Seu endpoint Formspree
+
+  if (state.succeeded) {
+    return (
+      <div className="min-h-screen bg-white flex flex-col">
+        <Header />
+        <div className="flex-1 flex items-center justify-center p-6 text-center">
+          <div>
+            <h1 className="text-4xl font-bold text-green-600 mb-4">Mensagem Enviada com Sucesso!</h1>
+            <p className="text-gray-700 mb-6">Agradecemos seu contato. Em breve, um de nossos especialistas entrará em contato com você.</p>
+            <button
+              onClick={() => window.location.reload()} // Recarrega a página para permitir novo envio
+              className="bg-gradient-to-r from-green-600 to-blue-600 text-white font-semibold px-8 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
+            >
+              Enviar Nova Mensagem
+            </button>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -109,7 +133,31 @@ export const ContatoPage = () => {
             <div className="bg-gray-50 rounded-2xl p-8">
               <h2 className="text-2xl font-bold mb-6">Envie sua Mensagem</h2>
               
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <input type="hidden" name="_subject" value="Nova Mensagem - Use Carro (Contato)" />
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Tipo de Manifestação *
+                  </label>
+                  <select 
+                    name="Tipo de Manifestacao"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                    required
+                  >
+                    <option value="">Selecione o tipo</option>
+                    <option value="Reclamacao">Reclamação</option>
+                    <option value="Sugestao">Sugestão</option>
+                    <option value="Elogio">Elogio</option>
+                    <option value="Denuncia">Denúncia</option>
+                    <option value="Solicitacao de Informacao">Solicitação de Informação</option>
+                  </select>
+                  <ValidationError 
+                    prefix="Tipo de Manifestacao" 
+                    field="Tipo de Manifestacao"
+                    errors={state.errors}
+                  />
+                </div>
+
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -117,8 +165,15 @@ export const ContatoPage = () => {
                     </label>
                     <input
                       type="text"
+                      name="Nome Completo"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
                       placeholder="Seu nome completo"
+                      required
+                    />
+                    <ValidationError 
+                      prefix="Nome Completo" 
+                      field="Nome Completo"
+                      errors={state.errors}
                     />
                   </div>
                   <div>
@@ -127,8 +182,15 @@ export const ContatoPage = () => {
                     </label>
                     <input
                       type="email"
+                      name="Email"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
                       placeholder="seu@email.com"
+                      required
+                    />
+                    <ValidationError 
+                      prefix="Email" 
+                      field="Email"
+                      errors={state.errors}
                     />
                   </div>
                 </div>
@@ -138,24 +200,40 @@ export const ContatoPage = () => {
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Telefone
                     </label>
-                  <input
-                    type="tel"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                    placeholder="(12) 98290-0169"
-                  />
+                    <input
+                      type="tel"
+                      name="Telefone"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                      placeholder="(12) 98290-0169"
+                      required
+                    />
+                    <ValidationError 
+                      prefix="Telefone" 
+                      field="Telefone"
+                      errors={state.errors}
+                    />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Assunto
                     </label>
-                    <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent">
-                      <option>Selecione um assunto</option>
-                      <option>Assinatura de Veículos</option>
-                      <option>Consórcio</option>
-                      <option>Financiamento</option>
-                      <option>Dúvidas Gerais</option>
-                      <option>Suporte</option>
+                    <select 
+                      name="Assunto"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                      required
+                    >
+                      <option value="">Selecione um assunto</option>
+                      <option value="Assinatura de Veiculos">Assinatura de Veículos</option>
+                      <option value="Consorcio">Consórcio</option>
+                      <option value="Financiamento">Financiamento</option>
+                      <option value="Duvidas Gerais">Dúvidas Gerais</option>
+                      <option value="Suporte">Suporte</option>
                     </select>
+                    <ValidationError 
+                      prefix="Assunto" 
+                      field="Assunto"
+                      errors={state.errors}
+                    />
                   </div>
                 </div>
 
@@ -165,17 +243,21 @@ export const ContatoPage = () => {
                   </label>
                   <textarea
                     rows={6}
+                    name="Mensagem"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
                     placeholder="Descreva como podemos ajudar você..."
+                    required
                   ></textarea>
+                  <ValidationError 
+                    prefix="Mensagem" 
+                    field="Mensagem"
+                    errors={state.errors}
+                  />
                 </div>
 
                 <button
                   type="submit"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    alert("Mensagem enviada com sucesso! Entraremos em contato em breve.");
-                  }}
+                  disabled={state.submitting}
                   className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white font-semibold py-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
                 >
                   Enviar Mensagem

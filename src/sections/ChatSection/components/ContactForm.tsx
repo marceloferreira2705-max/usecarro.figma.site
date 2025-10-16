@@ -1,9 +1,27 @@
-import { vehiclesData } from "@/data/vehiclesData";
+import React from 'react';
+import { useForm, ValidationError } from '@formspree/react';
+import { vehiclesData } from "@/data/vehiclesData"; // Usando alias absoluto
 
 export const ContactForm = () => {
-  // O Formspree lida com o envio, então removemos a função handleSubmit manual
-  // e o mailto: link.
+  const [state, handleSubmit] = useForm("xgvndwrv"); // Seu endpoint Formspree
   const allVehicles = Object.values(vehiclesData);
+
+  if (state.succeeded) {
+    return (
+      <div className="bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.25)_0px_25px_50px_-12px] overflow-hidden rounded-2xl h-full flex items-center justify-center p-6 text-center">
+        <div>
+          <h3 className="text-2xl font-bold text-green-600 mb-4">Pedido Enviado com Sucesso!</h3>
+          <p className="text-gray-700 mb-6">Agradecemos seu contato. Em breve, um de nossos especialistas entrará em contato com você.</p>
+          <button
+            onClick={() => window.location.reload()} // Recarrega a página para permitir novo envio
+            className="bg-gradient-to-r from-blue-600 to-green-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer text-sm"
+          >
+            Fazer Novo Pedido
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.25)_0px_25px_50px_-12px] box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] overflow-hidden rounded-2xl h-full">
@@ -26,18 +44,22 @@ export const ContactForm = () => {
       </div>
       
       <div className="p-6 overflow-y-auto max-h-[500px]">
-        {/* Atualizado para usar Formspree */}
-        <form action="https://formspree.io/f/xgvndwrv" method="POST" className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <input type="hidden" name="_subject" value="Nova Proposta - Use Carro (Home)" />
           <div>
             <label htmlFor="nome" className="text-sm font-medium block mb-2">Nome completo</label>
             <input
               type="text"
               id="nome"
-              name="Nome Completo" // Nome para o Formspree
+              name="Nome Completo"
               placeholder="Seu nome"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm"
               required
+            />
+            <ValidationError 
+              prefix="Nome Completo" 
+              field="Nome Completo"
+              errors={state.errors}
             />
           </div>
           
@@ -46,10 +68,15 @@ export const ContactForm = () => {
             <input
               type="email"
               id="email"
-              name="Email" // Nome para o Formspree
+              name="Email"
               placeholder="seu@email.com"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm"
               required
+            />
+            <ValidationError 
+              prefix="Email" 
+              field="Email"
+              errors={state.errors}
             />
           </div>
           
@@ -58,10 +85,15 @@ export const ContactForm = () => {
             <input
               type="tel"
               id="telefone"
-              name="Telefone" // Nome para o Formspree
+              name="Telefone"
               placeholder="(11) 99999-9999"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm"
               required
+            />
+            <ValidationError 
+              prefix="Telefone" 
+              field="Telefone"
+              errors={state.errors}
             />
           </div>
           
@@ -69,21 +101,27 @@ export const ContactForm = () => {
             <label htmlFor="interesse" className="text-sm font-medium block mb-2">Interesse</label>
             <select
               id="interesse"
-              name="Interesse" // Nome para o Formspree
+              name="Interesse"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm"
+              required
             >
               <option value="">Selecione uma opção</option>
               <option value="Assinatura">Assinatura</option>
               <option value="Consórcio">Consórcio</option>
               <option value="Financiamento">Financiamento</option>
             </select>
+            <ValidationError 
+              prefix="Interesse" 
+              field="Interesse"
+              errors={state.errors}
+            />
           </div>
           
           <div>
             <label htmlFor="veiculo" className="text-sm font-medium block mb-2">Escolha seu veículo</label>
             <select
               id="veiculo"
-              name="Veiculo de Interesse" // Nome para o Formspree
+              name="Veiculo de Interesse"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm"
             >
               <option value="">Selecione um veículo (opcional)</option>
@@ -93,10 +131,16 @@ export const ContactForm = () => {
                 </option>
               ))}
             </select>
+            <ValidationError 
+              prefix="Veiculo de Interesse" 
+              field="Veiculo de Interesse"
+              errors={state.errors}
+            />
           </div>
           
           <button
             type="submit"
+            disabled={state.submitting}
             className="w-full bg-gradient-to-r from-blue-600 to-green-600 text-white font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer text-sm"
           >
             Receber Proposta
