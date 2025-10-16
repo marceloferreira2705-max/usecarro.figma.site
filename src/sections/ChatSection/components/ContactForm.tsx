@@ -83,7 +83,8 @@ export const ContactForm = () => {
         </div>
       </div>
       
-      <div className="p-6"> {/* Removido overflow-y-auto e max-h */}
+      {/* Adicionado max-h e overflow-y-auto para o conteúdo do formulário */}
+      <div className="p-6 max-h-[550px] overflow-y-auto"> {/* Altura máxima para o card do formulário */}
         <form onSubmit={handleSubmit} action="https://formspree.io/f/xgvndwrv" method="POST" className="space-y-4">
           <input type="hidden" name="_subject" value="Nova Proposta - Use Carro (Home)" />
           <input type="hidden" name="_next" value="https://SEU_DOMINIO_AQUI.com/" /> {/* Redireciona para a Home do seu site */}

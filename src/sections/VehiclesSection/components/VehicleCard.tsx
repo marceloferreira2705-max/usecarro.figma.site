@@ -1,9 +1,10 @@
+
 import { useState } from "react";
+import { vehiclesData } from "@/data/vehiclesData"; // Importado no topo do arquivo
 
 export type VehicleCardProps = {
   vehicleImage: string;
   categoryName: string;
-  // categoryVariant: string; // Removido definitivamente
   popularityLabel: string;
   popularityVariant: string;
   vehicleTitle: string;
@@ -11,7 +12,7 @@ export type VehicleCardProps = {
   fuelType: string;
   transmissionType: string;
   seatingCapacity: string;
-  monthlyPrice: string;
+  monthlyPrice: string; // Este é o preço de assinatura padrão
   vehicleId: string;
   category?: string;
 };
@@ -19,39 +20,35 @@ export type VehicleCardProps = {
 export const VehicleCard = (props: VehicleCardProps) => {
   const [activeTab, setActiveTab] = useState("Assinatura");
 
-  // Importa vehiclesData para acessar os preços completos
-  import { vehiclesData } from "@/data/vehiclesData";
-
-  const getPriceByTab = (tab: string) => {
+  const getPriceAndTermByTab = (tab: string) => {
     const vehicleData = vehiclesData[props.vehicleId];
     if (!vehicleData || !vehicleData.prices) {
-      return { monthly: props.monthlyPrice, term: "/mês" }; // Fallback
+      // Fallback se os dados do veículo ou preços não forem encontrados
+      return { monthly: props.monthlyPrice, term: "/mês" };
     }
 
-    let priceData;
+    let priceInfo;
     switch (tab) {
       case "Assinatura":
-        priceData = vehicleData.prices.assinatura;
+        priceInfo = vehicleData.prices.assinatura;
         break;
       case "Financiamento":
-        priceData = vehicleData.prices.financiamento;
+        priceInfo = vehicleData.prices.financiamento;
         break;
       case "Consórcio":
-        priceData = vehicleData.prices.consorcio;
+        priceInfo = vehicleData.prices.consorcio;
         break;
       default:
-        priceData = vehicleData.prices.assinatura;
+        priceInfo = vehicleData.prices.assinatura; // Padrão para assinatura
     }
 
-    // Garante que sempre retorna um objeto com monthly e term
     return {
-      monthly: priceData?.monthly || props.monthlyPrice,
-      term: priceData?.term || "/mês"
+      monthly: priceInfo?.monthly || props.monthlyPrice,
+      term: priceInfo?.term || "/mês"
     };
   };
 
-  // Acessa os dados de preço e termo para a aba ativa
-  const currentPriceAndTerm = getPriceByTab(activeTab);
+  const currentPriceAndTerm = getPriceAndTermByTab(activeTab);
 
   return (
     <div className="bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_10px_15px_-3px,rgba(0,0,0,0.1)_0px_4px_6px_-4px] box-border caret-transparent gap-x-6 flex flex-col outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] gap-y-6 overflow-hidden rounded-2xl">
@@ -199,7 +196,7 @@ export const VehicleCard = (props: VehicleCardProps) => {
                   : activeTab === "Financiamento"
                   ? "text-blue-900"
                   : "text-green-700"
-                }`}>
+              }`}>
                 {currentPriceAndTerm.monthly}
               </p>
             </div>
