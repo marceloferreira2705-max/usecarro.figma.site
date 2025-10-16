@@ -19,32 +19,39 @@ export type VehicleCardProps = {
 export const VehicleCard = (props: VehicleCardProps) => {
   const [activeTab, setActiveTab] = useState("Assinatura");
 
+  // Importa vehiclesData para acessar os preços completos
+  import { vehiclesData } from "@/data/vehiclesData";
+
   const getPriceByTab = (tab: string) => {
-    const basePrice = parseInt(props.monthlyPrice.replace(/[^\d]/g, ''));
+    const vehicleData = vehiclesData[props.vehicleId];
+    if (!vehicleData || !vehicleData.prices) {
+      return { monthly: props.monthlyPrice, term: "/mês" }; // Fallback
+    }
+
+    let priceData;
     switch (tab) {
       case "Assinatura":
-        return props.monthlyPrice;
+        priceData = vehicleData.prices.assinatura;
+        break;
       case "Financiamento":
-        return `R$ ${(basePrice * 1.2).toLocaleString('pt-BR')}`;
+        priceData = vehicleData.prices.financiamento;
+        break;
       case "Consórcio":
-        return `R$ ${(basePrice * 0.8).toLocaleString('pt-BR')}`;
+        priceData = vehicleData.prices.consorcio;
+        break;
       default:
-        return props.monthlyPrice;
+        priceData = vehicleData.prices.assinatura;
     }
+
+    // Garante que sempre retorna um objeto com monthly e term
+    return {
+      monthly: priceData?.monthly || props.monthlyPrice,
+      term: priceData?.term || "/mês"
+    };
   };
 
-  const getTabDescription = (tab: string) => {
-    switch (tab) {
-      case "Assinatura":
-        return "/mês";
-      case "Financiamento":
-        return "/mês (60x)";
-      case "Consórcio":
-        return "/mês (grupo)";
-      default:
-        return "/mês";
-    }
-  };
+  // Acessa os dados de preço e termo para a aba ativa
+  const currentPriceAndTerm = getPriceByTab(activeTab);
 
   return (
     <div className="bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_10px_15px_-3px,rgba(0,0,0,0.1)_0px_4px_6px_-4px] box-border caret-transparent gap-x-6 flex flex-col outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] gap-y-6 overflow-hidden rounded-2xl">
@@ -183,7 +190,7 @@ export const VehicleCard = (props: VehicleCardProps) => {
                     ? "text-blue-800"
                     : "text-green-600"
                 }`}>
-                  {getTabDescription(activeTab)}
+                  {currentPriceAndTerm.term}
                 </p>
               </div>
               <p className={`text-lg font-bold box-border caret-transparent leading-7 outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] ${
@@ -192,8 +199,8 @@ export const VehicleCard = (props: VehicleCardProps) => {
                   : activeTab === "Financiamento"
                   ? "text-blue-900"
                   : "text-green-700"
-              }`}>
-                {getPriceByTab(activeTab)}
+                }`}>
+                {currentPriceAndTerm.monthly}
               </p>
             </div>
           </div>
