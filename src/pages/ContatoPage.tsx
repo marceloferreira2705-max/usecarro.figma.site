@@ -112,23 +112,8 @@ export const ContatoPage = () => {
               {/* Revertido para Formspree HTML POST */}
               <form action="https://formspree.io/f/xgvndwrv" method="POST" className="space-y-6">
                 <input type="hidden" name="_subject" value="Nova Mensagem - Use Carro (Contato)" />
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Tipo de Manifestação *
-                  </label>
-                  <select 
-                    name="Tipo de Manifestacao"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                    required
-                  >
-                    <option value="">Selecione o tipo</option>
-                    <option value="Reclamacao">Reclamação</option>
-                    <option value="Sugestao">Sugestão</option>
-                    <option value="Elogio">Elogio</option>
-                    <option value="Denuncia">Denúncia</option>
-                    <option value="Solicitacao de Informacao">Solicitação de Informação</option>
-                  </select>
-                </div>
+                <input type="hidden" name="_next" value="https://usecarro.figma.site/success" /> {/* Redireciona para a página de sucesso */}
+                <input type="hidden" name="Tipo de Manifestacao" value="Solicitação de Informação" /> {/* Campo oculto */}
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
@@ -138,7 +123,7 @@ export const ContatoPage = () => {
                     <input
                       type="text"
                       name="Nome Completo"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-border-transparent"
                       placeholder="Seu nome completo"
                       required
                     />
