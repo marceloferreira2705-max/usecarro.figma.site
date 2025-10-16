@@ -1,32 +1,8 @@
 import React from 'react';
-import { useForm, ValidationError } from '@formspree/react';
 import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
 
 export const ContatoPage = () => {
-  const [state, handleSubmit] = useForm("xgvndwrv"); // Seu endpoint Formspree
-
-  if (state.succeeded) {
-    return (
-      <div className="min-h-screen bg-white flex flex-col">
-        <Header />
-        <div className="flex-1 flex items-center justify-center p-6 text-center">
-          <div>
-            <h1 className="text-4xl font-bold text-green-600 mb-4">Mensagem Enviada com Sucesso!</h1>
-            <p className="text-gray-700 mb-6">Agradecemos seu contato. Em breve, um de nossos especialistas entrará em contato com você.</p>
-            <button
-              onClick={() => window.location.reload()} // Recarrega a página para permitir novo envio
-              className="bg-gradient-to-r from-green-600 to-blue-600 text-white font-semibold px-8 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
-            >
-              Enviar Nova Mensagem
-            </button>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -133,7 +109,8 @@ export const ContatoPage = () => {
             <div className="bg-gray-50 rounded-2xl p-8">
               <h2 className="text-2xl font-bold mb-6">Envie sua Mensagem</h2>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Revertido para Formspree HTML POST */}
+              <form action="https://formspree.io/f/xgvndwrv" method="POST" className="space-y-6">
                 <input type="hidden" name="_subject" value="Nova Mensagem - Use Carro (Contato)" />
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -151,11 +128,6 @@ export const ContatoPage = () => {
                     <option value="Denuncia">Denúncia</option>
                     <option value="Solicitacao de Informacao">Solicitação de Informação</option>
                   </select>
-                  <ValidationError 
-                    prefix="Tipo de Manifestacao" 
-                    field="Tipo de Manifestacao"
-                    errors={state.errors}
-                  />
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
@@ -170,11 +142,6 @@ export const ContatoPage = () => {
                       placeholder="Seu nome completo"
                       required
                     />
-                    <ValidationError 
-                      prefix="Nome Completo" 
-                      field="Nome Completo"
-                      errors={state.errors}
-                    />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -186,11 +153,6 @@ export const ContatoPage = () => {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
                       placeholder="seu@email.com"
                       required
-                    />
-                    <ValidationError 
-                      prefix="Email" 
-                      field="Email"
-                      errors={state.errors}
                     />
                   </div>
                 </div>
@@ -206,11 +168,6 @@ export const ContatoPage = () => {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
                       placeholder="(12) 98290-0169"
                       required
-                    />
-                    <ValidationError 
-                      prefix="Telefone" 
-                      field="Telefone"
-                      errors={state.errors}
                     />
                   </div>
                   <div>
@@ -229,11 +186,6 @@ export const ContatoPage = () => {
                       <option value="Duvidas Gerais">Dúvidas Gerais</option>
                       <option value="Suporte">Suporte</option>
                     </select>
-                    <ValidationError 
-                      prefix="Assunto" 
-                      field="Assunto"
-                      errors={state.errors}
-                    />
                   </div>
                 </div>
 
@@ -248,16 +200,10 @@ export const ContatoPage = () => {
                     placeholder="Descreva como podemos ajudar você..."
                     required
                   ></textarea>
-                  <ValidationError 
-                    prefix="Mensagem" 
-                    field="Mensagem"
-                    errors={state.errors}
-                  />
                 </div>
 
                 <button
                   type="submit"
-                  disabled={state.submitting}
                   className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white font-semibold py-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
                 >
                   Enviar Mensagem
