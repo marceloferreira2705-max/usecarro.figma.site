@@ -42,8 +42,18 @@ export const ContatoPage = () => {
         <Header />
         <div className="flex-1 flex items-center justify-center p-6 text-center">
           <div>
-            <h1 className="text-4xl font-bold text-green-600 mb-4">Mensagem Enviada com Sucesso!</h1>
-            <p className="text-gray-700 mb-6">Agradecemos seu contato. Em breve, um de nossos especialistas entrará em contato com você.</p>
+            <h1 className="text-4xl font-bold text-green-600 mb-4">Sua Solicitação Chegou ao Use Carro! 🥳</h1>
+            <p className="text-gray-700 text-lg mb-6">
+              Olá!
+              <br /><br />
+              Obrigado pelo seu interesse! Recebemos seu pedido de informações e nossos especialistas (os "caçadores de detalhes automotivos") já estão analisando tudo com carinho. 🔎
+              <br /><br />
+              Enquanto preparamos a resposta perfeita, que tal continuar a navegar? O próximo carro dos seus sonhos pode estar a um clique de distância! 😉
+              <br /><br />
+              Voltamos em breve!
+              <br /><br />
+              Equipe Use Carro 🚗💨
+            </p>
             <button
               onClick={() => setSubmitted(false)} // Permite enviar novamente
               className="bg-gradient-to-r from-green-600 to-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer text-sm"
