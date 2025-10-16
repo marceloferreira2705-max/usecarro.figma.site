@@ -3,7 +3,7 @@ import { useState } from "react";
 export type VehicleCardProps = {
   vehicleImage: string;
   categoryName: string;
-  categoryVariant: string;
+  // categoryVariant: string; // Removido definitivamente
   popularityLabel: string;
   popularityVariant: string;
   vehicleTitle: string;
@@ -49,13 +49,15 @@ export const VehicleCard = (props: VehicleCardProps) => {
   return (
     <div className="bg-white shadow-[rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0)_0px_0px_0px_0px,rgba(0,0,0,0.1)_0px_10px_15px_-3px,rgba(0,0,0,0.1)_0px_4px_6px_-4px] box-border caret-transparent gap-x-6 flex flex-col outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] gap-y-6 overflow-hidden rounded-2xl">
       <div className="relative box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)]">
+        {/* Fundo branco explícito e sem categoryVariant */}
         <div
-          className={`relative items-center aspect-video box-border caret-transparent flex justify-center outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] overflow-hidden ${props.categoryVariant}`}
+          className={`relative items-center aspect-video box-border caret-transparent flex justify-center outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] overflow-hidden bg-white`}
         >
           <img
             src={props.vehicleImage}
             alt={props.vehicleTitle}
             className="w-full h-full object-contain"
+            onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/600x400?text=Imagem+não+disponível"; e.currentTarget.style.backgroundColor = "#ffffff"; }} // Fallback e fundo branco
           />
         </div>
         <span
@@ -170,9 +172,7 @@ export const VehicleCard = (props: VehicleCardProps) => {
                     ? "text-blue-700" 
                     : activeTab === "Financiamento"
                     ? "text-blue-900"
-                    : activeTab === "Consórcio"
-                    ? "text-green-700"
-                    : "text-[oklch(0.446_0.03_256.802)]"
+                    : "text-green-700"
                 }`}>
                   {activeTab}
                 </p>
@@ -181,9 +181,7 @@ export const VehicleCard = (props: VehicleCardProps) => {
                     ? "text-blue-600" 
                     : activeTab === "Financiamento"
                     ? "text-blue-800"
-                    : activeTab === "Consórcio"
-                    ? "text-green-600"
-                    : "text-[oklch(0.551_0.027_264.364)]"
+                    : "text-green-600"
                 }`}>
                   {getTabDescription(activeTab)}
                 </p>
@@ -193,9 +191,7 @@ export const VehicleCard = (props: VehicleCardProps) => {
                   ? "text-blue-700" 
                   : activeTab === "Financiamento"
                   ? "text-blue-900"
-                  : activeTab === "Consórcio"
-                  ? "text-green-700"
-                  : "text-green-600"
+                  : "text-green-700"
               }`}>
                 {getPriceByTab(activeTab)}
               </p>

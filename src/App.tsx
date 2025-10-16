@@ -25,7 +25,9 @@ export const App = () => {
                 <OptionsSection />
                 <BenefitsSection />
                 <VehiclesSection />
-                <ChatSection />
+                <div id="ia-clara-section"> {/* Adicionado ID para ancoragem */}
+                  <ChatSection />
+                </div>
                 <PartnersSection />
                 <FAQSection />
                 <Footer />

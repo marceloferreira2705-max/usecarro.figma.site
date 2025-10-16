@@ -36,6 +36,7 @@ export const WhatsAppContact = () => {
           </p>
         </div>
         
+        {/* Este botão já é o de WhatsApp, então não o alteramos para a IA Clara */}
         <button
           onClick={handleWhatsAppClick}
           className="bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all flex items-center gap-3 cursor-pointer"

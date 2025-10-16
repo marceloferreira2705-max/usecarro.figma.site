@@ -23,7 +23,7 @@ export const VehiclesSection = () => {
               vehicleIcon={vehicle.type === "SUV Compacto" ? "🚙" : vehicle.type === "Picape Compacta" ? "🚚" : "🚗"}
               vehicleImage={vehicle.images[0]} // Usar a primeira imagem do array
               categoryName={vehicle.type}
-              categoryVariant="bg-[linear-gradient(to_right_bottom,oklch(0.623_0.214_259.815)_0%,oklch(0.546_0.245_262.881)_100%)]" // Placeholder, adjust as needed
+              // categoryVariant="bg-white" // Removido
               popularityLabel={vehicle.type} // Placeholder, adjust as needed
               popularityVariant="bg-green-600 right-4" // Placeholder, adjust as needed
               vehicleTitle={vehicle.title}
@@ -31,7 +31,7 @@ export const VehiclesSection = () => {
               fuelType={vehicle.fuelType}
               transmissionType={vehicle.transmission}
               seatingCapacity={vehicle.seats}
-              monthlyPrice={vehicle.prices.assinatura.monthly}
+              monthlyPrice={vehicle.prices.assinatura.monthly} // Agora puxa do vehiclesData
               vehicleId={vehicle.id}
               category={vehicle.type}
             />

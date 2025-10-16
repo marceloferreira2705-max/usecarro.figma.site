@@ -108,11 +108,13 @@ export const VehicleDetailPage = () => {
                   )}
                 </div>
 
-                <div className="bg-gradient-to-br from-blue-50 to-green-50 rounded-3xl p-8 flex items-start justify-center mb-6">
+                {/* Fundo branco explícito para a imagem do veículo na página de detalhes */}
+                <div className="bg-white rounded-3xl p-8 flex items-start justify-center mb-6">
                   <img
                     src={imageUrl}
                     alt={vehicle.title || "Veículo"}
                     className="w-full h-auto object-contain drop-shadow-2xl"
+                    onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/600x400?text=Imagem+não+disponível"; e.currentTarget.style.backgroundColor = "#ffffff"; }} // Fallback e fundo branco
                   />
                 </div>
 
@@ -286,7 +288,7 @@ export const VehicleDetailPage = () => {
                     Fale com Especialista
                   </button>
                   <button 
-                    onClick={() => window.open("https://www.chatbase.co/chatbot-iframe/Ey1TW94MhZcS3j_kJfNd7", "_blank")}
+                    onClick={() => window.location.href = "/#ia-clara-section"} // Link para a seção na Home
                     className={`flex-1 font-bold py-4 rounded-xl border-2 transition-all cursor-pointer ${
                       activeTab === "Assinatura" 
                         ? "border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white" 

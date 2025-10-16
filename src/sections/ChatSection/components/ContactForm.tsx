@@ -1,31 +1,8 @@
 import { vehiclesData } from "@/data/vehiclesData";
 
 export const ContactForm = () => {
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const form = e.currentTarget as HTMLFormElement;
-    const formData = new FormData(form);
-
-    const nome = formData.get("nome") as string;
-    const email = formData.get("email") as string;
-    const telefone = formData.get("telefone") as string;
-    const interesse = formData.get("interesse") as string;
-    const veiculo = formData.get("veiculo") as string;
-
-    const subject = `Nova Proposta - ${interesse} - ${nome}`;
-    const body = `
-      Nome Completo: ${nome}
-      E-mail: ${email}
-      Telefone: ${telefone}
-      Interesse: ${interesse}
-      Veículo de Interesse: ${veiculo ? vehiclesData[veiculo].brand + " " + vehiclesData[veiculo].version : "Não especificado"}
-
-      Por favor, entre em contato para dar continuidade à proposta.
-    `;
-
-    window.location.href = `mailto:vendas@usecarro.com.br?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  };
-
+  // O Formspree lida com o envio, então removemos a função handleSubmit manual
+  // e o mailto: link.
   const allVehicles = Object.values(vehiclesData);
 
   return (
@@ -49,13 +26,15 @@ export const ContactForm = () => {
       </div>
       
       <div className="p-6 overflow-y-auto max-h-[500px]">
-        <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Atualizado para usar Formspree */}
+        <form action="https://formspree.io/f/xgvndwrv" method="POST" className="space-y-4">
+          <input type="hidden" name="_subject" value="Nova Proposta - Use Carro (Home)" />
           <div>
             <label htmlFor="nome" className="text-sm font-medium block mb-2">Nome completo</label>
             <input
               type="text"
               id="nome"
-              name="nome"
+              name="Nome Completo" // Nome para o Formspree
               placeholder="Seu nome"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm"
               required
@@ -67,7 +46,7 @@ export const ContactForm = () => {
             <input
               type="email"
               id="email"
-              name="email"
+              name="Email" // Nome para o Formspree
               placeholder="seu@email.com"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm"
               required
@@ -79,7 +58,7 @@ export const ContactForm = () => {
             <input
               type="tel"
               id="telefone"
-              name="telefone"
+              name="Telefone" // Nome para o Formspree
               placeholder="(11) 99999-9999"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm"
               required
@@ -90,7 +69,7 @@ export const ContactForm = () => {
             <label htmlFor="interesse" className="text-sm font-medium block mb-2">Interesse</label>
             <select
               id="interesse"
-              name="interesse"
+              name="Interesse" // Nome para o Formspree
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm"
             >
               <option value="">Selecione uma opção</option>
@@ -104,12 +83,12 @@ export const ContactForm = () => {
             <label htmlFor="veiculo" className="text-sm font-medium block mb-2">Escolha seu veículo</label>
             <select
               id="veiculo"
-              name="veiculo"
+              name="Veiculo de Interesse" // Nome para o Formspree
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm"
             >
               <option value="">Selecione um veículo (opcional)</option>
               {allVehicles.map((vehicle) => (
-                <option key={vehicle.id} value={vehicle.id}>
+                <option key={vehicle.id} value={`${vehicle.brand} ${vehicle.version} - ${vehicle.clientType}`}>
                   {vehicle.brand} {vehicle.version} - {vehicle.clientType}
                 </option>
               ))}
