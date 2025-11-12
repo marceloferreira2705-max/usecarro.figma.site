@@ -100,7 +100,7 @@ export const ContatoPage = () => {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold mb-2">Telefone</h3>
-                    <p className="text-gray-600">(12) 98290-0169</p>
+                    <p className="text-gray-600">(12) 99109-5018</p>
                     <p className="text-sm text-gray-500">Segunda a Sexta: 8h às 18h</p>
                   </div>
                 </div>

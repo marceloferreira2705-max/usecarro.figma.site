@@ -121,7 +121,7 @@ export const ContactForm = () => {
               type="tel"
               id="telefone"
               name="Telefone"
-              placeholder="(11) 99999-9999"
+              placeholder="(12) 99109-5018"
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent text-sm"
               required
             />

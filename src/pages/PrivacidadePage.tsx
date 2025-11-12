@@ -92,7 +92,7 @@ export const PrivacidadePage = () => {
             </p>
             <ul className="list-disc pl-6 mb-6">
               <li>E-mail: privacidade@usecarro.com.br</li>
-              <li>Telefone: (12) 98290-0169</li>
+              <li>Telefone: (12) 99109-5018</li>
               <li>Endereço: Av. Nove de Julho, nº 95 - Sala 21, Vila Adyana, São José dos Campos - SP</li>
             </ul>
 
