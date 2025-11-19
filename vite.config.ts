@@ -1,22 +1,17 @@
 import react from "@vitejs/plugin-react";
-import tailwind from "tailwindcss";
 import { defineConfig } from "vite";
 import path from "path";
 
-// https://vite.dev/config/
+// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   publicDir: "./static",
-  base: "/", // Alterado para caminho base absoluto
-  css: {
-    postcss: {
-      plugins: [tailwind()],
-    },
-  },
+  base: "/",
+  // Removendo a configuração 'css.postcss' daqui, pois o Vite detectará 'postcss.config.js'
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
-      "@/data": path.resolve(__dirname, "src/data"), // Adiciona alias específico para a pasta data
+      "@/data": path.resolve(__dirname, "src/data"),
     },
   },
 });

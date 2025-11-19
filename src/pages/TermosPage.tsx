@@ -74,7 +74,7 @@ export const TermosPage = () => {
 
             <h2 className="text-2xl font-bold mb-6">8. Contato</h2>
             <p className="mb-6">
-              Para dúvidas sobre estes termos, entre em contato conosco através do e-mail: juridico@usecarro.com.br ou telefone (12) 98290-0169.
+              Para dúvidas sobre estes termos, entre em contato conosco através do e-mail: juridico@usecarro.com.br ou telefone (12) 99109-5018.
             </p>
 
             <p className="text-sm text-gray-500 mt-8">

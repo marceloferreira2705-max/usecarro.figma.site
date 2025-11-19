@@ -82,7 +82,7 @@ export const OuvidoriaPage = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Telefone</h4>
-                    <p className="text-gray-600">(12) 98290-0169 (gratuito)</p>
+                    <p className="text-gray-600">(12) 99109-5018 (gratuito)</p>
                     <p className="text-sm text-gray-500">Segunda a Sexta: 8h às 18h</p>
                   </div>
                 </div>

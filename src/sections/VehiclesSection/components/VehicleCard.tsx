@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { vehiclesData } from "@/data/vehiclesData"; // Importado no topo do arquivo
 

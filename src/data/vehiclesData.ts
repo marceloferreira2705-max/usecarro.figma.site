@@ -51,19 +51,19 @@ export const vehiclesData: Record<string, VehicleData> = {
     year: "2026",
     prices: {
       assinatura: {
-        monthly: "R$ 1.800,00",
+        monthly: "R$ 1.757,99",
         term: "36 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
       },
       financiamento: {
-        monthly: "R$ 2.160,00",
+        monthly: "R$ 1.615,81",
         term: "60 meses",
         details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
       },
       consorcio: {
-        monthly: "R$ 1.440,00",
-        term: "120 meses",
+        monthly: "R$ 674,00",
+        term: "80 meses",
         details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
       }
     },
@@ -162,13 +162,13 @@ export const vehiclesData: Record<string, VehicleData> = {
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
       },
       financiamento: {
-        monthly: "R$ 2.327,99",
+        monthly: "R$ 1.930,08",
         term: "60 meses",
         details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
       },
       consorcio: {
-        monthly: "R$ 1.551,99",
-        term: "120 meses",
+        monthly: "R$ 767,00",
+        term: "80 meses",
         details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
       }
     },
@@ -366,19 +366,19 @@ export const vehiclesData: Record<string, VehicleData> = {
     year: "2026",
     prices: {
       assinatura: {
-        monthly: "R$ 2.349,99",
+        monthly: "R$ 1.939,99",
         term: "36 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
       },
       financiamento: {
-        monthly: "R$ 2.819,99",
+        monthly: "R$ 1.849,67",
         term: "60 meses",
         details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
       },
       consorcio: {
-        monthly: "R$ 1.879,99",
-        term: "120 meses",
+        monthly: "R$ 888,00",
+        term: "80 meses",
         details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
       }
     },
@@ -506,19 +506,19 @@ export const vehiclesData: Record<string, VehicleData> = {
     year: "2025",
     prices: {
       assinatura: {
-        monthly: "R$ 2.649,99",
+        monthly: "R$ 2.237,99",
         term: "36 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
       },
       financiamento: {
-        monthly: "R$ 3.179,99",
+        monthly: "R$ 2.482,99",
         term: "60 meses",
         details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
       },
       consorcio: {
-        monthly: "R$ 2.119,99",
-        term: "120 meses",
+        monthly: "R$ 953,00",
+        term: "80 meses",
         details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
       }
     },
@@ -1101,23 +1101,23 @@ export const vehiclesData: Record<string, VehicleData> = {
     year: "2025",
     prices: {
       assinatura: {
-        monthly: "R$ 3.899,99",
+        monthly: "R$ 3.492,99",
         term: "36 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
       },
       financiamento: {
-        monthly: "R$ 4.679,99",
+        monthly: "R$ 4.060,34",
         term: "60 meses",
         details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
       },
       consorcio: {
-        monthly: "R$ 3.119,99",
-        term: "120 meses",
+        monthly: "R$ 1.090,00",
+        term: "90 meses",
         details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
       }
     },
-    images: ["https://c.animaapp.com/mfxz26rhnSsSP4/img/compass_longitude_t270_1_3_tb_4x2_flex_aut_1.png"],
+    images: ["https://c.animaapp.com/mfxz26rhnSsSP4/img/compass_longitude.png"],
     description: "SUV médio com design robusto e tecnologia avançada."
   },
   "32": {

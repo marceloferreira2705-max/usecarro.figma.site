@@ -136,7 +136,7 @@ export const CookiesPage = () => {
             </p>
             <ul className="list-disc pl-6 mb-6">
               <li>E-mail: privacidade@usecarro.com.br</li>
-              <li>Telefone: (12) 98290-0169</li>
+              <li>Telefone: (12) 99109-5018</li>
             </ul>
 
             <p className="text-sm text-gray-500 mt-8">

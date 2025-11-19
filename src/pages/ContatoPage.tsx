@@ -142,7 +142,7 @@ export const ContatoPage = () => {
                       rel="noopener noreferrer"
                       className="text-gray-600 hover:text-green-700 transition-colors"
                     >
-                      (12) 98290-0169
+                      (12) 99109-5018
                     </a>
                     <p className="text-sm text-gray-500">Atendimento rápido via WhatsApp</p>
                   </div>
@@ -215,7 +215,7 @@ export const ContatoPage = () => {
                       type="tel"
                       name="Telefone"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                      placeholder="(12) 98290-0169"
+                      placeholder="(12) 99109-5018"
                       required
                     />
                   </div>
