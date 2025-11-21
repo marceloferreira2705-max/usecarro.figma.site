@@ -251,7 +251,7 @@ export const vehiclesData: Record<string, VehicleData> = {
     brand: "FIAT",
     version: "STRADA 1.3 CABINE PLUS ENDURANCE",
     type: "Picape Compacta",
-    clientType: "Pessoa Física",
+    clientType: "Pessoa Jurídica",
     fuelType: "Flex",
     transmission: "Manual",
     seats: "2",
@@ -261,19 +261,19 @@ export const vehiclesData: Record<string, VehicleData> = {
     year: "2026",
     prices: {
       assinatura: {
-        monthly: "R$ 2.249,00",
+        monthly: "R$ 1.799,00",
         term: "36 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
       },
       financiamento: {
-        monthly: "R$ 2.698,80",
+        monthly: "R$ 2.480,00",
         term: "60 meses",
         details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
       },
       consorcio: {
-        monthly: "R$ 1.799,20",
-        term: "120 meses",
+        monthly: "R$ 995,00",
+        term: "80 meses",
         details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
       }
     },
@@ -317,33 +317,33 @@ export const vehiclesData: Record<string, VehicleData> = {
   },
   "9": {
     id: "9",
-    title: "Fiat Pulse Drive 1.3",
+    title: "Fiat Pulse Drive 1.3 MT",
     brand: "FIAT",
-    version: "PULSE DRIVE 1.3",
+    version: "PULSE DRIVE 1.3 MT",
     type: "SUV Compacto",
-    clientType: "Pessoa Física",
+    clientType: "Pessoa Jurídica",
     fuelType: "Flex",
     transmission: "Manual",
     seats: "5",
     engine: "1.3",
     color: "Diversas",
     doors: "4",
-    year: "2025",
+    year: "2026",
     prices: {
       assinatura: {
-        monthly: "R$ 2.650,00",
+        monthly: "R$ 2.169,00",
         term: "36 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
       },
       financiamento: {
-        monthly: "R$ 3.180,00",
+        monthly: "R$ 2.213,00",
         term: "60 meses",
         details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
       },
       consorcio: {
-        monthly: "R$ 2.120,00",
-        term: "120 meses",
+        monthly: "R$ 907,00",
+        term: "80 meses",
         details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
       }
     },
@@ -772,12 +772,12 @@ export const vehiclesData: Record<string, VehicleData> = {
   },
   "22": {
     id: "22",
-    title: "Fiat Fastback Audace Hybrid",
+    title: "Fiat Fastback Audace Turbo",
     brand: "FIAT",
-    version: "FASTBACK AUDACE TURBO 1.0 HYBRID",
+    version: "FASTBACK AUDACE TURBO 1.0",
     type: "SUV Coupé",
-    clientType: "Pessoa Física",
-    fuelType: "Flex/Híbrido",
+    clientType: "Pessoa Jurídica",
+    fuelType: "Flex",
     transmission: "Automático (CVT)",
     seats: "5",
     engine: "1.0 Turbo",
@@ -786,19 +786,19 @@ export const vehiclesData: Record<string, VehicleData> = {
     year: "2025",
     prices: {
       assinatura: {
-        monthly: "R$ 3.049,99",
+        monthly: "R$ 2.499,00",
         term: "36 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
       },
       financiamento: {
-        monthly: "R$ 3.659,99",
+        monthly: "R$ 2.650,00",
         term: "60 meses",
         details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
       },
       consorcio: {
-        monthly: "R$ 2.439,99",
-        term: "120 meses",
+        monthly: "R$ 1.084,00",
+        term: "80 meses",
         details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
       }
     },
@@ -1122,37 +1122,37 @@ export const vehiclesData: Record<string, VehicleData> = {
   },
   "32": {
     id: "32",
-    title: "RAM Rampage Big Horn 2.0 Turbo Diesel",
+    title: "RAM Rampage Big Horn 2.2 Diesel",
     brand: "RAM",
-    version: "RAMPAGE BIG HORN 2.0 TURBO DIESEL AUT.",
+    version: "RAMPAGE BIG HORN 2.2 DIESEL AUT.",
     type: "Picape Média",
-    clientType: "Pessoa Física",
+    clientType: "Pessoa Jurídica",
     fuelType: "Diesel",
     transmission: "Automático",
     seats: "5",
-    engine: "2.0 Turbo Diesel",
+    engine: "2.2 Diesel",
     color: "Diversas",
     doors: "4",
     year: "2025",
     prices: {
       assinatura: {
-        monthly: "R$ 4.299,99",
+        monthly: "R$ 4.699,00",
         term: "36 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
       },
       financiamento: {
-        monthly: "R$ 5.159,99",
+        monthly: "R$ 4.687,50",
         term: "60 meses",
         details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
       },
       consorcio: {
-        monthly: "R$ 3.439,99",
-        term: "120 meses",
+        monthly: "R$ 1.560,00",
+        term: "80 meses",
         details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
       }
     },
-    images: ["https://c.animaapp.com/mfxz26rhnSsSP4/img/rampage.png"],
+    images: ["https://c.animaapp.com/mfxz26rhnSsSP4/img/rambig.webp"],
     description: "Picape média com motor diesel potente e design imponente."
   },
   "33": {

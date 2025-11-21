@@ -37,9 +37,16 @@ export const BlackFridayVehicleCard = (props: BlackFridayVehicleCardProps) => {
             e.currentTarget.style.backgroundColor = "#ffffff"; 
           }}
         />
-        <span className="absolute top-4 left-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-          BLACK FRIDAY
-        </span>
+        <div className="absolute top-4 left-4 flex gap-2">
+          <span className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+            BLACK FRIDAY
+          </span>
+          {vehicle.clientType === "Pessoa Jurídica" && (
+            <span className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+              PJ - DESTAQUE
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Vehicle Info */}

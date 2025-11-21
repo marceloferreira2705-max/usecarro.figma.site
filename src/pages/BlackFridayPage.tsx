@@ -50,6 +50,42 @@ const blackFridayVehiclesData = [
     consorcioTerm: "90m",
     consorcioPrice: "R$ 1.090,00",
   },
+  {
+    vehicleId: "22",
+    fipeValue: "R$ 119.780",
+    assinaturaPrice: "R$ 2.499,00",
+    financiamentoPrice: "R$ 2.650,00",
+    consorcioCredit: "R$ 122.500",
+    consorcioTerm: "80m",
+    consorcioPrice: "R$ 1.084,00",
+  },
+  {
+    vehicleId: "7",
+    fipeValue: "R$ 112.155",
+    assinaturaPrice: "R$ 1.799,00",
+    financiamentoPrice: "R$ 2.480,00",
+    consorcioCredit: "R$ 112.500",
+    consorcioTerm: "80m",
+    consorcioPrice: "R$ 995,00",
+  },
+  {
+    vehicleId: "32",
+    fipeValue: "R$ 207.189",
+    assinaturaPrice: "R$ 4.699,00",
+    financiamentoPrice: "R$ 4.687,50",
+    consorcioCredit: "R$ 200.000",
+    consorcioTerm: "80m",
+    consorcioPrice: "R$ 1.560,00",
+  },
+  {
+    vehicleId: "9",
+    fipeValue: "R$ 99.999",
+    assinaturaPrice: "R$ 2.169,00",
+    financiamentoPrice: "R$ 2.213,00",
+    consorcioCredit: "R$ 102.500",
+    consorcioTerm: "80m",
+    consorcioPrice: "R$ 907,00",
+  },
 ];
 
 export const BlackFridayPage = () => {
