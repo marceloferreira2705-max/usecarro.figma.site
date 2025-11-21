@@ -6,11 +6,17 @@ import { vehiclesData, VehicleData } from "@/data/vehiclesData";
 
 export const VeiculosPage = () => {
   const [selectedFilter, setSelectedFilter] = useState("Todos");
-  const [visibleVehicles, setVisibleVehicles] = useState(6);
+  const [visibleVehicles, setVisibleVehicles] = useState(9);
 
-  const allVehicles: VehicleData[] = Object.values(vehiclesData);
+  // Black Friday vehicles IDs
+  const blackFridayIds = ["1", "4", "14", "10", "31", "22", "7", "32", "9"];
+  
+  // Get only Black Friday vehicles
+  const allVehicles: VehicleData[] = blackFridayIds
+    .map(id => vehiclesData[id])
+    .filter(Boolean);
 
-  const filters = ["Todos", "Econômico", "Hatch", "Sedan", "Picape Compacta", "SUV Compacto", "SUV Médio", "Crossover Coupé", "Comercial"];
+  const filters = ["Todos", "Econômico", "Hatch Compacto", "SUV Compacto", "SUV Médio", "SUV Coupé", "Picape Compacta", "Picape Média"];
 
   const filteredVehicles = selectedFilter === "Todos" 
     ? allVehicles 
@@ -32,14 +38,18 @@ export const VeiculosPage = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="bg-[linear-gradient(to_right_bottom,rgb(255,255,255)_0%,oklch(0.985_0.002_247.839)_100%)] pt-32 pb-20">
+      <section className="bg-gradient-to-br from-purple-900 via-purple-800 to-black pt-32 pb-20">
         <div className="max-w-screen-xl mx-auto px-6 md:px-8">
           <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-6xl font-black leading-tight mb-6">
-              Nossos <span className="text-green-600">Veículos</span>
+            <div className="inline-flex items-center gap-2 bg-yellow-400 text-black font-black px-6 py-2 rounded-full mb-6 animate-bounce">
+              <span className="text-2xl">🔥</span>
+              <span className="text-sm uppercase tracking-wider">Black Friday</span>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-black leading-tight mb-6 text-white">
+              Ofertas <span className="text-yellow-400">Black Friday</span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-              Explore nossa frota completa com {allVehicles.length} veículos 0km e seminovos. Compare preços entre assinatura, consórcio e financiamento.
+            <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">
+              Explore nossa seleção especial com {allVehicles.length} veículos em promoção. Compare preços entre assinatura, consórcio e financiamento.
             </p>
           </div>
         </div>
@@ -106,20 +116,26 @@ export const VeiculosPage = () => {
             <div className="text-center mt-12">
               <button 
                 onClick={loadMoreVehicles}
-                className="bg-green-600 text-white font-semibold px-8 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-shadow"
+                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold px-10 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer"
               >
-                Carregar Mais Veículos ({filteredVehicles.length - visibleVehicles} restantes)
+                Carregar Mais Ofertas ({filteredVehicles.length - visibleVehicles} restantes)
               </button>
             </div>
           )}
 
           {/* No More Vehicles Message */}
-          {visibleVehicles >= filteredVehicles.length && filteredVehicles.length > 6 && (
+          {visibleVehicles >= filteredVehicles.length && filteredVehicles.length > 9 && (
             <div className="text-center mt-12">
               <p className="text-gray-600 text-lg">
-                Você visualizou todos os {filteredVehicles.length} veículos disponíveis
+                Você visualizou todas as {filteredVehicles.length} ofertas disponíveis
                 {selectedFilter !== "Todos" && ` em ${selectedFilter}`}.
               </p>
+              <button
+                onClick={() => window.location.href = "/blackfriday"}
+                className="mt-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold px-8 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all cursor-pointer"
+              >
+                Ver Página Black Friday Completa
+              </button>
             </div>
           )}
         </div>
