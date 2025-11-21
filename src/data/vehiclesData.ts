@@ -262,7 +262,7 @@ export const vehiclesData: Record<string, VehicleData> = {
     prices: {
       assinatura: {
         monthly: "R$ 1.799,00",
-        term: "36 meses",
+        term: "18 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
       },
@@ -332,7 +332,7 @@ export const vehiclesData: Record<string, VehicleData> = {
     prices: {
       assinatura: {
         monthly: "R$ 2.169,00",
-        term: "36 meses",
+        term: "18 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
       },
@@ -787,7 +787,7 @@ export const vehiclesData: Record<string, VehicleData> = {
     prices: {
       assinatura: {
         monthly: "R$ 2.499,00",
-        term: "36 meses",
+        term: "18 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
       },
@@ -1137,7 +1137,7 @@ export const vehiclesData: Record<string, VehicleData> = {
     prices: {
       assinatura: {
         monthly: "R$ 4.699,00",
-        term: "36 meses",
+        term: "18 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
       },
