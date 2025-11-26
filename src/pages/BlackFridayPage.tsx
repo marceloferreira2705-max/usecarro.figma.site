@@ -92,10 +92,8 @@ export const BlackFridayPage = () => {
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    // Data de início: 19/11/2025 13:23
-    const startDate = new Date('2025-11-19T13:23:00');
-    // Adicionar 77 horas
-    const endDate = new Date(startDate.getTime() + (77 * 60 * 60 * 1000));
+    // Data de término: 30/11/2025 23:59
+    const endDate = new Date('2025-11-30T23:59:59');
 
     const calculateTimeLeft = () => {
       const now = new Date();
