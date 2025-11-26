@@ -73,9 +73,9 @@ export const BlackFridayVehicleCard = (props: BlackFridayVehicleCardProps) => {
         </div>
 
         {/* FIPE Value */}
-        <div className="bg-gray-100 rounded-lg p-3 mb-4">
-          <p className="text-xs text-gray-600 mb-1">Valor FIPE</p>
-          <p className="text-lg font-bold text-gray-800">{props.fipeValue}</p>
+        <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-lg p-3 mb-4">
+          <p className="text-xs text-purple-700 font-semibold mb-1">Valor FIPE</p>
+          <p className="text-xl font-black text-purple-900">{props.fipeValue}</p>
         </div>
 
         {/* Prices */}

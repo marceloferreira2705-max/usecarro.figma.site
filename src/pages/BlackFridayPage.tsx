@@ -34,12 +34,12 @@ const blackFridayVehiclesData = [
   },
   {
     vehicleId: "10",
-    fipeValue: "R$ 78.551",
-    assinaturaPrice: "R$ 1.939,99",
-    financiamentoPrice: "R$ 1.849,67",
-    consorcioCredit: "R$ 72.500",
+    fipeValue: "R$ 95.620",
+    assinaturaPrice: "R$ 2.289,99",
+    financiamentoPrice: "R$ 2.115,77",
+    consorcioCredit: "R$ 92.500",
     consorcioTerm: "80m",
-    consorcioPrice: "R$ 888,00",
+    consorcioPrice: "R$ 860,00",
   },
   {
     vehicleId: "31",

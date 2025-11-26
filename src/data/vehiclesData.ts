@@ -366,18 +366,18 @@ export const vehiclesData: Record<string, VehicleData> = {
     year: "2026",
     prices: {
       assinatura: {
-        monthly: "R$ 1.939,99",
-        term: "36 meses",
+        monthly: "R$ 2.289,99",
+        term: "24 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
       },
       financiamento: {
-        monthly: "R$ 1.849,67",
-        term: "60 meses",
+        monthly: "R$ 2.115,77",
+        term: "36 meses",
         details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
       },
       consorcio: {
-        monthly: "R$ 888,00",
+        monthly: "R$ 860,00",
         term: "80 meses",
         details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
       }
