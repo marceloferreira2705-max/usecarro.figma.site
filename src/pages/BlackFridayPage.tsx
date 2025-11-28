@@ -6,6 +6,15 @@ import { useState, useEffect } from "react";
 
 const blackFridayVehiclesData = [
   {
+    vehicleId: "25",
+    fipeValue: "R$ 156.329",
+    assinaturaPrice: "R$ 3.424,99",
+    financiamentoPrice: "R$ 3.655,54",
+    consorcioCredit: "R$ 160.000",
+    consorcioTerm: "80m",
+    consorcioPrice: "R$ 1.302,00",
+  },
+  {
     vehicleId: "1",
     fipeValue: "R$ 68.657",
     assinaturaPrice: "R$ 1.757,99",
@@ -92,10 +101,9 @@ export const BlackFridayPage = () => {
   const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    // Data de término: 30/11/2025 23:59
     const endDate = new Date('2025-11-30T23:59:59');
 
-    const calculateTimeLeft = () => {
+    const timer = setInterval(() => {
       const now = new Date();
       const difference = endDate.getTime() - now.getTime();
 
@@ -107,11 +115,9 @@ export const BlackFridayPage = () => {
         setTimeLeft({ hours, minutes, seconds });
       } else {
         setTimeLeft({ hours: 0, minutes: 0, seconds: 0 });
+        clearInterval(timer);
       }
-    };
-
-    calculateTimeLeft();
-    const timer = setInterval(calculateTimeLeft, 1000);
+    }, 1000);
 
     return () => clearInterval(timer);
   }, []);

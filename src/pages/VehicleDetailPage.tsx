@@ -10,6 +10,7 @@ export const VehicleDetailPage = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [showOfferForm, setShowOfferForm] = useState(false);
+  const [showChatModal, setShowChatModal] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const vehicle: VehicleData | undefined = id ? vehiclesData[id] : undefined;
@@ -24,16 +25,7 @@ export const VehicleDetailPage = () => {
     } else {
       console.log("VehicleDetailPage: Dados do veículo carregados:", vehicle);
     }
-
-    // Lógica para rolar para a seção IA se o hash estiver presente
-    if (window.location.hash === "#ia-clara-section" && iaSectionRef.current) {
-      iaSectionRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
   }, [id, name, vehicle]);
-
-  const handleGoToIaSection = () => {
-    navigate("/#ia-clara-section");
-  };
 
   const handleOfferFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -91,7 +83,6 @@ export const VehicleDetailPage = () => {
 
   const getPriceDataByTab = (tab: string) => {
     if (!vehicle.prices) {
-      console.error("VehicleDetailPage: vehicle.prices é undefined para o veículo:", vehicle.id);
       return undefined;
     }
     switch (tab) {
@@ -109,7 +100,6 @@ export const VehicleDetailPage = () => {
   const currentPriceData = getPriceDataByTab(activeTab);
 
   if (!currentPriceData) {
-    console.error("VehicleDetailPage: currentPriceData é undefined para o veículo:", vehicle.id, "e aba:", activeTab);
     return (
       <div className="min-h-screen bg-white">
         <Header />
@@ -325,7 +315,7 @@ export const VehicleDetailPage = () => {
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button 
-                    onClick={handleGoToIaSection}
+                    onClick={() => setShowChatModal(true)}
                     className={`flex-1 font-bold py-4 rounded-xl border-2 transition-all cursor-pointer ${
                       activeTab === "Assinatura" 
                         ? "border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white" 
@@ -354,136 +344,170 @@ export const VehicleDetailPage = () => {
           </div>
         </section>
 
-      {/* Offer Form Modal */}
-      {showOfferForm && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-            <div className="sticky top-0 bg-gradient-to-r from-green-600 to-blue-600 text-white p-6 rounded-t-2xl">
-              <div className="flex justify-between items-center">
-                <h3 className="text-2xl font-bold">Solicitar Oferta</h3>
+        {/* Offer Form Modal */}
+        {showOfferForm && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+              <div className="sticky top-0 bg-gradient-to-r from-green-600 to-blue-600 text-white p-6 rounded-t-2xl">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-2xl font-bold">Solicitar Oferta</h3>
+                  <button 
+                    onClick={() => setShowOfferForm(false)}
+                    className="text-white hover:text-gray-200 text-3xl font-bold cursor-pointer"
+                  >
+                    ×
+                  </button>
+                </div>
+                <p className="text-white/90 mt-2">Preencha o formulário e receba uma proposta personalizada</p>
+              </div>
+
+              <div className="p-6">
+                {formSubmitted ? (
+                  <div className="text-center py-12">
+                    <div className="text-6xl mb-4">✅</div>
+                    <h4 className="text-2xl font-bold text-green-600 mb-2">Solicitação Enviada!</h4>
+                    <p className="text-gray-600">Entraremos em contato em breve com sua oferta personalizada.</p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleOfferFormSubmit} action="https://formspree.io/f/xgvndwrv" method="POST" className="space-y-4">
+                    <input type="hidden" name="_subject" value={`Nova Oferta - ${vehicle?.title}`} />
+                    <input type="hidden" name="_gotcha" style={{display: 'none'}} />
+                    <input type="hidden" name="Veiculo" value={vehicle?.title} />
+                    <input type="hidden" name="Modalidade" value={activeTab} />
+                    <input type="hidden" name="Valor" value={currentPriceData?.monthly} />
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Nome Completo *</label>
+                        <input
+                          type="text"
+                          name="Nome Completo"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                          placeholder="Seu nome completo"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">E-mail *</label>
+                        <input
+                          type="email"
+                          name="Email"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                          placeholder="seu@email.com"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Telefone *</label>
+                        <input
+                          type="tel"
+                          name="Telefone"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                          placeholder="(12) 99109-5018"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Tipo de Pessoa</label>
+                        <select
+                          name="Tipo de Pessoa"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                        >
+                          <option value="Pessoa Física">Pessoa Física</option>
+                          <option value="Pessoa Jurídica">Pessoa Jurídica</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Mensagem (opcional)</label>
+                      <textarea
+                        name="Mensagem"
+                        rows={4}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
+                        placeholder="Deixe uma mensagem ou dúvida..."
+                      ></textarea>
+                    </div>
+
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <p className="text-sm font-semibold text-gray-700 mb-2">Resumo da Oferta:</p>
+                      <div className="space-y-1 text-sm text-gray-600">
+                        <p><strong>Veículo:</strong> {vehicle?.title}</p>
+                        <p><strong>Modalidade:</strong> {activeTab}</p>
+                        <p><strong>Valor:</strong> {currentPriceData?.monthly}</p>
+                      </div>
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white font-bold py-4 rounded-lg shadow-lg hover:shadow-xl transition-all cursor-pointer"
+                    >
+                      Enviar Solicitação
+                    </button>
+
+                    <p className="text-xs text-gray-500 text-center">
+                      Ao enviar, você concorda com nossa política de privacidade
+                    </p>
+                  </form>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Chat Modal */}
+        {showChatModal && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl max-w-2xl w-full h-[80vh] shadow-2xl flex flex-col overflow-hidden">
+              <div className="bg-gradient-to-r from-green-600 to-blue-600 text-white p-4 flex justify-between items-center">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-green-600 font-bold">
+                    IA
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg">Clara - IA Assistente</h3>
+                    <p className="text-xs text-white/90">Especialista em soluções automotivas</p>
+                  </div>
+                </div>
                 <button 
-                  onClick={() => setShowOfferForm(false)}
+                  onClick={() => setShowChatModal(false)}
                   className="text-white hover:text-gray-200 text-3xl font-bold cursor-pointer"
                 >
                   ×
                 </button>
               </div>
-              <p className="text-white/90 mt-2">Preencha o formulário e receba uma proposta personalizada</p>
-            </div>
-
-            <div className="p-6">
-              {formSubmitted ? (
-                <div className="text-center py-12">
-                  <div className="text-6xl mb-4">✅</div>
-                  <h4 className="text-2xl font-bold text-green-600 mb-2">Solicitação Enviada!</h4>
-                  <p className="text-gray-600">Entraremos em contato em breve com sua oferta personalizada.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleOfferFormSubmit} action="https://formspree.io/f/xgvndwrv" method="POST" className="space-y-4">
-                  <input type="hidden" name="_subject" value={`Nova Oferta - ${vehicle?.title}`} />
-                  <input type="hidden" name="_gotcha" style={{display: 'none'}} />
-                  <input type="hidden" name="Veiculo" value={vehicle?.title} />
-                  <input type="hidden" name="Modalidade" value={activeTab} />
-                  <input type="hidden" name="Valor" value={currentPriceData?.monthly} />
-
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Nome Completo *</label>
-                      <input
-                        type="text"
-                        name="Nome Completo"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                        placeholder="Seu nome completo"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">E-mail *</label>
-                      <input
-                        type="email"
-                        name="Email"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                        placeholder="seu@email.com"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Telefone *</label>
-                      <input
-                        type="tel"
-                        name="Telefone"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                        placeholder="(12) 99109-5018"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Tipo de Pessoa</label>
-                      <select
-                        name="Tipo de Pessoa"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                      >
-                        <option value="Pessoa Física">Pessoa Física</option>
-                        <option value="Pessoa Jurídica">Pessoa Jurídica</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Mensagem (opcional)</label>
-                    <textarea
-                      name="Mensagem"
-                      rows={4}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                      placeholder="Deixe uma mensagem ou dúvida..."
-                    ></textarea>
-                  </div>
-
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    <p className="text-sm font-semibold text-gray-700 mb-2">Resumo da Oferta:</p>
-                    <div className="space-y-1 text-sm text-gray-600">
-                      <p><strong>Veículo:</strong> {vehicle?.title}</p>
-                      <p><strong>Modalidade:</strong> {activeTab}</p>
-                      <p><strong>Valor:</strong> {currentPriceData?.monthly}</p>
-                    </div>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white font-bold py-4 rounded-lg shadow-lg hover:shadow-xl transition-all cursor-pointer"
-                  >
-                    Enviar Solicitação
-                  </button>
-
-                  <p className="text-xs text-gray-500 text-center">
-                    Ao enviar, você concorda com nossa política de privacidade
-                  </p>
-                </form>
-              )}
+              <div className="flex-1 w-full h-full">
+                <iframe
+                  src="https://www.chatbase.co/chatbot-iframe/5fRwrAroJGoXqpBWFMTyB"
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  title="Clara - IA Assistente"
+                ></iframe>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-green-600 to-blue-600">
-        <div className="max-w-screen-xl mx-auto px-6 md:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Pronto para ter este veículo?
-          </h2>
-          <button 
-            onClick={() => window.open("https://api.whatsapp.com/send/?phone=5512982900169&text=Quero+saber+mais+sobre+as+condicoes+da+UseCarro&type=phone_number&app_absent=0", "_blank")}
-            className="bg-white text-green-600 font-bold px-10 py-5 rounded-2xl text-lg shadow-xl hover:shadow-2xl transition-shadow cursor-pointer"
-          >
-            Fale com Especialista Agora
-          </button>
-        </div>
-      </section>
+        {/* CTA Section */}
+        <section className="py-16 bg-gradient-to-br from-green-600 to-blue-600">
+          <div className="max-w-screen-xl mx-auto px-6 md:px-8 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              Pronto para ter este veículo?
+            </h2>
+            <button 
+              onClick={() => window.open("https://api.whatsapp.com/send/?phone=5512982900169&text=Quero+saber+mais+sobre+as+condicoes+da+UseCarro&type=phone_number&app_absent=0", "_blank")}
+              className="bg-white text-green-600 font-bold px-10 py-5 rounded-2xl text-lg shadow-xl hover:shadow-2xl transition-shadow cursor-pointer"
+            >
+              Fale com Especialista Agora
+            </button>
+          </div>
+        </section>
 
-      <Footer />
+        <Footer />
       </div>
     );
   } catch (e: any) {

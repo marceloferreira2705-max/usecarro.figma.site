@@ -9,7 +9,7 @@ export const VeiculosPage = () => {
   const [visibleVehicles, setVisibleVehicles] = useState(9);
 
   // Black Friday vehicles IDs
-  const blackFridayIds = ["1", "4", "14", "10", "31", "22", "7", "32", "9"];
+  const blackFridayIds = ["25", "1", "4", "14", "10", "31", "22", "7", "32", "9"];
   
   // Get only Black Friday vehicles
   const allVehicles: VehicleData[] = blackFridayIds

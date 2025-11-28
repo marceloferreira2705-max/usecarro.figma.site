@@ -492,15 +492,15 @@ export const vehiclesData: Record<string, VehicleData> = {
   },
   "14": {
     id: "14",
-    title: "VW Tera Comfort 1.0 TSI AT",
+    title: "VW Tera 1.0 MPI MT",
     brand: "VW",
-    version: "TERA COMFORT 1.0 TSI AT",
+    version: "TERA 1.0 MPI MT",
     type: "SUV Compacto",
     clientType: "Pessoa Física",
     fuelType: "Flex",
-    transmission: "Automático",
+    transmission: "Manual",
     seats: "5",
-    engine: "1.0 TSI",
+    engine: "1.0 MPI",
     color: "Diversas",
     doors: "4",
     year: "2025",
@@ -523,7 +523,7 @@ export const vehiclesData: Record<string, VehicleData> = {
       }
     },
     images: ["https://c.animaapp.com/mfxz26rhnSsSP4/img/tera.png"],
-    description: "Novo SUV compacto da VW. Design moderno e a praticidade do câmbio automático e motor turbo para o uso urbano."
+    description: "Novo SUV compacto da VW. Design moderno e a praticidade do motor MPI para o uso urbano."
   },
   "15": {
     id: "15",
@@ -891,19 +891,19 @@ export const vehiclesData: Record<string, VehicleData> = {
     year: "2025",
     prices: {
       assinatura: {
-        monthly: "R$ 3.299,99",
+        monthly: "R$ 3.424,99",
         term: "36 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
       },
       financiamento: {
-        monthly: "R$ 3.959,99",
+        monthly: "R$ 3.655,54",
         term: "60 meses",
         details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
       },
       consorcio: {
-        monthly: "R$ 2.639,99",
-        term: "120 meses",
+        monthly: "R$ 1.302,00",
+        term: "80 meses",
         details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
       }
     },
