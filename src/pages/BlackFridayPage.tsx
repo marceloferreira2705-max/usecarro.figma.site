@@ -4,38 +4,20 @@ import { BlackFridayVehicleCard } from "@/components/BlackFridayVehicleCard";
 import { ChatSection } from "@/sections/ChatSection";
 import { useState, useEffect } from "react";
 
-const blackFridayVehiclesData = [
-  {
-    vehicleId: "25",
-    fipeValue: "R$ 156.329",
-    assinaturaPrice: "R$ 3.424,99",
-    financiamentoPrice: "R$ 3.655,54",
-    consorcioCredit: "R$ 160.000",
-    consorcioTerm: "80m",
-    consorcioPrice: "R$ 1.302,00",
-  },
+const ofertas2026VehiclesData = [
   {
     vehicleId: "1",
     fipeValue: "R$ 68.657",
-    assinaturaPrice: "R$ 1.757,99",
+    assinaturaPrice: "R$ 1.749,99",
     financiamentoPrice: "R$ 1.615,81",
     consorcioCredit: "R$ 72.500",
     consorcioTerm: "80m",
     consorcioPrice: "R$ 674,00",
   },
   {
-    vehicleId: "4",
-    fipeValue: "R$ 81.992",
-    assinaturaPrice: "R$ 1.939,99",
-    financiamentoPrice: "R$ 1.930,08",
-    consorcioCredit: "R$ 82.500",
-    consorcioTerm: "80m",
-    consorcioPrice: "R$ 767,00",
-  },
-  {
     vehicleId: "14",
     fipeValue: "R$ 105.484",
-    assinaturaPrice: "R$ 2.237,99",
+    assinaturaPrice: "R$ 2.247,99",
     financiamentoPrice: "R$ 2.482,99",
     consorcioCredit: "R$ 102.500",
     consorcioTerm: "80m",
@@ -44,25 +26,43 @@ const blackFridayVehiclesData = [
   {
     vehicleId: "10",
     fipeValue: "R$ 95.620",
-    assinaturaPrice: "R$ 2.289,99",
+    assinaturaPrice: "R$ 2.388,99",
     financiamentoPrice: "R$ 2.115,77",
     consorcioCredit: "R$ 92.500",
     consorcioTerm: "80m",
     consorcioPrice: "R$ 860,00",
   },
   {
+    vehicleId: "19",
+    fipeValue: "R$ 145.000",
+    assinaturaPrice: "R$ 3.139,99",
+    financiamentoPrice: "R$ 3.720,00",
+    consorcioCredit: "R$ 150.000",
+    consorcioTerm: "120m",
+    consorcioPrice: "R$ 2.480,00",
+  },
+  {
     vehicleId: "31",
     fipeValue: "R$ 172.477",
-    assinaturaPrice: "R$ 3.492,99",
+    assinaturaPrice: "R$ 3.845,99",
     financiamentoPrice: "R$ 4.060,34",
     consorcioCredit: "R$ 170.000",
     consorcioTerm: "90m",
     consorcioPrice: "R$ 1.090,00",
   },
   {
+    vehicleId: "17",
+    fipeValue: "R$ 135.000",
+    assinaturaPrice: "R$ 2.899,99",
+    financiamentoPrice: "R$ 3.540,00",
+    consorcioCredit: "R$ 140.000",
+    consorcioTerm: "120m",
+    consorcioPrice: "R$ 2.360,00",
+  },
+  {
     vehicleId: "22",
     fipeValue: "R$ 119.780",
-    assinaturaPrice: "R$ 2.499,00",
+    assinaturaPrice: "R$ 3.169,00",
     financiamentoPrice: "R$ 2.650,00",
     consorcioCredit: "R$ 122.500",
     consorcioTerm: "80m",
@@ -71,7 +71,7 @@ const blackFridayVehiclesData = [
   {
     vehicleId: "7",
     fipeValue: "R$ 112.155",
-    assinaturaPrice: "R$ 1.799,00",
+    assinaturaPrice: "R$ 2.059,00",
     financiamentoPrice: "R$ 2.480,00",
     consorcioCredit: "R$ 112.500",
     consorcioTerm: "80m",
@@ -80,7 +80,7 @@ const blackFridayVehiclesData = [
   {
     vehicleId: "32",
     fipeValue: "R$ 207.189",
-    assinaturaPrice: "R$ 4.699,00",
+    assinaturaPrice: "R$ 5.369,00",
     financiamentoPrice: "R$ 4.687,50",
     consorcioCredit: "R$ 200.000",
     consorcioTerm: "80m",
@@ -89,7 +89,7 @@ const blackFridayVehiclesData = [
   {
     vehicleId: "9",
     fipeValue: "R$ 99.999",
-    assinaturaPrice: "R$ 2.169,00",
+    assinaturaPrice: "R$ 2.359,00",
     financiamentoPrice: "R$ 2.213,00",
     consorcioCredit: "R$ 102.500",
     consorcioTerm: "80m",
@@ -97,24 +97,25 @@ const blackFridayVehiclesData = [
   },
 ];
 
-export const BlackFridayPage = () => {
-  const [timeLeft, setTimeLeft] = useState({ hours: 0, minutes: 0, seconds: 0 });
+export const Ofertas2026Page = () => {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    const endDate = new Date('2025-11-30T23:59:59');
+    const endDate = new Date('2026-01-01T00:00:00');
 
     const timer = setInterval(() => {
       const now = new Date();
       const difference = endDate.getTime() - now.getTime();
 
       if (difference > 0) {
-        const hours = Math.floor(difference / (1000 * 60 * 60));
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-        setTimeLeft({ hours, minutes, seconds });
+        setTimeLeft({ days, hours, minutes, seconds });
       } else {
-        setTimeLeft({ hours: 0, minutes: 0, seconds: 0 });
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
         clearInterval(timer);
       }
     }, 1000);
@@ -126,142 +127,161 @@ export const BlackFridayPage = () => {
     <div className="min-h-screen bg-white">
       <Header />
       
-      {/* Hero Section Black Friday */}
-      <section className="relative bg-gradient-to-br from-purple-900 via-purple-800 to-black pt-32 pb-20 overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.05) 35px, rgba(255,255,255,.05) 70px)'
-          }}></div>
+      {/* Hero Section Ofertas 2026 */}
+      <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-950 pt-32 pb-20 overflow-hidden">
+        {/* Background Pattern - Bokeh Effect */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-blue-300 to-blue-400 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-br from-cyan-300 to-blue-300 rounded-full blur-3xl"></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-br from-blue-200 to-cyan-200 rounded-full blur-2xl"></div>
+          <div className="absolute bottom-40 left-20 w-36 h-36 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-full blur-3xl"></div>
         </div>
         
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-10 w-20 h-20 bg-yellow-400 rounded-full opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-32 h-32 bg-pink-500 rounded-full opacity-20 animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-16 h-16 bg-green-400 rounded-full opacity-20 animate-pulse"></div>
+        {/* Metallic Shine Effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-pulse"></div>
         
         <div className="relative max-w-screen-xl mx-auto px-6 md:px-8 text-center text-white z-10">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-yellow-400 text-black font-black px-6 py-2 rounded-full mb-6 animate-bounce">
-            <span className="text-2xl">⚡</span>
-            <span className="text-sm uppercase tracking-wider">Ofertas Relâmpago</span>
+          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-400 to-blue-400 text-blue-950 font-black px-6 py-2 rounded-full mb-6 shadow-lg">
+            <span className="text-2xl">✨</span>
+            <span className="text-sm uppercase tracking-wider">Ofertas Especiais 2026</span>
           </div>
           
           {/* Main Title */}
           <h1 className="text-5xl md:text-7xl font-black leading-tight mb-6">
-            <span className="block text-yellow-400 mb-2">BLACK FRIDAY</span>
-            <span className="block">USECARRO</span>
+            <span className="block mb-2">Comece 2026</span>
+            <span className="block bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">no comando</span>
           </h1>
           
           {/* Subtitle */}
           <p className="text-2xl md:text-3xl font-bold mb-4">
-            Assinatura de Veículos com <span className="text-green-400">ZERO SURPRESA!</span> 🥳
+            Inteligente, simples e <span className="text-cyan-300">livre de burocracia</span>
           </p>
           
-          <p className="text-lg md:text-xl max-w-3xl mx-auto mb-10 text-gray-200">
-            Aproveite as ofertas exclusivas da Black Friday e garanta seu carro novo com as melhores condições de assinatura, financiamento ou consórcio.
+          <p className="text-lg md:text-xl max-w-3xl mx-auto mb-10 text-blue-100">
+            Garanta seu carro para as viagens de fim de ano agora. Pule as preocupações com IPVA, seguro e manutenção: a única coisa que você vai acumular são novas memórias.
           </p>
           
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <button
               onClick={() => {
                 const element = document.getElementById('ofertas');
                 if (element) element.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-black px-10 py-5 rounded-2xl text-lg shadow-2xl hover:shadow-yellow-500/50 transition-all transform hover:scale-105 cursor-pointer"
+              className="bg-gradient-to-r from-cyan-400 to-blue-400 text-blue-950 font-black px-10 py-5 rounded-2xl text-lg shadow-2xl hover:shadow-cyan-400/50 transition-all transform hover:scale-105 cursor-pointer"
             >
-              Ver Ofertas Agora 🔥
+              Quero garantir meu carro para o Natal 🎄
             </button>
             <button
-              onClick={() => window.open("https://api.whatsapp.com/send/?phone=5512982900169&text=Quero+saber+mais+sobre+as+ofertas+da+Black+Friday&type=phone_number&app_absent=0", "_blank")}
-              className="bg-white text-purple-900 font-bold px-10 py-5 rounded-2xl text-lg shadow-2xl hover:shadow-white/50 transition-all transform hover:scale-105 cursor-pointer border-4 border-white"
+              onClick={() => window.open("https://api.whatsapp.com/send/?phone=5512982900169&text=Quero+saber+mais+sobre+as+ofertas+2026&type=phone_number&app_absent=0", "_blank")}
+              className="bg-white text-blue-900 font-bold px-10 py-5 rounded-2xl text-lg shadow-2xl hover:shadow-white/50 transition-all transform hover:scale-105 cursor-pointer border-4 border-white"
             >
               Falar com Especialista
             </button>
           </div>
           
           {/* Countdown Timer */}
-          <div className="mt-12 inline-block bg-black/50 backdrop-blur-sm rounded-2xl p-6 border-2 border-yellow-400">
-            <p className="text-yellow-400 font-bold mb-3 text-sm uppercase tracking-wider">Ofertas por tempo limitado</p>
+          <div className="inline-block bg-white/10 backdrop-blur-sm rounded-2xl p-6 border-2 border-cyan-400/50">
+            <p className="text-cyan-300 font-bold mb-3 text-sm uppercase tracking-wider">Contagem regressiva para 2026</p>
             <div className="flex gap-4 justify-center">
               <div className="text-center">
-                <div className="text-4xl font-black text-white">{String(timeLeft.hours).padStart(2, '0')}</div>
-                <div className="text-xs text-gray-300 uppercase">Horas</div>
+                <div className="text-4xl font-black text-white">{String(timeLeft.days).padStart(2, '0')}</div>
+                <div className="text-xs text-blue-200 uppercase">Dias</div>
               </div>
-              <div className="text-4xl font-black text-yellow-400">:</div>
+              <div className="text-4xl font-black text-cyan-300">:</div>
+              <div className="text-center">
+                <div className="text-4xl font-black text-white">{String(timeLeft.hours).padStart(2, '0')}</div>
+                <div className="text-xs text-blue-200 uppercase">Horas</div>
+              </div>
+              <div className="text-4xl font-black text-cyan-300">:</div>
               <div className="text-center">
                 <div className="text-4xl font-black text-white">{String(timeLeft.minutes).padStart(2, '0')}</div>
-                <div className="text-xs text-gray-300 uppercase">Minutos</div>
+                <div className="text-xs text-blue-200 uppercase">Minutos</div>
               </div>
-              <div className="text-4xl font-black text-yellow-400">:</div>
+              <div className="text-4xl font-black text-cyan-300">:</div>
               <div className="text-center">
                 <div className="text-4xl font-black text-white">{String(timeLeft.seconds).padStart(2, '0')}</div>
-                <div className="text-xs text-gray-300 uppercase">Segundos</div>
+                <div className="text-xs text-blue-200 uppercase">Segundos</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
+      {/* Janeiro sem IPVA Section */}
+      <section className="py-16 bg-gradient-to-b from-blue-50 to-white">
+        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
+          <div className="bg-gradient-to-r from-blue-600 to-cyan-600 rounded-3xl p-12 text-center text-white shadow-2xl">
+            <h2 className="text-4xl md:text-5xl font-black mb-6">
+              Janeiro sem boleto de IPVA? <br />
+              <span className="text-cyan-200">Com a Use Carro é realidade.</span>
+            </h2>
+            <p className="text-xl md:text-2xl max-w-3xl mx-auto text-blue-100">
+              Enquanto todos se preocupam com as contas de início de ano, você só se preocupa com o destino da sua próxima viagem.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section - Smart */}
+      <section className="py-16 bg-white">
         <div className="max-w-screen-xl mx-auto px-6 md:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-black text-blue-950 mb-4">
-              Por que aproveitar a Black Friday?
+              Benefícios Smart para suas férias
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Condições especiais que você só encontra nesta época do ano
+              Transformando características técnicas em soluções de férias
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow text-center border-2 border-purple-100">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-3xl">💰</span>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow text-center border-2 border-blue-100">
+              <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-4xl">⚡</span>
               </div>
-              <h3 className="font-bold text-lg mb-2">Preços Exclusivos</h3>
-              <p className="text-gray-600 text-sm">Valores especiais só para Black Friday</p>
+              <h3 className="font-black text-xl mb-3 text-blue-950">Pronto para a estrada</h3>
+              <p className="text-gray-700">Processo 100% digital e ágil. Você resolve tudo online e sai dirigindo antes de 2025 acabar.</p>
             </div>
             
-            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow text-center border-2 border-yellow-100">
-              <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-3xl">⚡</span>
+            <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow text-center border-2 border-cyan-100">
+              <div className="w-20 h-20 bg-gradient-to-br from-cyan-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-4xl">🛡️</span>
               </div>
-              <h3 className="font-bold text-lg mb-2">Aprovação Rápida</h3>
-              <p className="text-gray-600 text-sm">Processo acelerado para Black Friday</p>
+              <h3 className="font-black text-xl mb-3 text-blue-950">Férias Blindadas</h3>
+              <p className="text-gray-700">Seguro completo e assistência 24h inclusos. Se imprevistos acontecerem na viagem, nós resolvemos.</p>
             </div>
             
-            <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow text-center border-2 border-green-100">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-3xl">🎁</span>
+            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow text-center border-2 border-blue-100">
+              <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-4xl">💰</span>
               </div>
-              <h3 className="font-bold text-lg mb-2">Benefícios por Indicar um Amigo</h3>
-              <p className="text-gray-600 text-sm">Ganhe vantagens extras ao indicar</p>
+              <h3 className="font-black text-xl mb-3 text-blue-950">Seu dinheiro rende mais</h3>
+              <p className="text-gray-700">Sem entrada e sem desvalorização. Use seu capital para investir em você ou nas suas férias, não em um passivo.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Black Friday Vehicles Section */}
-      <section id="ofertas" className="py-20 bg-gradient-to-b from-white to-gray-50">
+      {/* Vehicles Section */}
+      <section id="ofertas" className="py-20 bg-gradient-to-b from-white to-blue-50">
         <div className="max-w-screen-xl mx-auto px-6 md:px-8">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-black px-6 py-2 rounded-full mb-4">
-              <span className="text-xl">🔥</span>
-              <span className="text-sm uppercase tracking-wider">Ofertas Imperdíveis</span>
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-black px-6 py-2 rounded-full mb-4 shadow-lg">
+              <span className="text-xl">🚗</span>
+              <span className="text-sm uppercase tracking-wider">Ofertas Especiais</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-black text-blue-950 mb-4">
-              Veículos em Promoção
+              Veículos Selecionados para 2026
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Não perca a chance de ter seu carro novo com condições exclusivas!
+              Garanta seu carro novo com condições exclusivas de fim de ano
             </p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blackFridayVehiclesData.map((vehicle, index) => (
+            {ofertas2026VehiclesData.map((vehicle, index) => (
               <BlackFridayVehicleCard key={index} {...vehicle} />
             ))}
           </div>
@@ -270,20 +290,20 @@ export const BlackFridayPage = () => {
           <div className="text-center mt-12">
             <button
               onClick={() => window.location.href = "/veiculos"}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold px-10 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer"
+              className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-bold px-10 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer"
             >
-              Ver Todos os Veículos em Oferta
+              Ver Todos os Veículos Disponíveis
             </button>
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Social Proof Section */}
       <section className="py-20 bg-white">
         <div className="max-w-screen-xl mx-auto px-6 md:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-black text-blue-950 mb-4">
-              O que nossos clientes dizem
+              Quem escolheu a inteligência para mover 2025
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Mais de 20.000 clientes satisfeitos
@@ -291,61 +311,61 @@ export const BlackFridayPage = () => {
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 shadow-lg">
+            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8 shadow-lg border-2 border-blue-100">
               <div className="flex items-center mb-4">
-                <div className="flex text-yellow-400 text-xl">
+                <div className="flex text-cyan-500 text-xl">
                   ⭐⭐⭐⭐⭐
                 </div>
               </div>
               <p className="text-gray-700 mb-4 italic">
-                "Aproveitei a Black Friday e consegui condições incríveis! O processo foi super rápido e transparente."
+                "Vendi meu carro antigo em novembro e assinei com a Use Carro. Foi a melhor decisão: vou viajar tranquilo e com um carro zero, sem me preocupar com revisão."
               </p>
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold mr-3">
-                  MC
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-full flex items-center justify-center text-white font-bold mr-3">
+                  CS
                 </div>
                 <div>
-                  <p className="font-bold">Maria Clara</p>
+                  <p className="font-bold text-blue-950">Cliente Smart</p>
                   <p className="text-sm text-gray-600">São Paulo, SP</p>
                 </div>
               </div>
             </div>
             
-            <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 shadow-lg">
+            <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl p-8 shadow-lg border-2 border-cyan-100">
               <div className="flex items-center mb-4">
-                <div className="flex text-yellow-400 text-xl">
+                <div className="flex text-cyan-500 text-xl">
                   ⭐⭐⭐⭐⭐
                 </div>
               </div>
               <p className="text-gray-700 mb-4 italic">
-                "Melhor decisão que tomei! Assinei meu carro na Black Friday e estou muito satisfeito com o atendimento."
+                "Processo super rápido e transparente. Em menos de uma semana já estava com meu carro novo para as férias de fim de ano!"
               </p>
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold mr-3">
-                  RS
+                <div className="w-12 h-12 bg-gradient-to-br from-cyan-600 to-blue-600 rounded-full flex items-center justify-center text-white font-bold mr-3">
+                  MR
                 </div>
                 <div>
-                  <p className="font-bold">Roberto Silva</p>
+                  <p className="font-bold text-blue-950">Marcos Roberto</p>
                   <p className="text-sm text-gray-600">Rio de Janeiro, RJ</p>
                 </div>
               </div>
             </div>
             
-            <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-8 shadow-lg">
+            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8 shadow-lg border-2 border-blue-100">
               <div className="flex items-center mb-4">
-                <div className="flex text-yellow-400 text-xl">
+                <div className="flex text-cyan-500 text-xl">
                   ⭐⭐⭐⭐⭐
                 </div>
               </div>
               <p className="text-gray-700 mb-4 italic">
-                "Preços justos e sem pegadinhas. A Use Carro realmente entrega o que promete!"
+                "A melhor decisão financeira que tomei. Sem IPVA, sem seguro, sem dor de cabeça. Só alegria!"
               </p>
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-bold mr-3">
-                  AP
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-full flex items-center justify-center text-white font-bold mr-3">
+                  JF
                 </div>
                 <div>
-                  <p className="font-bold">Ana Paula</p>
+                  <p className="font-bold text-blue-950">Juliana Ferreira</p>
                   <p className="text-sm text-gray-600">Belo Horizonte, MG</p>
                 </div>
               </div>
@@ -355,35 +375,35 @@ export const BlackFridayPage = () => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500">
+      <section className="py-20 bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-700">
         <div className="max-w-screen-xl mx-auto px-6 md:px-8 text-center">
-          <div className="inline-flex items-center gap-2 bg-yellow-400 text-black font-black px-6 py-2 rounded-full mb-6 animate-bounce">
+          <div className="inline-flex items-center gap-2 bg-white text-blue-900 font-black px-6 py-2 rounded-full mb-6">
             <span className="text-2xl">⏰</span>
-            <span className="text-sm uppercase tracking-wider">Últimas Horas</span>
+            <span className="text-sm uppercase tracking-wider">Estoque Limitado</span>
           </div>
           
           <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
-            Não Perca Esta Oportunidade!
+            2026 já começou para quem decide rápido
           </h2>
-          <p className="text-xl text-white/90 max-w-2xl mx-auto mb-10">
-            As ofertas da Black Friday são por tempo limitado. Garanta já o seu carro com condições exclusivas!
+          <p className="text-xl text-blue-100 max-w-2xl mx-auto mb-10">
+            Não deixe para a última semana do ano. O estoque de final de ano é limitado.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button 
-              onClick={() => window.open("https://api.whatsapp.com/send/?phone=5512982900169&text=Quero+aproveitar+as+ofertas+da+Black+Friday&type=phone_number&app_absent=0", "_blank")}
-              className="bg-white text-purple-600 font-black px-12 py-6 rounded-2xl text-xl shadow-2xl hover:shadow-white/50 transition-all transform hover:scale-105 cursor-pointer"
-            >
-              Falar com Especialista Agora 🚀
-            </button>
             <button 
               onClick={() => {
                 const element = document.getElementById('ofertas');
                 if (element) element.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="bg-black text-white font-bold px-12 py-6 rounded-2xl text-xl shadow-2xl hover:shadow-black/50 transition-all transform hover:scale-105 cursor-pointer border-4 border-white"
+              className="bg-white text-blue-900 font-black px-12 py-6 rounded-2xl text-xl shadow-2xl hover:shadow-white/50 transition-all transform hover:scale-105 cursor-pointer"
             >
-              Ver Ofertas Novamente
+              Simular meu carro novo agora 🚀
+            </button>
+            <button 
+              onClick={() => window.open("https://api.whatsapp.com/send/?phone=5512982900169&text=Quero+garantir+meu+carro+para+2026&type=phone_number&app_absent=0", "_blank")}
+              className="bg-gradient-to-r from-cyan-400 to-blue-400 text-blue-950 font-bold px-12 py-6 rounded-2xl text-xl shadow-2xl hover:shadow-cyan-400/50 transition-all transform hover:scale-105 cursor-pointer border-4 border-white"
+            >
+              Falar com Especialista
             </button>
           </div>
         </div>

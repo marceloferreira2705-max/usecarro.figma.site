@@ -12,7 +12,8 @@ import { LGPDPage } from './pages/LGPDPage';
 import { CookiesPage } from './pages/CookiesPage';
 import { OuvidoriaPage } from './pages/OuvidoriaPage';
 import { VehicleDetailPage } from './pages/VehicleDetailPage';
-import { BlackFridayPage } from './pages/BlackFridayPage';
+import { Ofertas2026Page } from './pages/BlackFridayPage';
+import { AdminVehiclesPage } from './pages/AdminVehiclesPage';
 
 export const AppRouter = () => {
   return (
@@ -31,7 +32,9 @@ export const AppRouter = () => {
         <Route path="/lgpd" element={<LGPDPage />} />
         <Route path="/cookies" element={<CookiesPage />} />
         <Route path="/ouvidoria" element={<OuvidoriaPage />} />
-        <Route path="/blackfriday" element={<BlackFridayPage />} />
+        <Route path="/blackfriday" element={<Ofertas2026Page />} />
+        <Route path="/ofertas2026" element={<Ofertas2026Page />} />
+        <Route path="/admin-xk9p2m7q" element={<AdminVehiclesPage />} />
       </Routes>
     </Router>
   );

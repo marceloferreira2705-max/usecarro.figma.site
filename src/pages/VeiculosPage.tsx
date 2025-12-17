@@ -38,15 +38,15 @@ export const VeiculosPage = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-purple-900 via-purple-800 to-black pt-32 pb-20">
+      <section className="bg-gradient-to-br from-blue-900 via-cyan-800 to-blue-950 pt-32 pb-20">
         <div className="max-w-screen-xl mx-auto px-6 md:px-8">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-yellow-400 text-black font-black px-6 py-2 rounded-full mb-6 animate-bounce">
-              <span className="text-2xl">🔥</span>
-              <span className="text-sm uppercase tracking-wider">Black Friday</span>
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-400 to-blue-400 text-blue-950 font-black px-6 py-2 rounded-full mb-6 animate-bounce">
+              <span className="text-2xl">✨</span>
+              <span className="text-sm uppercase tracking-wider">Ofertas 2026</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-black leading-tight mb-6 text-white">
-              Ofertas <span className="text-yellow-400">Black Friday</span>
+              Ofertas <span className="text-cyan-300">2026</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-200 max-w-3xl mx-auto">
               Explore nossa seleção especial com {allVehicles.length} veículos em promoção. Compare preços entre assinatura, consórcio e financiamento.
@@ -116,7 +116,7 @@ export const VeiculosPage = () => {
             <div className="text-center mt-12">
               <button 
                 onClick={loadMoreVehicles}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold px-10 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer"
+                className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-bold px-10 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer"
               >
                 Carregar Mais Ofertas ({filteredVehicles.length - visibleVehicles} restantes)
               </button>
@@ -131,10 +131,10 @@ export const VeiculosPage = () => {
                 {selectedFilter !== "Todos" && ` em ${selectedFilter}`}.
               </p>
               <button
-                onClick={() => window.location.href = "/blackfriday"}
-                className="mt-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold px-8 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all cursor-pointer"
+                onClick={() => window.location.href = "/ofertas2026"}
+                className="mt-6 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-bold px-8 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all cursor-pointer"
               >
-                Ver Página Black Friday Completa
+                Ver Página Ofertas 2026 Completa
               </button>
             </div>
           )}

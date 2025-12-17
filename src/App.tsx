@@ -23,23 +23,23 @@ export const App = () => {
                 <Header />
                 <HeroSection />
                 
-                {/* Black Friday Banner */}
-                <section className="py-8 bg-gradient-to-r from-purple-900 via-pink-600 to-orange-500">
+                {/* Ofertas 2026 Banner */}
+                <section className="py-8 bg-gradient-to-r from-blue-900 via-cyan-600 to-blue-700">
                   <div className="max-w-screen-xl mx-auto px-6 md:px-8">
                     <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                       <div className="text-white">
-                        <div className="inline-flex items-center gap-2 bg-yellow-400 text-black font-black px-4 py-1 rounded-full mb-3 animate-pulse">
-                          <span className="text-xl">🔥</span>
-                          <span className="text-xs uppercase">Oferta Limitada</span>
+                        <div className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-400 to-blue-400 text-blue-950 font-black px-4 py-1 rounded-full mb-3 animate-pulse">
+                          <span className="text-xl">✨</span>
+                          <span className="text-xs uppercase">Ofertas Especiais</span>
                         </div>
-                        <h2 className="text-3xl md:text-4xl font-black mb-2">BLACK FRIDAY USECARRO</h2>
-                        <p className="text-lg md:text-xl text-white/90">Condições especiais em veículos selecionados!</p>
+                        <h2 className="text-3xl md:text-4xl font-black mb-2">OFERTAS 2026 USECARRO</h2>
+                        <p className="text-lg md:text-xl text-white/90">Comece o ano no comando com condições exclusivas!</p>
                       </div>
                       <button
-                        onClick={() => window.location.href = "/blackfriday"}
-                        className="bg-yellow-400 text-black font-black px-8 py-4 rounded-2xl text-lg shadow-2xl hover:shadow-yellow-400/50 transition-all transform hover:scale-105 cursor-pointer whitespace-nowrap"
+                        onClick={() => window.location.href = "/ofertas2026"}
+                        className="bg-gradient-to-r from-cyan-400 to-blue-400 text-blue-950 font-black px-8 py-4 rounded-2xl text-lg shadow-2xl hover:shadow-cyan-400/50 transition-all transform hover:scale-105 cursor-pointer whitespace-nowrap"
                       >
-                        Ver Ofertas Black Friday 🚗
+                        Ver Ofertas 2026 🚗
                       </button>
                     </div>
                   </div>

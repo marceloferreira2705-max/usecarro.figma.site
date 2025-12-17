@@ -79,8 +79,8 @@ export const BlackFridayVehicleCard = (props: BlackFridayVehicleCardProps) => {
             }}
           />
           <div className="absolute top-4 left-4 flex gap-2">
-            <span className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-              BLACK FRIDAY
+            <span className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+              OFERTAS 2026
             </span>
             {vehicle.clientType === "Pessoa Jurídica" && (
               <span className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
@@ -178,9 +178,9 @@ export const BlackFridayVehicleCard = (props: BlackFridayVehicleCardProps) => {
       {showOfferForm && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-            <div className="sticky top-0 bg-gradient-to-r from-purple-600 to-pink-600 text-white p-6 rounded-t-2xl">
+            <div className="sticky top-0 bg-gradient-to-r from-blue-600 to-cyan-600 text-white p-6 rounded-t-2xl">
               <div className="flex justify-between items-center">
-                <h3 className="text-2xl font-bold">Solicitar Oferta Black Friday</h3>
+                <h3 className="text-2xl font-bold">Solicitar Oferta 2026</h3>
                 <button 
                   onClick={() => setShowOfferForm(false)}
                   className="text-white hover:text-gray-200 text-3xl font-bold cursor-pointer"
@@ -200,10 +200,10 @@ export const BlackFridayVehicleCard = (props: BlackFridayVehicleCardProps) => {
                 </div>
               ) : (
                 <form onSubmit={handleOfferFormSubmit} action="https://formspree.io/f/xgvndwrv" method="POST" className="space-y-4">
-                  <input type="hidden" name="_subject" value={`Nova Oferta Black Friday - ${vehicle.title}`} />
+                  <input type="hidden" name="_subject" value={`Nova Oferta 2026 - ${vehicle.title}`} />
                   <input type="hidden" name="_gotcha" style={{display: 'none'}} />
                   <input type="hidden" name="Veiculo" value={vehicle.title} />
-                  <input type="hidden" name="Origem" value="Black Friday Card" />
+                  <input type="hidden" name="Origem" value="Ofertas 2026 Card" />
 
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
@@ -275,9 +275,9 @@ export const BlackFridayVehicleCard = (props: BlackFridayVehicleCardProps) => {
 
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-4 rounded-lg shadow-lg hover:shadow-xl transition-all cursor-pointer"
+                    className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-bold py-4 rounded-lg shadow-lg hover:shadow-xl transition-all cursor-pointer"
                   >
-                    Enviar Solicitação Black Friday
+                    Enviar Solicitação Ofertas 2026
                   </button>
 
                   <p className="text-xs text-gray-500 text-center">

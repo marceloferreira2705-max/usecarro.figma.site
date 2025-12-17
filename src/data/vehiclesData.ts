@@ -37,9 +37,9 @@ export type VehicleData = {
 export const vehiclesData: Record<string, VehicleData> = {
   "1": {
     id: "1",
-    title: "Fiat Mobi 1.0 Like Mec",
+    title: "Fiat Mobi 1.0 Trekking MT",
     brand: "FIAT",
-    version: "MOBI 1.0 LIKE MEC",
+    version: "MOBI 1.0 TREKKING MT",
     type: "Econômico",
     clientType: "Pessoa Física",
     fuelType: "Flex",
@@ -48,10 +48,10 @@ export const vehiclesData: Record<string, VehicleData> = {
     engine: "1.0",
     color: "Diversas",
     doors: "4",
-    year: "2026",
+    year: "2025",
     prices: {
       assinatura: {
-        monthly: "R$ 1.757,99",
+        monthly: "R$ 1.749,99",
         term: "36 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
@@ -247,9 +247,9 @@ export const vehiclesData: Record<string, VehicleData> = {
   },
   "7": {
     id: "7",
-    title: "Fiat Strada Endurance 1.3",
+    title: "Fiat Strada Endurance 1.3 Flex 8V CP",
     brand: "FIAT",
-    version: "STRADA 1.3 CABINE PLUS ENDURANCE",
+    version: "STRADA ENDURANCE 1.3 FLEX 8V CP",
     type: "Picape Compacta",
     clientType: "Pessoa Jurídica",
     fuelType: "Flex",
@@ -261,7 +261,7 @@ export const vehiclesData: Record<string, VehicleData> = {
     year: "2026",
     prices: {
       assinatura: {
-        monthly: "R$ 1.799,00",
+        monthly: "R$ 2.059,00",
         term: "18 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
@@ -331,7 +331,7 @@ export const vehiclesData: Record<string, VehicleData> = {
     year: "2026",
     prices: {
       assinatura: {
-        monthly: "R$ 2.169,00",
+        monthly: "R$ 2.359,00",
         term: "18 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
@@ -352,9 +352,9 @@ export const vehiclesData: Record<string, VehicleData> = {
   },
   "10": {
     id: "10",
-    title: "VW Polo Sense 1.0 170 TSI AT",
+    title: "VW Polo 1.0 170 TSI Sense Auto",
     brand: "VW",
-    version: "POLO SENSE 1.0 170 TSI AT",
+    version: "POLO 1.0 170 TSI SENSE AUTO",
     type: "Hatch Compacto",
     clientType: "Pessoa Física",
     fuelType: "Flex",
@@ -362,11 +362,11 @@ export const vehiclesData: Record<string, VehicleData> = {
     seats: "5",
     engine: "1.0 TSI",
     color: "Diversas",
-    doors: "4",
+    doors: "5",
     year: "2026",
     prices: {
       assinatura: {
-        monthly: "R$ 2.289,99",
+        monthly: "R$ 2.388,99",
         term: "24 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
@@ -506,7 +506,7 @@ export const vehiclesData: Record<string, VehicleData> = {
     year: "2025",
     prices: {
       assinatura: {
-        monthly: "R$ 2.237,99",
+        monthly: "R$ 2.247,99",
         term: "36 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
@@ -597,21 +597,21 @@ export const vehiclesData: Record<string, VehicleData> = {
   },
   "17": {
     id: "17",
-    title: "Fiat Pulse Audace 1.3 AT",
+    title: "Fiat Pulse 1.0 T200 Mhev Audace CVT",
     brand: "FIAT",
-    version: "PULSE AUDACE 1.3 AT",
+    version: "PULSE 1.0 T200 MHEV AUDACE CVT",
     type: "SUV Compacto",
     clientType: "Pessoa Física",
     fuelType: "Flex",
-    transmission: "Automático",
+    transmission: "Automático (CVT)",
     seats: "5",
-    engine: "1.3",
+    engine: "1.0 T200",
     color: "Diversas",
-    doors: "4",
-    year: "2025",
+    doors: "5",
+    year: "2026",
     prices: {
       assinatura: {
-        monthly: "R$ 2.950,00",
+        monthly: "R$ 2.899,99",
         term: "36 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
@@ -667,9 +667,9 @@ export const vehiclesData: Record<string, VehicleData> = {
   },
   "19": {
     id: "19",
-    title: "VW T-Cross TSI 200 Aut.",
+    title: "VW T-Cross 200 TSI AT 1.0 4P",
     brand: "VW",
-    version: "T-CROSS TSI 200 AUT.",
+    version: "T-CROSS 200 TSI AT 1.0 4P",
     type: "SUV Compacto",
     clientType: "Pessoa Física",
     fuelType: "Flex",
@@ -678,10 +678,10 @@ export const vehiclesData: Record<string, VehicleData> = {
     engine: "1.0 TSI",
     color: "Diversas",
     doors: "4",
-    year: "2025",
+    year: "2026",
     prices: {
       assinatura: {
-        monthly: "R$ 3.100,00",
+        monthly: "R$ 3.139,99",
         term: "36 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
@@ -772,9 +772,9 @@ export const vehiclesData: Record<string, VehicleData> = {
   },
   "22": {
     id: "22",
-    title: "Fiat Fastback Audace Turbo",
+    title: "Fiat Fastback Audace 200 TB Aut (Híbrido)",
     brand: "FIAT",
-    version: "FASTBACK AUDACE TURBO 1.0",
+    version: "FASTBACK AUDACE 200 TB AUT (HÍBRIDO)",
     type: "SUV Coupé",
     clientType: "Pessoa Jurídica",
     fuelType: "Flex",
@@ -786,7 +786,7 @@ export const vehiclesData: Record<string, VehicleData> = {
     year: "2025",
     prices: {
       assinatura: {
-        monthly: "R$ 2.499,00",
+        monthly: "R$ 3.169,00",
         term: "18 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
@@ -1087,9 +1087,9 @@ export const vehiclesData: Record<string, VehicleData> = {
   },
   "31": {
     id: "31",
-    title: "Jeep Compass Longitude 1.3 Turbo",
+    title: "Jeep Compass Longitude T270",
     brand: "JEEP",
-    version: "COMPASS LONGITUDE 1.3 TURBO AUT.",
+    version: "COMPASS LONGITUDE T270 1.3 TB 4X2 FLEX AUT",
     type: "SUV Médio",
     clientType: "Pessoa Física",
     fuelType: "Flex",
@@ -1098,10 +1098,10 @@ export const vehiclesData: Record<string, VehicleData> = {
     engine: "1.3 Turbo",
     color: "Diversas",
     doors: "4",
-    year: "2025",
+    year: "2026",
     prices: {
       assinatura: {
-        monthly: "R$ 3.492,99",
+        monthly: "R$ 3.845,99",
         term: "36 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
@@ -1122,9 +1122,9 @@ export const vehiclesData: Record<string, VehicleData> = {
   },
   "32": {
     id: "32",
-    title: "RAM Rampage Big Horn 2.2 Diesel",
+    title: "RAM Rampage Rebel 2.2 TB CD 4X4 Diesel Aut",
     brand: "RAM",
-    version: "RAMPAGE BIG HORN 2.2 DIESEL AUT.",
+    version: "RAMPAGE REBEL 2.2 TB CD 4X4 DIESEL AUT",
     type: "Picape Média",
     clientType: "Pessoa Jurídica",
     fuelType: "Diesel",
@@ -1136,7 +1136,7 @@ export const vehiclesData: Record<string, VehicleData> = {
     year: "2025",
     prices: {
       assinatura: {
-        monthly: "R$ 4.699,00",
+        monthly: "R$ 5.369,00",
         term: "18 meses",
         mileage: "1.000 km/mês",
         details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]

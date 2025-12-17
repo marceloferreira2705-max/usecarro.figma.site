@@ -241,10 +241,10 @@ export const FooterLinks = () => {
           </li>
           <li className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)]">
             <button
-              onClick={() => window.location.href = "/blackfriday"}
+              onClick={() => window.location.href = "/ofertas2026"}
               className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] cursor-pointer hover:text-green-600"
             >
-              Black Friday
+              Ofertas 2026
             </button>
           </li>
         </ul>
