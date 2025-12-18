@@ -14,6 +14,8 @@ import { OuvidoriaPage } from './pages/OuvidoriaPage';
 import { VehicleDetailPage } from './pages/VehicleDetailPage';
 import { Ofertas2026Page } from './pages/BlackFridayPage';
 import { AdminVehiclesPage } from './pages/AdminVehiclesPage';
+import { EspecialistaPage } from './pages/EspecialistaPage';
+import { FormularioEnviadoPage } from './pages/FormularioEnviadoPage';
 
 export const AppRouter = () => {
   return (
@@ -35,6 +37,8 @@ export const AppRouter = () => {
         <Route path="/blackfriday" element={<Ofertas2026Page />} />
         <Route path="/ofertas2026" element={<Ofertas2026Page />} />
         <Route path="/admin-xk9p2m7q" element={<AdminVehiclesPage />} />
+        <Route path="/especialista" element={<EspecialistaPage />} />
+        <Route path="/formulario-enviado" element={<FormularioEnviadoPage />} />
       </Routes>
     </Router>
   );

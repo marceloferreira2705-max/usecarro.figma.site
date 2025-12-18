@@ -42,12 +42,7 @@ export const VehicleDetailPage = () => {
       });
 
       if (response.ok) {
-        setFormSubmitted(true);
-        form.reset();
-        setTimeout(() => {
-          setShowOfferForm(false);
-          setFormSubmitted(false);
-        }, 3000);
+        window.location.href = "/formulario-enviado";
       } else {
         const data = await response.json();
         if (data.errors) {
@@ -315,7 +310,7 @@ export const VehicleDetailPage = () => {
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button 
-                    onClick={() => setShowChatModal(true)}
+                    onClick={() => window.location.href = "/especialista"}
                     className={`flex-1 font-bold py-4 rounded-xl border-2 transition-all cursor-pointer ${
                       activeTab === "Assinatura" 
                         ? "border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white" 
@@ -499,7 +494,7 @@ export const VehicleDetailPage = () => {
               Pronto para ter este veículo?
             </h2>
             <button 
-              onClick={() => window.open("https://api.whatsapp.com/send/?phone=5512982900169&text=Quero+saber+mais+sobre+as+condicoes+da+UseCarro&type=phone_number&app_absent=0", "_blank")}
+              onClick={() => window.location.href = "/especialista"}
               className="bg-white text-green-600 font-bold px-10 py-5 rounded-2xl text-lg shadow-xl hover:shadow-2xl transition-shadow cursor-pointer"
             >
               Fale com Especialista Agora

@@ -175,7 +175,7 @@ export const ContatoPage = () => {
               
               <form onSubmit={handleSubmit} action="https://formspree.io/f/xgvndwrv" method="POST" className="space-y-6">
                 <input type="hidden" name="_subject" value="Nova Mensagem - Use Carro (Contato)" />
-                <input type="hidden" name="_next" value="https://SEU_DOMINIO_AQUI.com/" /> {/* Redireciona para a Home do seu site */}
+                <input type="hidden" name="_next" value="/formulario-enviado" />
                 <input type="hidden" name="_gotcha" style={{display: 'none'}} /> {/* Campo honeypot para spam */}
                 <input type="hidden" name="Tipo de Manifestacao" value="Solicitação de Informação" /> {/* Campo oculto */}
 

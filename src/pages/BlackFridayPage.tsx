@@ -174,7 +174,7 @@ export const Ofertas2026Page = () => {
               Quero garantir meu carro para o Natal 🎄
             </button>
             <button
-              onClick={() => window.open("https://api.whatsapp.com/send/?phone=5512982900169&text=Quero+saber+mais+sobre+as+ofertas+2026&type=phone_number&app_absent=0", "_blank")}
+              onClick={() => window.location.href = "/especialista"}
               className="bg-white text-blue-900 font-bold px-10 py-5 rounded-2xl text-lg shadow-2xl hover:shadow-white/50 transition-all transform hover:scale-105 cursor-pointer border-4 border-white"
             >
               Falar com Especialista
@@ -400,7 +400,7 @@ export const Ofertas2026Page = () => {
               Simular meu carro novo agora 🚀
             </button>
             <button 
-              onClick={() => window.open("https://api.whatsapp.com/send/?phone=5512982900169&text=Quero+garantir+meu+carro+para+2026&type=phone_number&app_absent=0", "_blank")}
+              onClick={() => window.location.href = "/especialista"}
               className="bg-gradient-to-r from-cyan-400 to-blue-400 text-blue-950 font-bold px-12 py-6 rounded-2xl text-xl shadow-2xl hover:shadow-cyan-400/50 transition-all transform hover:scale-105 cursor-pointer border-4 border-white"
             >
               Falar com Especialista

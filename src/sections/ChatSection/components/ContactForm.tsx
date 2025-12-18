@@ -87,7 +87,7 @@ export const ContactForm = () => {
       <div className="p-6 max-h-[550px] overflow-y-auto"> {/* Altura máxima para o card do formulário */}
         <form onSubmit={handleSubmit} action="https://formspree.io/f/xgvndwrv" method="POST" className="space-y-4">
           <input type="hidden" name="_subject" value="Nova Proposta - Use Carro (Home)" />
-          <input type="hidden" name="_next" value="https://SEU_DOMINIO_AQUI.com/" /> {/* Redireciona para a Home do seu site */}
+          <input type="hidden" name="_next" value="/formulario-enviado" />
           <input type="hidden" name="_gotcha" style={{display: 'none'}} /> {/* Campo honeypot para spam */}
           <input type="hidden" name="Tipo de Manifestacao" value="Solicitação de Informação" /> {/* Campo oculto */}
 

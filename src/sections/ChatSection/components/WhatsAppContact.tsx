@@ -1,6 +1,6 @@
 export const WhatsAppContact = () => {
   const handleWhatsAppClick = () => {
-    window.open("https://api.whatsapp.com/send/?phone=5512982900169&text=Quero+saber+mais+sobre+as+condicoes+da+UseCarro&type=phone_number&app_absent=0", "_blank");
+    window.location.href = "/especialista";
   };
 
   return (

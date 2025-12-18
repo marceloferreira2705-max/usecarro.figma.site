@@ -44,12 +44,7 @@ export const BlackFridayVehicleCard = (props: BlackFridayVehicleCardProps) => {
       });
 
       if (response.ok) {
-        setFormSubmitted(true);
-        form.reset();
-        setTimeout(() => {
-          setShowOfferForm(false);
-          setFormSubmitted(false);
-        }, 3000);
+        window.location.href = "/formulario-enviado";
       } else {
         const data = await response.json();
         if (data.errors) {

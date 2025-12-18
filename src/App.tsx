@@ -35,12 +35,20 @@ export const App = () => {
                         <h2 className="text-3xl md:text-4xl font-black mb-2">OFERTAS 2026 USECARRO</h2>
                         <p className="text-lg md:text-xl text-white/90">Comece o ano no comando com condições exclusivas!</p>
                       </div>
-                      <button
-                        onClick={() => window.location.href = "/ofertas2026"}
-                        className="bg-gradient-to-r from-cyan-400 to-blue-400 text-blue-950 font-black px-8 py-4 rounded-2xl text-lg shadow-2xl hover:shadow-cyan-400/50 transition-all transform hover:scale-105 cursor-pointer whitespace-nowrap"
-                      >
-                        Ver Ofertas 2026 🚗
-                      </button>
+                      <div className="flex flex-col sm:flex-row gap-3">
+                        <button
+                          onClick={() => window.location.href = "/ofertas2026"}
+                          className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-black px-8 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer whitespace-nowrap"
+                        >
+                          Ver Ofertas 2026 🚗
+                        </button>
+                        <button
+                          onClick={() => window.location.href = "/especialista"}
+                          className="bg-white text-blue-900 font-bold px-8 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer whitespace-nowrap border-2 border-white"
+                        >
+                          Falar com Especialista
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </section>
