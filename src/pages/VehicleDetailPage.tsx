@@ -10,14 +10,27 @@ export const VehicleDetailPage = () => {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [vehicle, setVehicle] = useState<VehicleData | undefined>(undefined);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (id) {
-      const foundVehicle = getVehicleById(id);
-      setVehicle(foundVehicle);
+    try {
+      if (id) {
+        const foundVehicle = getVehicleById(id);
+        if (foundVehicle) {
+          setVehicle(foundVehicle);
+        } else {
+          setError("Veículo não encontrado na base de dados.");
+        }
+      } else {
+        setError("ID do veículo não fornecido.");
+      }
+    } catch (err) {
+      console.error("Erro ao carregar veículo:", err);
+      setError("Ocorreu um erro ao carregar os dados do veículo.");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }, [id]);
 
   const handleOfferFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -42,33 +55,52 @@ export const VehicleDetailPage = () => {
     if (!vehicle) return;
     
     const planText = selectedPlan ? `Tenho interesse na modalidade *${selectedPlan}*` : "Gostaria de mais informações";
-    const message = `Olá! ${planText} para o veículo *${vehicle.title}*. Poderia me ajudar?`;
+    const message = `Olá! ${planText} para o veículo *${vehicle.title || "Veículo"}*. Poderia me ajudar?`;
     const encodedMessage = encodeURIComponent(message);
     
     window.open(`https://api.whatsapp.com/send/?phone=5512982900169&text=${encodedMessage}&type=phone_number&app_absent=0`, '_blank');
   };
 
+  // Helper seguro para formatar moeda
+  const safeFormatCurrency = (value: string | number | undefined): string => {
+    if (value === undefined || value === null || value === "") return "Sob Consulta";
+    if (typeof value === 'string' && value.includes("R$")) return value;
+    
+    const num = typeof value === 'string' ? parseFloat(value) : value;
+    if (isNaN(num)) return "Sob Consulta";
+    
+    return num.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  };
+
   if (loading) {
-    return <div className="min-h-screen bg-luxury-black"></div>;
+    return <div className="min-h-screen bg-luxury-black flex items-center justify-center"><div className="text-luxury-gold animate-pulse">Carregando...</div></div>;
   }
 
-  if (!vehicle) {
+  if (error || !vehicle) {
     return (
       <div className="min-h-screen bg-luxury-black flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-white font-serif text-3xl mb-4">Veículo não encontrado</h1>
-          <p className="text-luxury-gray mb-6">O veículo com ID {id} não foi localizado na base de dados.</p>
-          <a href="/" className="text-luxury-gold border-b border-luxury-gold pb-1 uppercase text-xs tracking-widest">Voltar para a Coleção</a>
+        <div className="text-center px-6">
+          <h1 className="text-white font-serif text-3xl mb-4">Veículo Indisponível</h1>
+          <p className="text-luxury-gray mb-6">{error || "Não foi possível carregar as informações deste veículo."}</p>
+          <a href="/" className="text-luxury-gold border-b border-luxury-gold pb-1 uppercase text-xs tracking-widest hover:text-white transition-colors">Voltar para a Coleção</a>
         </div>
       </div>
     );
   }
 
   // Safe access to properties with defaults
-  const mainImage = vehicle.images && vehicle.images.length > 0 ? vehicle.images[0] : "https://via.placeholder.com/1200x800?text=Imagem+Indisponível";
-  const thumbnails = vehicle.images && vehicle.images.length >= 4 
+  const mainImage = (vehicle.images && vehicle.images.length > 0 && vehicle.images[0]) 
+    ? vehicle.images[0] 
+    : "https://via.placeholder.com/1200x800?text=Imagem+Indisponível";
+    
+  const thumbnails = (vehicle.images && vehicle.images.length > 0)
     ? vehicle.images.slice(0, 4) 
-    : Array(4).fill(mainImage);
+    : [mainImage];
+    
+  // Preencher thumbnails se tiver menos de 4
+  while (thumbnails.length < 4) {
+    thumbnails.push(mainImage);
+  }
 
   // Safe access to prices
   const assinaturaPrice = vehicle.prices?.assinatura?.monthly || "Sob Consulta";
@@ -78,15 +110,23 @@ export const VehicleDetailPage = () => {
   // Calculate estimated credit safely
   let estimatedCreditValue = "Sob Consulta";
   try {
-    if (consorcioPrice !== "Sob Consulta") {
-      const numericPrice = parseFloat(consorcioPrice.replace("R$", "").replace(/\./g, "").replace(",", ".").trim());
-      const numericTerm = parseInt(consorcioTermStr.replace(/\D/g, '')) || 80;
-      if (!isNaN(numericPrice) && !isNaN(numericTerm)) {
-        estimatedCreditValue = (numericPrice * numericTerm * 0.85).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    if (consorcioPrice && consorcioPrice !== "Sob Consulta" && consorcioPrice !== "R$ 0,00") {
+      // Remove R$, pontos e troca vírgula por ponto
+      const cleanPrice = consorcioPrice.replace(/[^\d,]/g, '').replace(',', '.');
+      const numericPrice = parseFloat(cleanPrice);
+      
+      const cleanTerm = consorcioTermStr.replace(/\D/g, '');
+      const numericTerm = parseInt(cleanTerm) || 80;
+      
+      if (!isNaN(numericPrice) && !isNaN(numericTerm) && numericPrice > 0) {
+        // Estimativa: (Parcela * Prazo) * 0.85 (fator de correção aproximado para taxa adm)
+        const totalValue = numericPrice * numericTerm * 0.85;
+        estimatedCreditValue = totalValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       }
     }
   } catch (e) {
     console.error("Erro ao calcular crédito estimado", e);
+    estimatedCreditValue = "Sob Consulta";
   }
 
   return (
@@ -102,7 +142,7 @@ export const VehicleDetailPage = () => {
               {vehicle.brand || "Marca"}
             </span>
             <h1 className="font-serif text-4xl md:text-6xl text-white mb-4 leading-tight">
-              {vehicle.version || vehicle.title}
+              {vehicle.version || vehicle.title || "Veículo Exclusivo"}
             </h1>
             <p className="text-luxury-gray font-light text-lg tracking-wide uppercase">
               {vehicle.year || "2026"} • {vehicle.type || "Premium"}
@@ -113,7 +153,7 @@ export const VehicleDetailPage = () => {
           <div className="w-full aspect-[16/9] bg-luxury-card border border-white/5 mb-16 overflow-hidden relative group animate-fade-in-up" style={{ animationDelay: '100ms' }}>
             <img
               src={mainImage}
-              alt={vehicle.title}
+              alt={vehicle.title || "Veículo"}
               className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-[1.5s] ease-out"
               onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/1200x800?text=Imagem+Indisponível"; }}
             />
@@ -253,10 +293,10 @@ export const VehicleDetailPage = () => {
           {/* Dados do Veículo (Esquerda) */}
           <div className="flex items-center gap-4 w-full md:w-auto border-b md:border-b-0 border-white/10 pb-4 md:pb-0">
             <div className="hidden md:block w-16 h-10 rounded overflow-hidden bg-gray-800">
-              <img src={mainImage} alt={vehicle.title} className="w-full h-full object-cover" onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/100x60?text=Carro"; }} />
+              <img src={mainImage} alt={vehicle.title || "Veículo"} className="w-full h-full object-cover" onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/100x60?text=Carro"; }} />
             </div>
             <div>
-              <h4 className="text-white font-serif text-sm md:text-base leading-tight">{vehicle.title}</h4>
+              <h4 className="text-white font-serif text-sm md:text-base leading-tight">{vehicle.title || "Veículo Selecionado"}</h4>
               <div className="flex items-center gap-2 text-xs text-luxury-gray mt-1">
                 <span className="uppercase tracking-wider">{vehicle.year || "2026"}</span>
                 <span className="w-1 h-1 bg-luxury-gold rounded-full"></span>
@@ -305,15 +345,15 @@ export const VehicleDetailPage = () => {
                 <span className="text-luxury-gold text-[10px] tracking-[0.3em] uppercase block mb-2">
                   Atendimento Exclusivo
                 </span>
-                <h3 className="font-serif text-2xl text-white">{vehicle.title}</h3>
+                <h3 className="font-serif text-2xl text-white">{vehicle.title || "Veículo"}</h3>
                 <p className="text-luxury-gray text-xs mt-2 uppercase tracking-widest">
                   {selectedPlan ? `Interesse em: ${selectedPlan}` : "Solicitação de Contato"}
                 </p>
               </div>
 
               <form onSubmit={handleOfferFormSubmit} action="https://formspree.io/f/xgvndwrv" method="POST" className="space-y-5">
-                <input type="hidden" name="_subject" value={`Interesse Luxury (${selectedPlan || "Geral"}) - ${vehicle.title}`} />
-                <input type="hidden" name="Veiculo" value={vehicle.title} />
+                <input type="hidden" name="_subject" value={`Interesse Luxury (${selectedPlan || "Geral"}) - ${vehicle.title || "Veículo"}`} />
+                <input type="hidden" name="Veiculo" value={vehicle.title || "Veículo"} />
                 <input type="hidden" name="Modalidade" value={selectedPlan || "Não selecionada"} />
 
                 <div>
