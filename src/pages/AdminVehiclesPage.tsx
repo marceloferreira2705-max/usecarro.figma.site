@@ -407,6 +407,19 @@ export const AdminVehiclesPage = () => {
                 </div>
 
                 <div className="space-y-6">
+                  <h4 className="text-white font-serif text-xl border-b border-white/10 pb-2">Descrição</h4>
+                  <div>
+                    <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Sobre o Veículo</label>
+                    <textarea 
+                      value={formData.description} 
+                      onChange={(e) => handleInputChange("description", e.target.value)} 
+                      className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded h-32 resize-y" 
+                      placeholder="Descreva os detalhes, diferenciais e equipamentos do veículo..."
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-6">
                   <h4 className="text-white font-serif text-xl border-b border-white/10 pb-2">Precificação</h4>
                   <div className="bg-white/5 p-6 border border-white/10 rounded">
                     <h5 className="text-[#C5A059] font-serif text-lg mb-4">Signature Experience (Assinatura)</h5>

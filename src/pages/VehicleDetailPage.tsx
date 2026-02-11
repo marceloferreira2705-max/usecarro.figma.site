@@ -9,12 +9,15 @@ export const VehicleDetailPage = () => {
   const [showOfferForm, setShowOfferForm] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [vehicle, setVehicle] = useState<VehicleData | undefined>(undefined);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     if (id) {
-      setVehicle(getVehicleById(id));
+      const foundVehicle = getVehicleById(id);
+      setVehicle(foundVehicle);
     }
+    setLoading(false);
   }, [id]);
 
   const handleOfferFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -42,32 +45,49 @@ export const VehicleDetailPage = () => {
     const message = `Olá! ${planText} para o veículo *${vehicle.title}*. Poderia me ajudar?`;
     const encodedMessage = encodeURIComponent(message);
     
-    // Redireciona para a página intermediária que vai para o WhatsApp
-    // Passamos a mensagem como parâmetro se a página intermediária suportar, 
-    // mas como ela tem um timer fixo, vamos usar o link direto aqui ou ajustar a página intermediária.
-    // Para manter o padrão do site, vamos usar o link direto do WhatsApp aqui para garantir a mensagem correta.
     window.open(`https://api.whatsapp.com/send/?phone=5512982900169&text=${encodedMessage}&type=phone_number&app_absent=0`, '_blank');
   };
+
+  if (loading) {
+    return <div className="min-h-screen bg-luxury-black"></div>;
+  }
 
   if (!vehicle) {
     return (
       <div className="min-h-screen bg-luxury-black flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-white font-serif text-3xl mb-4">Veículo não encontrado</h1>
-          <a href="/veiculos" className="text-luxury-gold border-b border-luxury-gold pb-1 uppercase text-xs tracking-widest">Voltar para a Coleção</a>
+          <p className="text-luxury-gray mb-6">O veículo com ID {id} não foi localizado na base de dados.</p>
+          <a href="/" className="text-luxury-gold border-b border-luxury-gold pb-1 uppercase text-xs tracking-widest">Voltar para a Coleção</a>
         </div>
       </div>
     );
   }
 
-  const mainImage = vehicle.images && vehicle.images.length > 0 ? vehicle.images[0] : "https://via.placeholder.com/1200x800";
+  // Safe access to properties with defaults
+  const mainImage = vehicle.images && vehicle.images.length > 0 ? vehicle.images[0] : "https://via.placeholder.com/1200x800?text=Imagem+Indisponível";
   const thumbnails = vehicle.images && vehicle.images.length >= 4 
     ? vehicle.images.slice(0, 4) 
     : Array(4).fill(mainImage);
 
-  const consorcioMonthly = vehicle.prices.consorcio.monthly;
-  const consorcioTerm = parseInt(vehicle.prices.consorcio.term.replace(/\D/g, '')) || 80;
-  const estimatedCreditValue = (parseFloat(consorcioMonthly.replace("R$", "").replace(".", "").replace(",", ".")) * consorcioTerm * 0.85).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  // Safe access to prices
+  const assinaturaPrice = vehicle.prices?.assinatura?.monthly || "Sob Consulta";
+  const consorcioPrice = vehicle.prices?.consorcio?.monthly || "Sob Consulta";
+  const consorcioTermStr = vehicle.prices?.consorcio?.term || "80 meses";
+  
+  // Calculate estimated credit safely
+  let estimatedCreditValue = "Sob Consulta";
+  try {
+    if (consorcioPrice !== "Sob Consulta") {
+      const numericPrice = parseFloat(consorcioPrice.replace("R$", "").replace(/\./g, "").replace(",", ".").trim());
+      const numericTerm = parseInt(consorcioTermStr.replace(/\D/g, '')) || 80;
+      if (!isNaN(numericPrice) && !isNaN(numericTerm)) {
+        estimatedCreditValue = (numericPrice * numericTerm * 0.85).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      }
+    }
+  } catch (e) {
+    console.error("Erro ao calcular crédito estimado", e);
+  }
 
   return (
     <div className="min-h-screen bg-luxury-black text-white font-sans selection:bg-luxury-gold selection:text-black pb-40">
@@ -79,13 +99,13 @@ export const VehicleDetailPage = () => {
           {/* 1. Título e Subtítulo Centralizados */}
           <div className="text-center mb-12 animate-fade-in-up">
             <span className="text-luxury-gold text-xs tracking-[0.4em] uppercase block mb-4">
-              {vehicle.brand}
+              {vehicle.brand || "Marca"}
             </span>
             <h1 className="font-serif text-4xl md:text-6xl text-white mb-4 leading-tight">
-              {vehicle.version}
+              {vehicle.version || vehicle.title}
             </h1>
             <p className="text-luxury-gray font-light text-lg tracking-wide uppercase">
-              {vehicle.year} • {vehicle.type}
+              {vehicle.year || "2026"} • {vehicle.type || "Premium"}
             </p>
           </div>
 
@@ -95,6 +115,7 @@ export const VehicleDetailPage = () => {
               src={mainImage}
               alt={vehicle.title}
               className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-[1.5s] ease-out"
+              onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/1200x800?text=Imagem+Indisponível"; }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-luxury-black/50 to-transparent pointer-events-none"></div>
           </div>
@@ -107,11 +128,11 @@ export const VehicleDetailPage = () => {
             </p>
             
             <div className="flex flex-wrap justify-center gap-8 mt-8 text-xs tracking-widest uppercase text-luxury-gold">
-              <span>{vehicle.engine}</span>
+              <span>{vehicle.engine || "Motorização"}</span>
               <span className="text-white/20">•</span>
-              <span>{vehicle.transmission}</span>
+              <span>{vehicle.transmission || "Transmissão"}</span>
               <span className="text-white/20">•</span>
-              <span>{vehicle.fuelType}</span>
+              <span>{vehicle.fuelType || "Combustível"}</span>
             </div>
           </div>
 
@@ -123,6 +144,7 @@ export const VehicleDetailPage = () => {
                   src={thumb} 
                   alt={`Detalhe ${index + 1}`} 
                   className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                  onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/400x300?text=Detalhe"; }}
                 />
               </div>
             ))}
@@ -160,7 +182,7 @@ export const VehicleDetailPage = () => {
                   A partir de
                 </span>
                 <span className="font-serif text-3xl text-white">
-                  {vehicle.prices.assinatura.monthly}
+                  {assinaturaPrice}
                   <span className="text-lg text-luxury-gray font-light">/mês</span>
                 </span>
               </div>
@@ -206,7 +228,7 @@ export const VehicleDetailPage = () => {
                   {estimatedCreditValue}
                 </span>
                 <span className="block text-xs text-luxury-gray mt-1">
-                  Parcelas de {vehicle.prices.consorcio.monthly}
+                  Parcelas de {consorcioPrice}
                 </span>
               </div>
 
@@ -231,12 +253,12 @@ export const VehicleDetailPage = () => {
           {/* Dados do Veículo (Esquerda) */}
           <div className="flex items-center gap-4 w-full md:w-auto border-b md:border-b-0 border-white/10 pb-4 md:pb-0">
             <div className="hidden md:block w-16 h-10 rounded overflow-hidden bg-gray-800">
-              <img src={mainImage} alt={vehicle.title} className="w-full h-full object-cover" />
+              <img src={mainImage} alt={vehicle.title} className="w-full h-full object-cover" onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/100x60?text=Carro"; }} />
             </div>
             <div>
               <h4 className="text-white font-serif text-sm md:text-base leading-tight">{vehicle.title}</h4>
               <div className="flex items-center gap-2 text-xs text-luxury-gray mt-1">
-                <span className="uppercase tracking-wider">{vehicle.year}</span>
+                <span className="uppercase tracking-wider">{vehicle.year || "2026"}</span>
                 <span className="w-1 h-1 bg-luxury-gold rounded-full"></span>
                 <span className="text-luxury-gold">
                   {selectedPlan ? selectedPlan : "Selecione um plano"}
