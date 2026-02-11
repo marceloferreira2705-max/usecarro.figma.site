@@ -1,56 +1,66 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { LuxuryHeader } from "@/components/LuxuryHeader";
+import { LuxuryFooter } from "@/components/LuxuryFooter";
 
 export const FormularioEnviadoPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Redireciona para a home após 3 segundos
+    // Redireciona para a home após 5 segundos (aumentado para dar tempo de ler a mensagem elegante)
     const timer = setTimeout(() => {
       navigate("/");
-    }, 3000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, [navigate]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-600 to-blue-600 flex items-center justify-center p-6">
-      <div className="bg-white rounded-3xl shadow-2xl p-12 max-w-2xl w-full text-center">
-        <div className="w-32 h-32 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-8 animate-bounce">
-          <span className="text-7xl">✅</span>
-        </div>
-        
-        <h1 className="text-4xl font-black text-blue-950 mb-4">
-          Sua Solicitação Chegou ao Use Carro! 🥳
-        </h1>
-        
-        <div className="text-lg text-gray-700 space-y-4 mb-8">
-          <p>Olá!</p>
-          <p>
-            Obrigado pelo seu interesse! Recebemos seu pedido de informações e nossos especialistas 
-            (os "caçadores de detalhes automotivos") já estão analisando tudo com carinho. 🔎
+    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#C5A059] selection:text-black flex flex-col">
+      <LuxuryHeader />
+      
+      <main className="flex-1 flex items-center justify-center p-6 pt-32">
+        <div className="max-w-2xl w-full text-center animate-fade-in-up">
+          
+          {/* Ícone Elegante */}
+          <div className="w-24 h-24 border border-[#C5A059] rounded-full flex items-center justify-center mx-auto mb-10 relative">
+            <div className="absolute inset-0 rounded-full border border-[#C5A059] animate-ping opacity-20"></div>
+            <span className="text-[#C5A059] text-4xl">✓</span>
+          </div>
+          
+          <span className="text-[#C5A059] text-[10px] tracking-[0.4em] uppercase block mb-6">
+            Solicitação Confirmada
+          </span>
+          
+          <h1 className="font-serif text-4xl md:text-5xl text-white mb-8 leading-tight">
+            Recebemos seu interesse.
+          </h1>
+          
+          <div className="text-[#A0A0A0] font-light text-lg leading-relaxed tracking-wide space-y-6 mb-12 max-w-xl mx-auto">
+            <p>
+              Nossa equipe de Concierge já iniciou a análise do seu perfil.
+            </p>
+            <p>
+              Em breve, um de nossos Advisors entrará em contato para apresentar a estratégia ideal para sua aquisição.
+            </p>
+          </div>
+          
+          <div className="w-12 h-[1px] bg-[#C5A059]/30 mx-auto mb-12"></div>
+          
+          <p className="text-[#A0A0A0] text-xs tracking-widest uppercase mb-8">
+            Você será redirecionado para a coleção em instantes...
           </p>
-          <p>
-            Enquanto preparamos a resposta perfeita, que tal continuar a navegar? 
-            O próximo carro dos seus sonhos pode estar a um clique de distância! 😉
-          </p>
-          <p className="font-bold text-green-600">Voltamos em breve!</p>
-          <p className="text-sm text-gray-600">Equipe Use Carro 🚗💨</p>
+          
+          <button
+            onClick={() => navigate("/")}
+            className="inline-block py-4 px-10 border border-white/20 text-white text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-300"
+          >
+            Voltar Agora
+          </button>
         </div>
-        
-        <div className="bg-blue-50 rounded-xl p-4 mb-6">
-          <p className="text-sm text-blue-900">
-            Você será redirecionado para a página inicial em alguns segundos...
-          </p>
-        </div>
-        
-        <button
-          onClick={() => navigate("/")}
-          className="bg-gradient-to-r from-green-600 to-blue-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer"
-        >
-          Voltar para Home Agora
-        </button>
-      </div>
+      </main>
+
+      <LuxuryFooter />
     </div>
   );
 };

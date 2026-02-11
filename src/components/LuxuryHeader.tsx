@@ -67,7 +67,7 @@ export const LuxuryHeader = () => {
         <div className="h-full flex flex-col justify-center items-center">
           <nav className="flex flex-col gap-8 text-center">
             {[
-              { name: "A Coleção", href: "/veiculos" },
+              { name: "A Coleção", href: "/" },
               { name: "Signature Experience", href: "/assinatura" },
               { name: "Equity Planning", href: "/consorcio" },
               { name: "Sobre Nós", href: "/sobre" },
