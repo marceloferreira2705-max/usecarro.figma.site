@@ -1,13 +1,17 @@
 import { vehiclesData, VehicleData } from "@/data/vehiclesData";
 
-// Chave de armazenamento
-const STORAGE_KEY = "useCarroVehicles_v2026_Optimized";
-const UPDATE_DATE_KEY = "vehicleUpdateDates_v2026_Optimized";
+// Chave de armazenamento atual
+const STORAGE_KEY = "useCarroVehicles_v2026_Final";
+const UPDATE_DATE_KEY = "vehicleUpdateDates_v2026_Final";
 
-// Função auxiliar para calcular o tamanho em KB
-const getSizeInKB = (str: string) => {
-  return (new Blob([str]).size / 1024).toFixed(2);
-};
+// Lista de chaves antigas para limpeza automática se necessário
+const OLD_KEYS = [
+  "useCarroVehicles",
+  "useCarroVehicles_v2026",
+  "useCarroVehicles_v2026_Clean",
+  "useCarroVehicles_v2026_Optimized",
+  "vehicleUpdateDates_v2026_Optimized"
+];
 
 export const getStorageUsage = () => {
   try {
@@ -38,22 +42,16 @@ export const getVehicles = (): Record<string, VehicleData> => {
 export const saveVehicles = (vehicles: Record<string, VehicleData>) => {
   try {
     const serialized = JSON.stringify(vehicles);
-    const sizeMB = (new Blob([serialized]).size / 1024 / 1024);
-    
-    console.log(`Tentando salvar ${sizeMB.toFixed(2)} MB de dados...`);
-
-    if (sizeMB > 4.5) {
-      throw new Error("O tamanho dos dados excede o limite do navegador (5MB). Tente excluir alguns veículos ou usar imagens menores.");
-    }
-
     localStorage.setItem(STORAGE_KEY, serialized);
+    
+    // Dispara evento para atualizar a tela
     window.dispatchEvent(new Event("vehiclesUpdated"));
     return true;
   } catch (error: any) {
     console.error("Erro ao salvar veículos:", error);
     
     if (error.name === 'QuotaExceededError' || error.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
-      throw new Error("Armazenamento cheio! As imagens são muito pesadas. O sistema tentará comprimi-las automaticamente na próxima vez.");
+      throw new Error("Memória do navegador cheia! Tente usar o botão 'Limpar Memória Fantasma' ou use imagens menores.");
     }
     throw error;
   }
@@ -67,6 +65,18 @@ export const resetVehiclesStorage = () => {
     return true;
   } catch (error) {
     console.error("Erro ao limpar storage:", error);
+    return false;
+  }
+};
+
+// Função drástica para limpar TUDO do localStorage se estiver corrompido/cheio
+export const clearAllStorage = () => {
+  try {
+    localStorage.clear();
+    window.dispatchEvent(new Event("vehiclesUpdated"));
+    return true;
+  } catch (error) {
+    console.error("Erro ao limpar tudo:", error);
     return false;
   }
 };
