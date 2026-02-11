@@ -1,7 +1,8 @@
 import { vehiclesData, VehicleData } from "@/data/vehiclesData";
 
-const STORAGE_KEY = "useCarroVehicles";
-const UPDATE_DATE_KEY = "vehicleUpdateDates";
+// Alterei a chave para forçar o reset e limpar o erro de armazenamento cheio
+const STORAGE_KEY = "useCarroVehicles_v2026_Clean";
+const UPDATE_DATE_KEY = "vehicleUpdateDates_v2026_Clean";
 
 export const getVehicles = (): Record<string, VehicleData> => {
   try {
@@ -12,7 +13,7 @@ export const getVehicles = (): Record<string, VehicleData> => {
   } catch (error) {
     console.error("Erro ao carregar veículos do storage:", error);
   }
-  // Retorna os dados padrão se não houver nada salvo ou der erro
+  // Retorna os dados padrão (apenas 32, 46, 47, 48) se não houver nada salvo na nova chave
   return vehiclesData;
 };
 
