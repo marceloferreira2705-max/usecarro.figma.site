@@ -1,17 +1,20 @@
 import { LuxuryHeader } from "@/components/LuxuryHeader";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { vehiclesData, VehicleData } from "@/data/vehiclesData";
+import { VehicleData } from "@/data/vehiclesData";
+import { getVehicleById } from "@/utils/vehicleStorage";
 
 export const VehicleDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const [showOfferForm, setShowOfferForm] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(null); // Estado para o plano selecionado
-
-  const vehicle: VehicleData | undefined = id ? vehiclesData[id] : undefined;
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  const [vehicle, setVehicle] = useState<VehicleData | undefined>(undefined);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    if (id) {
+      setVehicle(getVehicleById(id));
+    }
   }, [id]);
 
   const handleOfferFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

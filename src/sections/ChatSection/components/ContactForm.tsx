@@ -1,9 +1,14 @@
-import React, { useState } from 'react'; // Importa useState
-import { vehiclesData } from "@/data/vehiclesData";
+import React, { useState, useEffect } from 'react'; // Importa useState
+import { getVehicles } from "@/utils/vehicleStorage";
+import { VehicleData } from "@/data/vehiclesData";
 
 export const ContactForm = () => {
   const [submitted, setSubmitted] = useState(false); // Estado para controlar o envio
-  const allVehicles = Object.values(vehiclesData);
+  const [allVehicles, setAllVehicles] = useState<VehicleData[]>([]);
+
+  useEffect(() => {
+    setAllVehicles(Object.values(getVehicles()));
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { vehiclesData, VehicleData } from "@/data/vehiclesData";
+import { VehicleData } from "@/data/vehiclesData";
+import { getVehicleById } from "@/utils/vehicleStorage";
 
 export type BlackFridayVehicleCardProps = {
   vehicleId: string;
@@ -15,8 +16,7 @@ export const BlackFridayVehicleCard = (props: BlackFridayVehicleCardProps) => {
   const [showOfferForm, setShowOfferForm] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   
-  // Move vehicle lookup inside the component body but ensure it doesn't cause side effects
-  const vehicle = vehiclesData[props.vehicleId];
+  const vehicle = getVehicleById(props.vehicleId);
 
   if (!vehicle) {
     return (

@@ -1,8 +1,22 @@
-import { vehiclesData } from "@/data/vehiclesData";
+import { useState, useEffect } from "react";
+import { getVehicles } from "@/utils/vehicleStorage";
+import { VehicleData } from "@/data/vehiclesData";
 
 export const LuxuryVehicleList = () => {
-  // Show all vehicles from the registry
-  const boutiqueInventory = Object.values(vehiclesData);
+  const [boutiqueInventory, setBoutiqueInventory] = useState<VehicleData[]>([]);
+
+  useEffect(() => {
+    // Carrega inicial
+    setBoutiqueInventory(Object.values(getVehicles()));
+
+    // Escuta atualizações
+    const handleUpdate = () => {
+      setBoutiqueInventory(Object.values(getVehicles()));
+    };
+
+    window.addEventListener("vehiclesUpdated", handleUpdate);
+    return () => window.removeEventListener("vehiclesUpdated", handleUpdate);
+  }, []);
 
   return (
     <section id="collection" className="bg-luxury-black py-20 px-4 md:px-8 overflow-hidden">

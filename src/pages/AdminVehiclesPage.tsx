@@ -1,12 +1,13 @@
 import { LuxuryHeader } from "@/components/LuxuryHeader";
 import { LuxuryFooter } from "@/components/LuxuryFooter";
 import { useState, useEffect } from "react";
-import { vehiclesData, VehicleData } from "@/data/vehiclesData";
+import { VehicleData } from "@/data/vehiclesData";
+import { getVehicles, saveVehicles, getLastUpdates, saveLastUpdate, removeLastUpdate } from "@/utils/vehicleStorage";
 
 export const AdminVehiclesPage = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
-  const [vehicles, setVehicles] = useState<Record<string, VehicleData>>(vehiclesData);
+  const [vehicles, setVehicles] = useState<Record<string, VehicleData>>({});
   const [editingVehicle, setEditingVehicle] = useState<string | null>(null);
   const [formData, setFormData] = useState<VehicleData | null>(null);
   const [saveMessage, setSaveMessage] = useState("");
@@ -14,11 +15,9 @@ export const AdminVehiclesPage = () => {
   const [lastUpdated, setLastUpdated] = useState<Record<string, string>>({});
 
   useEffect(() => {
-    // Carrega datas de atualização do localStorage
-    const savedDates = localStorage.getItem('vehicleUpdateDates');
-    if (savedDates) {
-      setLastUpdated(JSON.parse(savedDates));
-    }
+    // Carrega veículos e datas do storage ao iniciar
+    setVehicles(getVehicles());
+    setLastUpdated(getLastUpdates());
   }, []);
 
   const handleLogin = (e: React.FormEvent) => {
@@ -87,12 +86,12 @@ export const AdminVehiclesPage = () => {
     if (window.confirm(`Tem certeza que deseja excluir o veículo ${vehicles[vehicleId].title}?`)) {
       const updatedVehicles = { ...vehicles };
       delete updatedVehicles[vehicleId];
-      setVehicles(updatedVehicles);
       
-      const updatedDates = { ...lastUpdated };
-      delete updatedDates[vehicleId];
-      setLastUpdated(updatedDates);
-      localStorage.setItem('vehicleUpdateDates', JSON.stringify(updatedDates));
+      setVehicles(updatedVehicles);
+      saveVehicles(updatedVehicles); // Salva no storage
+      
+      removeLastUpdate(vehicleId);
+      setLastUpdated(getLastUpdates());
       
       setSaveMessage(`✅ Veículo excluído com sucesso!`);
       setTimeout(() => setSaveMessage(""), 3000);
@@ -173,17 +172,11 @@ export const AdminVehiclesPage = () => {
     };
 
     setVehicles(updatedVehicles);
+    saveVehicles(updatedVehicles); // Salva no storage
     
     // Atualiza data de modificação
-    const now = new Date().toLocaleString('pt-BR');
-    const updatedDates = {
-      ...lastUpdated,
-      [editingVehicle]: now
-    };
-    setLastUpdated(updatedDates);
-    localStorage.setItem('vehicleUpdateDates', JSON.stringify(updatedDates));
-    
-    console.log("Dados atualizados:", updatedVehicles[editingVehicle]);
+    saveLastUpdate(editingVehicle);
+    setLastUpdated(getLastUpdates());
     
     setSaveMessage(isCreating 
       ? "✅ Novo veículo criado com sucesso! Os dados foram salvos." 

@@ -1,10 +1,23 @@
 import { VehicleCard } from "@/sections/VehiclesSection/components/VehicleCard";
-import { vehiclesData } from "@/data/vehiclesData";
+import { getVehicles } from "@/utils/vehicleStorage";
+import { useEffect, useState } from "react";
+import { VehicleData } from "@/data/vehiclesData";
 
 export const VehiclesSection = () => {
-  // Featured vehicles: Fiat Mobi (1), VW Tera (14), Fiat Strada (7)
-  const featuredVehicleIds = ["1", "14", "7"];
-  const featuredVehicles = featuredVehicleIds.map(id => vehiclesData[id]).filter(Boolean);
+  const [featuredVehicles, setFeaturedVehicles] = useState<VehicleData[]>([]);
+
+  useEffect(() => {
+    const vehicles = getVehicles();
+    // Tenta pegar os destaques, se não existirem (ex: foram deletados), pega os 3 primeiros disponíveis
+    const featuredIds = ["1", "14", "7"];
+    let selected = featuredIds.map(id => vehicles[id]).filter(Boolean);
+    
+    if (selected.length === 0) {
+      selected = Object.values(vehicles).slice(0, 3);
+    }
+    
+    setFeaturedVehicles(selected);
+  }, []);
 
   return (
     <section className="bg-white box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] py-20">

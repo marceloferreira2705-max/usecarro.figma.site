@@ -1,20 +1,20 @@
 import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
 import { VehicleCard } from "@/sections/VehiclesSection/components/VehicleCard";
-import { useState } from "react";
-import { vehiclesData, VehicleData } from "@/data/vehiclesData";
+import { useState, useEffect } from "react";
+import { VehicleData } from "@/data/vehiclesData";
+import { getVehicles } from "@/utils/vehicleStorage";
 
 export const VeiculosPage = () => {
   const [selectedFilter, setSelectedFilter] = useState("Todos");
   const [visibleVehicles, setVisibleVehicles] = useState(9);
+  const [allVehicles, setAllVehicles] = useState<VehicleData[]>([]);
 
-  // Black Friday vehicles IDs
-  const blackFridayIds = ["25", "1", "4", "14", "10", "31", "22", "7", "32", "9"];
-  
-  // Get only Black Friday vehicles
-  const allVehicles: VehicleData[] = blackFridayIds
-    .map(id => vehiclesData[id])
-    .filter(Boolean);
+  useEffect(() => {
+    const vehicles = getVehicles();
+    // Carrega todos os veículos disponíveis no storage
+    setAllVehicles(Object.values(vehicles));
+  }, []);
 
   const filters = ["Todos", "Econômico", "Hatch Compacto", "SUV Compacto", "SUV Médio", "SUV Coupé", "Picape Compacta", "Picape Média"];
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { vehiclesData } from "@/data/vehiclesData"; // Importado no topo do arquivo
+import { getVehicleById } from "@/utils/vehicleStorage";
 
 export type VehicleCardProps = {
   vehicleImage: string;
@@ -20,7 +20,7 @@ export const VehicleCard = (props: VehicleCardProps) => {
   const [activeTab, setActiveTab] = useState("Assinatura");
 
   const getPriceAndTermByTab = (tab: string) => {
-    const vehicleData = vehiclesData[props.vehicleId];
+    const vehicleData = getVehicleById(props.vehicleId);
     if (!vehicleData || !vehicleData.prices) {
       // Fallback se os dados do veículo ou preços não forem encontrados
       return { monthly: props.monthlyPrice, term: "/mês" };
