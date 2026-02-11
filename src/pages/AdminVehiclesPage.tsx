@@ -184,23 +184,38 @@ export const AdminVehiclesPage = () => {
       [editingVehicle]: formData
     };
 
-    setVehicles(updatedVehicles);
-    saveVehicles(updatedVehicles); // Salva no storage
-    
-    // Atualiza data de modificação
-    saveLastUpdate(editingVehicle);
-    setLastUpdated(getLastUpdates());
-    
-    setSaveMessage(isCreating 
-      ? "✅ Novo veículo criado com sucesso! Os dados foram salvos." 
-      : "✅ Veículo atualizado com sucesso! Os dados foram salvos."
-    );
-    
-    setTimeout(() => {
-      setEditingVehicle(null);
-      setFormData(null);
-      setIsCreating(false);
-    }, 2000);
+    try {
+      saveVehicles(updatedVehicles); // Tenta salvar no storage
+      
+      // Se chegou aqui, salvou com sucesso
+      setVehicles(updatedVehicles);
+      
+      // Atualiza data de modificação
+      saveLastUpdate(editingVehicle);
+      setLastUpdated(getLastUpdates());
+      
+      setSaveMessage(isCreating 
+        ? "✅ Novo veículo criado com sucesso! Os dados foram salvos." 
+        : "✅ Veículo atualizado com sucesso! Os dados foram salvos."
+      );
+      
+      setTimeout(() => {
+        setEditingVehicle(null);
+        setFormData(null);
+        setIsCreating(false);
+      }, 2000);
+    } catch (error: any) {
+      alert(`ERRO AO SALVAR: ${error.message}\n\nDica: Se você fez upload de muitas imagens, tente usar URLs de imagens da internet em vez de enviar o arquivo.`);
+    }
+  };
+
+  const handleResetDatabase = () => {
+    if (window.confirm("ATENÇÃO: Isso apagará TODOS os veículos cadastrados e restaurará o padrão do sistema. Tem certeza?")) {
+      const { resetVehiclesStorage } = require("@/utils/vehicleStorage");
+      resetVehiclesStorage();
+      setVehicles(getVehicles()); // Recarrega o padrão
+      alert("Banco de dados resetado para o padrão inicial.");
+    }
   };
 
   if (!isAuthenticated) {
@@ -279,6 +294,14 @@ export const AdminVehiclesPage = () => {
                 Sair
               </button>
             </div>
+          </div>
+          <div className="mt-4 flex justify-end">
+             <button 
+               onClick={handleResetDatabase}
+               className="text-red-500 text-[10px] uppercase tracking-widest hover:text-red-400 underline"
+             >
+               Resetar Banco de Dados (Emergência)
+             </button>
           </div>
         </div>
       </section>

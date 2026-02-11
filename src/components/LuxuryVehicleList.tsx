@@ -38,7 +38,7 @@ export const LuxuryVehicleList = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10"></div>
                 
                 <img
-                  src={vehicle.images[0]}
+                  src={vehicle.images && vehicle.images.length > 0 ? vehicle.images[0] : "https://via.placeholder.com/1200x600/121212/333333?text=Sem+Imagem"}
                   alt={vehicle.title}
                   className="w-full h-full object-cover object-center transform scale-100 group-hover:scale-105 transition-transform duration-[1.5s] ease-out opacity-90 group-hover:opacity-100"
                   onError={(e) => {
