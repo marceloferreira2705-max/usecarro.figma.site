@@ -1,8 +1,8 @@
 import { vehiclesData } from "@/data/vehiclesData";
 
 export const LuxuryVehicleList = () => {
-  // Limit to 10 vehicles for the "Boutique" feel
-  const boutiqueInventory = Object.values(vehiclesData).slice(0, 10);
+  // Show all vehicles from the registry
+  const boutiqueInventory = Object.values(vehiclesData);
 
   return (
     <section id="collection" className="bg-luxury-black py-20 px-4 md:px-8 overflow-hidden">
