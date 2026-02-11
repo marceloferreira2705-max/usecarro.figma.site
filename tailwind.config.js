@@ -8,6 +8,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        luxury: {
+          black: "#050505", // Rich Black
+          card: "#121212",  // Dark Card
+          gold: "#C5A059",  // Champagne Gold
+          goldDim: "#8A7038",
+          white: "#FFFFFF",
+          gray: "#A0A0A0",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -49,15 +57,21 @@ module.exports = {
       },
       fontFamily: {
         sans: [
+          "Montserrat",
           "ui-sans-serif",
           "system-ui",
           "sans-serif",
-          '"Apple Color Emoji"',
-          '"Segoe UI Emoji"',
-          '"Segoe UI Symbol"',
-          '"Noto Color Emoji"',
         ],
-        "montserrat": ["Montserrat", "ui-sans-serif", "system-ui", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"]
+        serif: [
+          "Playfair Display",
+          "ui-serif",
+          "Georgia",
+          "serif",
+        ],
+        montserrat: ["Montserrat", "sans-serif"]
+      },
+      letterSpacing: {
+        widest: '.25em',
       },
       keyframes: {
         "accordion-down": {
@@ -68,10 +82,20 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "fade-in-up": {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "slow-zoom": {
+          "0%": { transform: "scale(1)" },
+          "100%": { transform: "scale(1.1)" },
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-in-up": "fade-in-up 1s ease-out forwards",
+        "slow-zoom": "slow-zoom 20s linear infinite alternate",
       },
     },
     container: { center: true, padding: "2rem", screens: { "2xl": "1400px" } },

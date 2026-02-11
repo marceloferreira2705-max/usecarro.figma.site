@@ -1,530 +1,335 @@
-import { Header } from "@/sections/Header";
-import { Footer } from "@/sections/Footer";
-import { useParams, useNavigate } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { LuxuryHeader } from "@/components/LuxuryHeader";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { vehiclesData, VehicleData } from "@/data/vehiclesData";
 
 export const VehicleDetailPage = () => {
-  const { id, name } = useParams<{ id: string; name?: string }>();
-  const [activeTab, setActiveTab] = useState("Assinatura");
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [error, setError] = useState<string | null>(null);
+  const { id } = useParams<{ id: string }>();
   const [showOfferForm, setShowOfferForm] = useState(false);
-  const [showChatModal, setShowChatModal] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null); // Estado para o plano selecionado
 
   const vehicle: VehicleData | undefined = id ? vehiclesData[id] : undefined;
 
-  const navigate = useNavigate();
-  const iaSectionRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
-    console.log("VehicleDetailPage: Componente montado. ID recebido:", id, "Nome:", name);
-    if (!vehicle) {
-      console.error("VehicleDetailPage: Veículo não encontrado para o ID:", id);
-    } else {
-      console.log("VehicleDetailPage: Dados do veículo carregados:", vehicle);
-    }
-  }, [id, name, vehicle]);
+    window.scrollTo(0, 0);
+  }, [id]);
 
   const handleOfferFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
-
     try {
       const response = await fetch(form.action, {
         method: form.method,
         body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
+        headers: { 'Accept': 'application/json' }
       });
-
-      if (response.ok) {
-        window.location.href = "/formulario-enviado";
-      } else {
-        const data = await response.json();
-        if (data.errors) {
-          alert(data.errors.map((error: any) => error.message).join(", "));
-        } else {
-          alert("Ocorreu um erro ao enviar o formulário.");
-        }
-      }
+      if (response.ok) window.location.href = "/formulario-enviado";
+      else alert("Erro ao enviar formulário.");
     } catch (error) {
-      alert("Ocorreu um erro de rede ao enviar o formulário.");
-      console.error("Erro de envio:", error);
+      console.error("Erro:", error);
+      alert("Erro de rede.");
     }
+  };
+
+  const handleWhatsAppClick = () => {
+    if (!vehicle) return;
+    
+    const planText = selectedPlan ? `Tenho interesse na modalidade *${selectedPlan}*` : "Gostaria de mais informações";
+    const message = `Olá! ${planText} para o veículo *${vehicle.title}*. Poderia me ajudar?`;
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Redireciona para a página intermediária que vai para o WhatsApp
+    // Passamos a mensagem como parâmetro se a página intermediária suportar, 
+    // mas como ela tem um timer fixo, vamos usar o link direto aqui ou ajustar a página intermediária.
+    // Para manter o padrão do site, vamos usar o link direto do WhatsApp aqui para garantir a mensagem correta.
+    window.open(`https://api.whatsapp.com/send/?phone=5512982900169&text=${encodedMessage}&type=phone_number&app_absent=0`, '_blank');
   };
 
   if (!vehicle) {
     return (
-      <div className="min-h-screen bg-white">
-        <Header />
-        <div className="pt-32 pb-20 text-center">
-          <h1 className="text-4xl font-bold mb-4">Veículo não encontrado</h1>
-          <p className="text-gray-600 mb-8">O veículo que você está procurando não existe ou foi removido.</p>
-          <button 
-            onClick={() => window.location.href = "/veiculos"}
-            className="bg-green-600 text-white px-6 py-3 rounded-lg cursor-pointer hover:bg-green-700 transition-colors"
-          >
-            Ver todos os veículos
-          </button>
+      <div className="min-h-screen bg-luxury-black flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-white font-serif text-3xl mb-4">Veículo não encontrado</h1>
+          <a href="/veiculos" className="text-luxury-gold border-b border-luxury-gold pb-1 uppercase text-xs tracking-widest">Voltar para a Coleção</a>
         </div>
-        <Footer />
       </div>
     );
   }
 
-  const getPriceDataByTab = (tab: string) => {
-    if (!vehicle.prices) {
-      return undefined;
-    }
-    switch (tab) {
-      case "Assinatura":
-        return vehicle.prices.assinatura;
-      case "Financiamento":
-        return vehicle.prices.financiamento || vehicle.prices.assinatura; 
-      case "Consórcio":
-        return vehicle.prices.consorcio || vehicle.prices.assinatura;
-      default:
-        return vehicle.prices.assinatura;
-    }
-  };
+  const mainImage = vehicle.images && vehicle.images.length > 0 ? vehicle.images[0] : "https://via.placeholder.com/1200x800";
+  const thumbnails = vehicle.images && vehicle.images.length >= 4 
+    ? vehicle.images.slice(0, 4) 
+    : Array(4).fill(mainImage);
 
-  const currentPriceData = getPriceDataByTab(activeTab);
+  const consorcioMonthly = vehicle.prices.consorcio.monthly;
+  const consorcioTerm = parseInt(vehicle.prices.consorcio.term.replace(/\D/g, '')) || 80;
+  const estimatedCreditValue = (parseFloat(consorcioMonthly.replace("R$", "").replace(".", "").replace(",", ".")) * consorcioTerm * 0.85).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
-  if (!currentPriceData) {
-    return (
-      <div className="min-h-screen bg-white">
-        <Header />
-        <div className="pt-32 pb-20 text-center">
-          <h1 className="text-4xl font-bold mb-4">Erro ao carregar dados de preço</h1>
-          <p className="text-gray-600 mb-8">Não foi possível encontrar os dados de preço para a modalidade selecionada.</p>
-          <button 
-            onClick={() => window.location.href = "/veiculos"}
-            className="bg-green-600 text-white px-6 py-3 rounded-lg cursor-pointer hover:bg-green-700 transition-colors"
-          >
-            Voltar para Veículos
-          </button>
+  return (
+    <div className="min-h-screen bg-luxury-black text-white font-sans selection:bg-luxury-gold selection:text-black pb-40">
+      <LuxuryHeader />
+      
+      <main className="pt-32 px-6 md:px-12">
+        <div className="max-w-[1000px] mx-auto flex flex-col items-center">
+          
+          {/* 1. Título e Subtítulo Centralizados */}
+          <div className="text-center mb-12 animate-fade-in-up">
+            <span className="text-luxury-gold text-xs tracking-[0.4em] uppercase block mb-4">
+              {vehicle.brand}
+            </span>
+            <h1 className="font-serif text-4xl md:text-6xl text-white mb-4 leading-tight">
+              {vehicle.version}
+            </h1>
+            <p className="text-luxury-gray font-light text-lg tracking-wide uppercase">
+              {vehicle.year} • {vehicle.type}
+            </p>
+          </div>
+
+          {/* 2. Foto Principal Centralizada */}
+          <div className="w-full aspect-[16/9] bg-luxury-card border border-white/5 mb-16 overflow-hidden relative group animate-fade-in-up" style={{ animationDelay: '100ms' }}>
+            <img
+              src={mainImage}
+              alt={vehicle.title}
+              className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-[1.5s] ease-out"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-luxury-black/50 to-transparent pointer-events-none"></div>
+          </div>
+
+          {/* 3. Descrição do Veículo */}
+          <div className="max-w-3xl text-center mb-16 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+            <h3 className="font-serif text-2xl text-white mb-6">Sobre o Veículo</h3>
+            <p className="text-luxury-gray font-light leading-relaxed text-lg">
+              {vehicle.description || "Uma obra-prima da engenharia automotiva. Este veículo combina performance excepcional com o mais alto nível de conforto e tecnologia. Cada detalhe foi pensado para proporcionar uma experiência de condução única e inesquecível."}
+            </p>
+            
+            <div className="flex flex-wrap justify-center gap-8 mt-8 text-xs tracking-widest uppercase text-luxury-gold">
+              <span>{vehicle.engine}</span>
+              <span className="text-white/20">•</span>
+              <span>{vehicle.transmission}</span>
+              <span className="text-white/20">•</span>
+              <span>{vehicle.fuelType}</span>
+            </div>
+          </div>
+
+          {/* 4. 4 Fotos Pequenas */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full mb-24 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
+            {thumbnails.map((thumb, index) => (
+              <div key={index} className="aspect-[4/3] bg-luxury-card border border-white/5 overflow-hidden cursor-pointer hover:border-luxury-gold/50 transition-colors">
+                <img 
+                  src={thumb} 
+                  alt={`Detalhe ${index + 1}`} 
+                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* 5. Duas Caixas Elegantes (Seleção) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full mb-12 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
+            
+            {/* Caixa 1: Signature Experience */}
+            <div 
+              onClick={() => setSelectedPlan("Assinatura")}
+              className={`relative p-10 border transition-all duration-500 cursor-pointer group overflow-hidden ${
+                selectedPlan === "Assinatura" 
+                  ? "bg-white/5 border-luxury-gold shadow-[0_0_30px_rgba(197,160,89,0.1)]" 
+                  : "bg-[#0A0A0A] border-white/10 hover:border-luxury-gold/30"
+              }`}
+            >
+              <div className={`absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-luxury-gold/50 to-transparent transition-opacity duration-500 ${selectedPlan === "Assinatura" ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}></div>
+              
+              <div className="flex justify-between items-start mb-4">
+                <h3 className={`font-serif text-2xl transition-colors ${selectedPlan === "Assinatura" ? "text-luxury-gold" : "text-white group-hover:text-luxury-gold"}`}>
+                  Signature Experience
+                </h3>
+                {selectedPlan === "Assinatura" && (
+                  <span className="text-luxury-gold text-xl">✓</span>
+                )}
+              </div>
+              
+              <p className="text-luxury-gray text-sm leading-relaxed mb-8 font-light">
+                Uso exclusivo sem depreciação do ativo. Blindagem, impostos e manutenção totalmente inclusos.
+              </p>
+              
+              <div className="mt-auto">
+                <span className="block text-[10px] text-luxury-gold tracking-[0.2em] uppercase mb-2">
+                  A partir de
+                </span>
+                <span className="font-serif text-3xl text-white">
+                  {vehicle.prices.assinatura.monthly}
+                  <span className="text-lg text-luxury-gray font-light">/mês</span>
+                </span>
+              </div>
+
+              <div className={`w-full mt-8 py-3 border text-xs tracking-[0.2em] uppercase text-center transition-all duration-300 ${
+                selectedPlan === "Assinatura"
+                  ? "bg-luxury-gold text-black border-luxury-gold font-bold"
+                  : "border-white/20 text-white group-hover:bg-white group-hover:text-black"
+              }`}>
+                {selectedPlan === "Assinatura" ? "Selecionado" : "Selecionar"}
+              </div>
+            </div>
+
+            {/* Caixa 2: Equity Planning */}
+            <div 
+              onClick={() => setSelectedPlan("Consórcio")}
+              className={`relative p-10 border transition-all duration-500 cursor-pointer group overflow-hidden ${
+                selectedPlan === "Consórcio" 
+                  ? "bg-white/5 border-luxury-gold shadow-[0_0_30px_rgba(197,160,89,0.1)]" 
+                  : "bg-[#0A0A0A] border-white/10 hover:border-luxury-gold/30"
+              }`}
+            >
+              <div className={`absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-luxury-gold/50 to-transparent transition-opacity duration-500 ${selectedPlan === "Consórcio" ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}></div>
+              
+              <div className="flex justify-between items-start mb-4">
+                <h3 className={`font-serif text-2xl transition-colors ${selectedPlan === "Consórcio" ? "text-luxury-gold" : "text-white group-hover:text-luxury-gold"}`}>
+                  Equity Planning
+                </h3>
+                {selectedPlan === "Consórcio" && (
+                  <span className="text-luxury-gold text-xl">✓</span>
+                )}
+              </div>
+
+              <p className="text-luxury-gray text-sm leading-relaxed mb-8 font-light">
+                Estratégia inteligente de aquisição de ativos. Taxas administrativas reduzidas e planejamento fiscal.
+              </p>
+              
+              <div className="mt-auto">
+                <span className="block text-[10px] text-luxury-gold tracking-[0.2em] uppercase mb-2">
+                  Crédito Estimado
+                </span>
+                <span className="font-serif text-3xl text-white">
+                  {estimatedCreditValue}
+                </span>
+                <span className="block text-xs text-luxury-gray mt-1">
+                  Parcelas de {vehicle.prices.consorcio.monthly}
+                </span>
+              </div>
+
+              <div className={`w-full mt-8 py-3 border text-xs tracking-[0.2em] uppercase text-center transition-all duration-300 ${
+                selectedPlan === "Consórcio"
+                  ? "bg-luxury-gold text-black border-luxury-gold font-bold"
+                  : "border-white/20 text-white group-hover:bg-white group-hover:text-black"
+              }`}>
+                {selectedPlan === "Consórcio" ? "Selecionado" : "Selecionar"}
+              </div>
+            </div>
+
+          </div>
+
         </div>
-        <Footer />
+      </main>
+
+      {/* Footer Fixo com Dados do Veículo */}
+      <div className="fixed bottom-0 left-0 right-0 bg-[#050505]/95 backdrop-blur-xl border-t border-white/10 z-40 py-4 px-6 md:px-12 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+        <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+          
+          {/* Dados do Veículo (Esquerda) */}
+          <div className="flex items-center gap-4 w-full md:w-auto border-b md:border-b-0 border-white/10 pb-4 md:pb-0">
+            <div className="hidden md:block w-16 h-10 rounded overflow-hidden bg-gray-800">
+              <img src={mainImage} alt={vehicle.title} className="w-full h-full object-cover" />
+            </div>
+            <div>
+              <h4 className="text-white font-serif text-sm md:text-base leading-tight">{vehicle.title}</h4>
+              <div className="flex items-center gap-2 text-xs text-luxury-gray mt-1">
+                <span className="uppercase tracking-wider">{vehicle.year}</span>
+                <span className="w-1 h-1 bg-luxury-gold rounded-full"></span>
+                <span className="text-luxury-gold">
+                  {selectedPlan ? selectedPlan : "Selecione um plano"}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Botões de Ação (Direita) */}
+          <div className="flex gap-3 w-full md:w-auto">
+            <button 
+              onClick={() => setShowOfferForm(true)}
+              className="flex-1 md:flex-none px-6 py-3 bg-white text-black text-[10px] md:text-xs font-bold tracking-[0.15em] uppercase hover:bg-luxury-gold transition-colors duration-300 min-w-[160px]"
+            >
+              Consulta Privada
+            </button>
+            
+            <button 
+              onClick={handleWhatsAppClick}
+              className="flex-1 md:flex-none px-6 py-3 bg-transparent border border-white/30 text-white text-[10px] md:text-xs font-bold tracking-[0.15em] uppercase hover:border-luxury-gold hover:text-luxury-gold transition-colors duration-300 flex items-center justify-center gap-2 min-w-[180px]"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+              </svg>
+              Concierge
+            </button>
+          </div>
+        </div>
       </div>
-    );
-  }
 
-  try {
-    const imageUrl = (vehicle.images && vehicle.images.length > 0 && currentImageIndex < vehicle.images.length) 
-      ? vehicle.images[currentImageIndex] 
-      : "https://via.placeholder.com/600x400?text=Imagem+não+disponível";
+      {/* Modal de Formulário */}
+      {showOfferForm && (
+        <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-luxury-card border border-white/10 max-w-md w-full shadow-2xl relative animate-fade-in-up">
+            <button 
+              onClick={() => setShowOfferForm(false)}
+              className="absolute top-4 right-4 text-luxury-gray hover:text-white transition-colors"
+            >
+              ✕
+            </button>
+            
+            <div className="p-8">
+              <div className="text-center mb-8">
+                <span className="text-luxury-gold text-[10px] tracking-[0.3em] uppercase block mb-2">
+                  Atendimento Exclusivo
+                </span>
+                <h3 className="font-serif text-2xl text-white">{vehicle.title}</h3>
+                <p className="text-luxury-gray text-xs mt-2 uppercase tracking-widest">
+                  {selectedPlan ? `Interesse em: ${selectedPlan}` : "Solicitação de Contato"}
+                </p>
+              </div>
 
-    return (
-      <div className="min-h-screen bg-white">
-        <Header />
-        
-        {/* Hero Section with Vehicle Image and Info */}
-        <section className="bg-[linear-gradient(to_right_bottom,rgb(255,255,255)_0%,oklch(0.985_0.002_247.839)_100%)] pt-32 pb-12">
-          <div className="max-w-screen-xl mx-auto px-6 md:px-8">
-            <div className="grid lg:grid-cols-2 gap-12 items-start">
-              {/* Left - Vehicle Image and Description */}
-              <div>
-                {/* Tags above image */}
-                <div className="flex gap-3 mb-4">
-                  {vehicle.type && (
-                    <span className="inline-block bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-                      {vehicle.type}
-                    </span>
-                  )}
-                  {vehicle.clientType && (
-                    <span className="inline-block bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
-                      {vehicle.clientType}
-                    </span>
-                  )}
+              <form onSubmit={handleOfferFormSubmit} action="https://formspree.io/f/xgvndwrv" method="POST" className="space-y-5">
+                <input type="hidden" name="_subject" value={`Interesse Luxury (${selectedPlan || "Geral"}) - ${vehicle.title}`} />
+                <input type="hidden" name="Veiculo" value={vehicle.title} />
+                <input type="hidden" name="Modalidade" value={selectedPlan || "Não selecionada"} />
+
+                <div>
+                  <input
+                    type="text"
+                    name="Nome"
+                    placeholder="NOME COMPLETO"
+                    className="w-full bg-transparent border-b border-white/20 py-3 text-white text-sm placeholder:text-luxury-gray/50 focus:border-luxury-gold focus:outline-none transition-colors"
+                    required
+                  />
                 </div>
-
-                {/* Fundo branco explícito para a imagem do veículo na página de detalhes */}
-                <div className="bg-white rounded-3xl p-8 flex items-start justify-center mb-6">
-                  <img
-                    src={imageUrl}
-                    alt={vehicle.title || "Veículo"}
-                    className="w-full h-auto object-contain drop-shadow-2xl"
-                    onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/600x400?text=Imagem+não+disponível"; e.currentTarget.style.backgroundColor = "#ffffff"; }} // Fallback e fundo branco
+                <div>
+                  <input
+                    type="email"
+                    name="Email"
+                    placeholder="E-MAIL CORPORATIVO OU PESSOAL"
+                    className="w-full bg-transparent border-b border-white/20 py-3 text-white text-sm placeholder:text-luxury-gray/50 focus:border-luxury-gold focus:outline-none transition-colors"
+                    required
+                  />
+                </div>
+                <div>
+                  <input
+                    type="tel"
+                    name="Telefone"
+                    placeholder="TELEFONE / WHATSAPP"
+                    className="w-full bg-transparent border-b border-white/20 py-3 text-white text-sm placeholder:text-luxury-gray/50 focus:border-luxury-gold focus:outline-none transition-colors"
+                    required
                   />
                 </div>
 
-                {/* Description Card */}
-                {vehicle.description && (
-                  <div className="bg-white shadow-lg rounded-2xl p-6 border-2 border-gray-200">
-                    <p className="text-gray-700 leading-relaxed text-center">{vehicle.description}</p>
-                  </div>
-                )}
-              </div>
-
-              {/* Right - Vehicle Info */}
-              <div>
-                <div className="mb-6">
-                  {vehicle.brand && <p className="text-green-600 font-semibold text-lg mb-2">{vehicle.brand}</p>}
-                  {vehicle.version && <h1 className="text-4xl md:text-5xl font-black mb-4 leading-tight">{vehicle.version}</h1>}
-                  {(vehicle.type || vehicle.year) && <p className="text-gray-600 text-lg">{vehicle.type} • {vehicle.year}</p>}
-                </div>
-
-                {/* Specifications Cards */}
-                <div className="grid grid-cols-3 gap-4 mb-8">
-                  {vehicle.fuelType && (
-                    <div className="bg-white shadow-md rounded-xl p-4 text-center border border-gray-100">
-                      <div className="text-3xl mb-2">⛽</div>
-                      <div className="text-xs text-gray-500 mb-1">Combustível</div>
-                      <div className="font-bold text-sm">{vehicle.fuelType}</div>
-                    </div>
-                  )}
-                  {vehicle.transmission && (
-                    <div className="bg-white shadow-md rounded-xl p-4 text-center border border-gray-100">
-                      <div className="text-3xl mb-2">⚙️</div>
-                      <div className="text-xs text-gray-500 mb-1">Câmbio</div>
-                      <div className="font-bold text-sm">{vehicle.transmission}</div>
-                    </div>
-                  )}
-                  {vehicle.seats && (
-                    <div className="bg-white shadow-md rounded-xl p-4 text-center border border-gray-100">
-                      <div className="text-3xl mb-2">👥</div>
-                      <div className="text-xs text-gray-500 mb-1">Lugares</div>
-                      <div className="font-bold text-sm">{vehicle.seats}</div>
-                    </div>
-                  )}
-                  {vehicle.engine && (
-                    <div className="bg-white shadow-md rounded-xl p-4 text-center border border-gray-100">
-                      <div className="text-3xl mb-2">🔧</div>
-                      <div className="text-xs text-gray-500 mb-1">Motor</div>
-                      <div className="font-bold text-sm">{vehicle.engine}</div>
-                    </div>
-                  )}
-                  {vehicle.color && (
-                    <div className="bg-white shadow-md rounded-xl p-4 text-center border border-gray-100">
-                      <div className="text-3xl mb-2">🎨</div>
-                      <div className="text-xs text-gray-500 mb-1">Cor</div>
-                      <div className="font-bold text-sm">{vehicle.color}</div>
-                    </div>
-                  )}
-                  {vehicle.doors && (
-                    <div className="bg-white shadow-md rounded-xl p-4 text-center border border-gray-100">
-                      <div className="text-3xl mb-2">🚪</div>
-                      <div className="text-xs text-gray-500 mb-1">Portas</div>
-                      <div className="font-bold text-sm">{vehicle.doors}</div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Price Tabs Section */}
-        <section className="py-12 bg-white">
-          <div className="max-w-screen-xl mx-auto px-6 md:px-8">
-            <h2 className="text-3xl font-bold text-center mb-8">Escolha a melhor forma de ter este veículo</h2>
-            
-            <div className="max-w-4xl mx-auto">
-              {/* Tabs */}
-              <div className="flex bg-gray-100 rounded-2xl p-2 mb-8">
-                {["Assinatura", "Financiamento", "Consórcio"].map((tab) => (
-                  <button
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`flex-1 py-3 px-6 rounded-xl text-base font-semibold transition-all duration-200 ${
-                      activeTab === tab
-                        ? tab === "Assinatura"
-                          ? "bg-blue-600 text-white shadow-lg"
-                          : tab === "Financiamento"
-                          ? "bg-blue-900 text-white shadow-lg"
-                          : "bg-green-600 text-white shadow-lg"
-                        : "text-gray-600 hover:text-gray-900"
-                    }`}
-                  >
-                    {tab}
-                  </button>
-                ))}
-              </div>
-              
-              {/* Price Card */}
-              <div className={`rounded-2xl p-8 border-2 transition-all duration-300 shadow-xl ${
-                activeTab === "Assinatura" 
-                  ? "bg-gradient-to-br from-blue-50 to-blue-100 border-blue-300" 
-                  : activeTab === "Financiamento"
-                  ? "bg-gradient-to-br from-blue-900/5 to-blue-900/10 border-blue-900/30"
-                  : "bg-gradient-to-br from-green-50 to-green-100 border-green-300"
-              }`}>
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
-                  <div>
-                    {currentPriceData.monthly && <h3 className={`text-2xl font-bold mb-2 ${
-                      activeTab === "Assinatura" 
-                        ? "text-blue-700" 
-                        : activeTab === "Financiamento"
-                        ? "text-blue-900"
-                        : "text-green-700"
-                    }`}>{activeTab}</h3>}
-                    {(currentPriceData.term || currentPriceData.mileage) && (
-                      <p className={`text-sm ${
-                        activeTab === "Assinatura" 
-                          ? "text-blue-600" 
-                          : activeTab === "Financiamento"
-                          ? "text-blue-800"
-                          : "text-green-600"
-                      }`}>
-                        {currentPriceData.term}
-                        {currentPriceData.mileage && ` • ${currentPriceData.mileage}`}
-                      </p>
-                    )}
-                  </div>
-                  <div className="text-right mt-4 md:mt-0">
-                    {currentPriceData.monthly && (
-                      <div className={`text-5xl font-black ${
-                        activeTab === "Assinatura" 
-                          ? "text-blue-700" 
-                          : activeTab === "Financiamento"
-                          ? "text-blue-900"
-                          : "text-green-700"
-                      }`}>
-                        {currentPriceData.monthly}
-                      </div>
-                    )}
-                    <div className="text-sm text-gray-600 font-medium">por mês</div>
-                  </div>
-                </div>
-                
-                {currentPriceData.details && Array.isArray(currentPriceData.details) && currentPriceData.details.length > 0 && (
-                  <div className="grid md:grid-cols-2 gap-3 mb-8">
-                    {currentPriceData.details.map((detail: string, index: number) => (
-                      <div key={index} className="flex items-center bg-white/50 rounded-lg p-3">
-                        <span className={`mr-3 text-xl ${
-                          activeTab === "Assinatura" 
-                            ? "text-blue-600" 
-                            : activeTab === "Financiamento"
-                            ? "text-blue-900"
-                            : "text-green-600"
-                        }`}>✓</span>
-                        <span className="text-gray-700 font-medium">{detail}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <button 
-                    onClick={() => window.location.href = "/especialista"}
-                    className={`flex-1 font-bold py-4 rounded-xl border-2 transition-all cursor-pointer ${
-                      activeTab === "Assinatura" 
-                        ? "border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white" 
-                        : activeTab === "Financiamento"
-                        ? "border-blue-900 text-blue-900 hover:bg-blue-900 hover:text-white"
-                        : "border-green-600 text-green-600 hover:bg-green-600 hover:text-white"
-                    }`}
-                  >
-                    Falar com a IA - Clara
-                  </button>
-                  <button 
-                    onClick={() => setShowOfferForm(true)}
-                    className={`flex-1 font-bold py-4 rounded-xl transition-all cursor-pointer ${
-                      activeTab === "Assinatura" 
-                        ? "bg-blue-600 text-white hover:bg-blue-700" 
-                        : activeTab === "Financiamento"
-                        ? "bg-blue-900 text-white hover:bg-blue-950"
-                        : "bg-green-600 text-white hover:bg-green-700"
-                    }`}
-                  >
-                    Pedir Oferta
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Offer Form Modal */}
-        {showOfferForm && (
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
-              <div className="sticky top-0 bg-gradient-to-r from-green-600 to-blue-600 text-white p-6 rounded-t-2xl">
-                <div className="flex justify-between items-center">
-                  <h3 className="text-2xl font-bold">Solicitar Oferta</h3>
-                  <button 
-                    onClick={() => setShowOfferForm(false)}
-                    className="text-white hover:text-gray-200 text-3xl font-bold cursor-pointer"
-                  >
-                    ×
-                  </button>
-                </div>
-                <p className="text-white/90 mt-2">Preencha o formulário e receba uma proposta personalizada</p>
-              </div>
-
-              <div className="p-6">
-                {formSubmitted ? (
-                  <div className="text-center py-12">
-                    <div className="text-6xl mb-4">✅</div>
-                    <h4 className="text-2xl font-bold text-green-600 mb-2">Solicitação Enviada!</h4>
-                    <p className="text-gray-600">Entraremos em contato em breve com sua oferta personalizada.</p>
-                  </div>
-                ) : (
-                  <form onSubmit={handleOfferFormSubmit} action="https://formspree.io/f/xgvndwrv" method="POST" className="space-y-4">
-                    <input type="hidden" name="_subject" value={`Nova Oferta - ${vehicle?.title}`} />
-                    <input type="hidden" name="_gotcha" style={{display: 'none'}} />
-                    <input type="hidden" name="Veiculo" value={vehicle?.title} />
-                    <input type="hidden" name="Modalidade" value={activeTab} />
-                    <input type="hidden" name="Valor" value={currentPriceData?.monthly} />
-
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Nome Completo *</label>
-                        <input
-                          type="text"
-                          name="Nome Completo"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                          placeholder="Seu nome completo"
-                          required
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">E-mail *</label>
-                        <input
-                          type="email"
-                          name="Email"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                          placeholder="seu@email.com"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Telefone *</label>
-                        <input
-                          type="tel"
-                          name="Telefone"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                          placeholder="(12) 99109-5018"
-                          required
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Tipo de Pessoa</label>
-                        <select
-                          name="Tipo de Pessoa"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                        >
-                          <option value="Pessoa Física">Pessoa Física</option>
-                          <option value="Pessoa Jurídica">Pessoa Jurídica</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Mensagem (opcional)</label>
-                      <textarea
-                        name="Mensagem"
-                        rows={4}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                        placeholder="Deixe uma mensagem ou dúvida..."
-                      ></textarea>
-                    </div>
-
-                    <div className="bg-gray-50 rounded-lg p-4">
-                      <p className="text-sm font-semibold text-gray-700 mb-2">Resumo da Oferta:</p>
-                      <div className="space-y-1 text-sm text-gray-600">
-                        <p><strong>Veículo:</strong> {vehicle?.title}</p>
-                        <p><strong>Modalidade:</strong> {activeTab}</p>
-                        <p><strong>Valor:</strong> {currentPriceData?.monthly}</p>
-                      </div>
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white font-bold py-4 rounded-lg shadow-lg hover:shadow-xl transition-all cursor-pointer"
-                    >
-                      Enviar Solicitação
-                    </button>
-
-                    <p className="text-xs text-gray-500 text-center">
-                      Ao enviar, você concorda com nossa política de privacidade
-                    </p>
-                  </form>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Chat Modal */}
-        {showChatModal && (
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="bg-white rounded-2xl max-w-2xl w-full h-[80vh] shadow-2xl flex flex-col overflow-hidden">
-              <div className="bg-gradient-to-r from-green-600 to-blue-600 text-white p-4 flex justify-between items-center">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-green-600 font-bold">
-                    IA
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg">Clara - IA Assistente</h3>
-                    <p className="text-xs text-white/90">Especialista em soluções automotivas</p>
-                  </div>
-                </div>
-                <button 
-                  onClick={() => setShowChatModal(false)}
-                  className="text-white hover:text-gray-200 text-3xl font-bold cursor-pointer"
+                <button
+                  type="submit"
+                  className="w-full mt-4 py-4 bg-luxury-gold text-luxury-black text-xs font-bold tracking-[0.2em] uppercase hover:bg-white transition-colors duration-300"
                 >
-                  ×
+                  Solicitar Contato
                 </button>
-              </div>
-              <div className="flex-1 w-full h-full">
-                <iframe
-                  src="https://www.chatbase.co/chatbot-iframe/5fRwrAroJGoXqpBWFMTyB"
-                  width="100%"
-                  height="100%"
-                  frameBorder="0"
-                  title="Clara - IA Assistente"
-                ></iframe>
-              </div>
+              </form>
             </div>
           </div>
-        )}
-
-        {/* CTA Section */}
-        <section className="py-16 bg-gradient-to-br from-green-600 to-blue-600">
-          <div className="max-w-screen-xl mx-auto px-6 md:px-8 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Pronto para ter este veículo?
-            </h2>
-            <button 
-              onClick={() => window.location.href = "/especialista"}
-              className="bg-white text-green-600 font-bold px-10 py-5 rounded-2xl text-lg shadow-xl hover:shadow-2xl transition-shadow cursor-pointer"
-            >
-              Fale com Especialista Agora
-            </button>
-          </div>
-        </section>
-
-        <Footer />
-      </div>
-    );
-  } catch (e: any) {
-    console.error("VehicleDetailPage: Erro durante a renderização:", e);
-    setError(e.message || "Erro desconhecido durante a renderização.");
-    return (
-      <div className="min-h-screen bg-white">
-        <Header />
-        <div className="pt-32 pb-20 text-center">
-          <h1 className="text-4xl font-bold mb-4">Erro de Renderização</h1>
-          <p className="text-red-600 text-lg mb-8">Ocorreu um erro ao exibir os detalhes do veículo.</p>
-          {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-          <p className="text-gray-600 mb-8">Por favor, tente novamente ou volte para a lista de veículos.</p>
-          <button
-            onClick={() => window.location.href = "/veiculos"}
-            className="bg-green-600 text-white px-6 py-3 rounded-lg cursor-pointer hover:bg-green-700 transition-colors"
-          >
-            Voltar para Veículos
-          </button>
         </div>
-        <Footer />
-      </div>
-    );
-  }
+      )}
+    </div>
+  );
 };

@@ -1,109 +1,95 @@
-import { Header } from "@/sections/Header";
-import { Footer } from "@/sections/Footer";
-import { FloatingButtons } from "@/components/FloatingButtons";
+import { LegalLayout } from "@/components/LegalLayout";
 
 export const PrivacidadePage = () => {
+  const sections = [
+    { id: "compromisso", title: "1. Compromisso de Privacidade" },
+    { id: "coleta", title: "2. Coleta de Dados" },
+    { id: "uso", title: "3. Uso das Informações" },
+    { id: "compartilhamento", title: "4. Compartilhamento (Grupo Nexi)" },
+    { id: "seguranca", title: "5. Segurança e LGPD" },
+    { id: "direitos", title: "6. Seus Direitos" },
+    { id: "contato", title: "7. Encarregado de Dados (DPO)" },
+  ];
+
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      
-      {/* Hero Section */}
-      <section className="bg-[linear-gradient(to_right_bottom,rgb(255,255,255)_0%,oklch(0.985_0.002_247.839)_100%)] pt-32 pb-20">
-        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-6xl font-black leading-tight mb-6">
-              Política de <span className="text-green-600">Privacidade</span>
-            </h1>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-              Saiba como coletamos, utilizamos e protegemos seus dados pessoais.
-            </p>
-          </div>
-        </div>
-      </section>
+    <LegalLayout
+      title="Política de Privacidade"
+      subtitle="Proteção de dados e confidencialidade com o padrão de segurança do Grupo Nexi."
+      sections={sections}
+    >
+      <div id="compromisso" className="mb-16 scroll-mt-40">
+        <h2>1. Compromisso de Privacidade</h2>
+        <p>
+          A <strong>Use Carro</strong> entende que a privacidade é o pilar fundamental da confiança. Tratamos seus dados pessoais com o mais alto nível de sigilo e segurança, em estrita conformidade com a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018).
+        </p>
+      </div>
 
-      {/* Privacy Content */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-6 md:px-8">
-          <div className="prose prose-lg max-w-none">
-            <h2 className="text-2xl font-bold mb-6">1. Informações que Coletamos</h2>
-            <p className="mb-6">
-              Coletamos informações que você nos fornece diretamente, como:
-            </p>
-            <ul className="list-disc pl-6 mb-6">
-              <li>Dados pessoais (nome, CPF, RG, endereço)</li>
-              <li>Informações de contato (e-mail, telefone)</li>
-              <li>Dados financeiros (renda, histórico de crédito)</li>
-              <li>Preferências de veículos</li>
-            </ul>
+      <div id="coleta" className="mb-16 scroll-mt-40">
+        <h2>2. Coleta de Dados</h2>
+        <p>
+          Coletamos apenas os dados estritamente necessários para a prestação de nossos serviços de consultoria e intermediação automotiva:
+        </p>
+        <ul>
+          <li><strong>Dados Cadastrais:</strong> Nome, CPF, endereço, e-mail e telefone.</li>
+          <li><strong>Dados Financeiros:</strong> Informações necessárias para análise de crédito e viabilidade financeira (Equity Planning).</li>
+          <li><strong>Dados de Navegação:</strong> Cookies e logs de acesso para melhoria da experiência do usuário e segurança da plataforma.</li>
+        </ul>
+      </div>
 
-            <h2 className="text-2xl font-bold mb-6">2. Como Utilizamos suas Informações</h2>
-            <p className="mb-6">
-              Utilizamos suas informações para:
-            </p>
-            <ul className="list-disc pl-6 mb-6">
-              <li>Processar suas solicitações de serviços</li>
-              <li>Realizar análises de crédito</li>
-              <li>Personalizar recomendações através da IA Clara</li>
-              <li>Comunicar sobre nossos serviços</li>
-              <li>Cumprir obrigações legais</li>
-            </ul>
+      <div id="uso" className="mb-16 scroll-mt-40">
+        <h2>3. Uso das Informações</h2>
+        <p>
+          As informações coletadas são utilizadas para:
+        </p>
+        <ul>
+          <li>Personalizar o atendimento do nosso <strong>Concierge</strong>.</li>
+          <li>Processar simulações de assinatura, consórcio e financiamento.</li>
+          <li>Realizar verificações de segurança e prevenção a fraudes.</li>
+          <li>Cumprir obrigações legais e regulatórias.</li>
+        </ul>
+      </div>
 
-            <h2 className="text-2xl font-bold mb-6">3. Compartilhamento de Dados</h2>
-            <p className="mb-6">
-              Podemos compartilhar suas informações com:
-            </p>
-            <ul className="list-disc pl-6 mb-6">
-              <li>Parceiros financeiros para análise de crédito</li>
-              <li>Seguradoras para cotação de seguros</li>
-              <li>Concessionárias para entrega de veículos</li>
-              <li>Órgãos reguladores quando exigido por lei</li>
-            </ul>
+      <div id="compartilhamento" className="mb-16 scroll-mt-40">
+        <h2>4. Compartilhamento de Dados</h2>
+        <p>
+          Seus dados podem ser compartilhados com empresas do <strong>Grupo Nexi</strong> para fins administrativos e de gestão. Externamente, compartilhamos dados apenas com parceiros essenciais para a execução do serviço (Montadoras, Seguradoras, Instituições Financeiras), sempre sob contratos de confidencialidade rigorosos.
+        </p>
+        <p>
+          <strong>Não vendemos seus dados a terceiros.</strong>
+        </p>
+      </div>
 
-            <h2 className="text-2xl font-bold mb-6">4. Segurança dos Dados</h2>
-            <p className="mb-6">
-              Implementamos medidas de segurança técnicas e organizacionais para proteger seus dados contra acesso não autorizado, alteração, divulgação ou destruição.
-            </p>
+      <div id="seguranca" className="mb-16 scroll-mt-40">
+        <h2>5. Segurança da Informação</h2>
+        <p>
+          Adotamos medidas técnicas e organizacionais robustas, incluindo criptografia de ponta a ponta, controles de acesso restrito e monitoramento contínuo de nossa infraestrutura digital para prevenir acessos não autorizados ou vazamentos.
+        </p>
+      </div>
 
-            <h2 className="text-2xl font-bold mb-6">5. Seus Direitos</h2>
-            <p className="mb-6">
-              Você tem o direito de:
-            </p>
-            <ul className="list-disc pl-6 mb-6">
-              <li>Acessar seus dados pessoais</li>
-              <li>Corrigir informações incorretas</li>
-              <li>Solicitar a exclusão de seus dados</li>
-              <li>Revogar consentimentos</li>
-              <li>Portabilidade de dados</li>
-            </ul>
+      <div id="direitos" className="mb-16 scroll-mt-40">
+        <h2>6. Seus Direitos (Titular dos Dados)</h2>
+        <p>
+          Você tem total controle sobre seus dados. A qualquer momento, você pode solicitar:
+        </p>
+        <ul>
+          <li>Confirmação da existência de tratamento.</li>
+          <li>Acesso aos dados.</li>
+          <li>Correção de dados incompletos ou desatualizados.</li>
+          <li>Anonimização, bloqueio ou eliminação de dados desnecessários.</li>
+          <li>Portabilidade dos dados.</li>
+        </ul>
+      </div>
 
-            <h2 className="text-2xl font-bold mb-6">6. Cookies e Tecnologias Similares</h2>
-            <p className="mb-6">
-              Utilizamos cookies para melhorar sua experiência em nossa plataforma. Você pode gerenciar suas preferências de cookies através das configurações do seu navegador.
-            </p>
-
-            <h2 className="text-2xl font-bold mb-6">7. Retenção de Dados</h2>
-            <p className="mb-6">
-              Mantemos seus dados pelo tempo necessário para cumprir as finalidades descritas nesta política ou conforme exigido por lei.
-            </p>
-
-            <h2 className="text-2xl font-bold mb-6">8. Contato</h2>
-            <p className="mb-6">
-              Para exercer seus direitos ou esclarecer dúvidas sobre esta política, entre em contato:
-            </p>
-            <ul className="list-disc pl-6 mb-6">
-              <li>E-mail: privacidade@usecarro.com.br</li>
-              <li>Telefone: (12) 99109-5018</li>
-              <li>Endereço: Av. Nove de Julho, nº 95 - Sala 21, Vila Adyana, São José dos Campos - SP</li>
-            </ul>
-
-            <p className="text-sm text-gray-500 mt-8">
-              Última atualização: Janeiro de 2025
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <Footer />
-    </div>
+      <div id="contato" className="mb-16 scroll-mt-40">
+        <h2>7. Encarregado de Dados (DPO)</h2>
+        <p>
+          Para exercer seus direitos ou esclarecer dúvidas sobre nossa governança de dados, entre em contato com nosso Encarregado de Proteção de Dados:
+        </p>
+        <p className="mt-4 border-l-2 border-[#C5A059] pl-4">
+          <strong>E-mail:</strong> dpo@usecarro.com.br<br />
+          <strong>Endereço:</strong> Av. Nove de Julho, nº 95 - Sala 21, Vila Adyana, São José dos Campos - SP
+        </p>
+      </div>
+    </LegalLayout>
   );
 };

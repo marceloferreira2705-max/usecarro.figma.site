@@ -4,7 +4,7 @@ export const VehicleCategories = () => {
       <h2 className="text-green-600 text-2xl font-bold box-border caret-transparent leading-8 outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] text-center mb-12">
         Nossos Veículos
       </h2>
-      <div className="box-border caret-transparent gap-x-12 grid grid-cols-none outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] gap-y-12 md:grid-cols-[repeat(3,minmax(0px,1fr))]">
+      <div className="box-border caret-transparent gap-x-12 grid grid-cols-none outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] gap-y-12 md:grid-cols-[repeat(2,minmax(0px,1fr))]">
         <div className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)]">
           <h3 className="text-green-600 text-xl font-bold box-border caret-transparent leading-7 outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] mb-6">
             Assinatura
@@ -259,56 +259,6 @@ export const VehicleCategories = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)]">
-          <h3 className="text-green-600 text-xl font-bold box-border caret-transparent leading-7 outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] mb-6">
-            Financiamento
-          </h3>
-          <p className="text-[oklch(0.872_0.01_258.338)] font-medium box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] mb-4">
-            Os mais procurados:
-          </p>
-          <ul className="box-border caret-transparent list-none outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] pl-0">
-            <li className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] mb-2">
-              <a
-                href="/financiamento"
-                className="text-[oklch(0.707_0.022_261.325)] box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)]"
-              >
-                Toyota Corolla
-              </a>
-            </li>
-            <li className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] mb-2">
-              <a
-                href="/financiamento"
-                className="text-[oklch(0.707_0.022_261.325)] box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)]"
-              >
-                Corolla Cross
-              </a>
-            </li>
-            <li className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] mb-2">
-              <a
-                href="/financiamento"
-                className="text-[oklch(0.707_0.022_261.325)] box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)]"
-              >
-                Hyundai Tucson
-              </a>
-            </li>
-            <li className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] mb-2">
-              <a
-                href="/financiamento"
-                className="text-[oklch(0.707_0.022_261.325)] box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)]"
-              >
-                Volkswagen Jetta
-              </a>
-            </li>
-            <li className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)]">
-              <a
-                href="/financiamento"
-                className="text-[oklch(0.707_0.022_261.325)] box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)]"
-              >
-                Jeep Commander
-              </a>
-            </li>
-          </ul>
         </div>
         <div className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)]">
           <h3 className="text-green-600 text-xl font-bold box-border caret-transparent leading-7 outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] mb-6">

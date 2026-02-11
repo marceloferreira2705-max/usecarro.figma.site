@@ -1,5 +1,5 @@
-import { Header } from "@/sections/Header";
-import { Footer } from "@/sections/Footer";
+import { LuxuryHeader } from "@/components/LuxuryHeader";
+import { LuxuryFooter } from "@/components/LuxuryFooter";
 import { useState, useEffect } from "react";
 import { vehiclesData, VehicleData } from "@/data/vehiclesData";
 
@@ -23,11 +23,11 @@ export const AdminVehiclesPage = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === "FERREIRALUCA") {
+    if (password === "NEXI2026") {
       setIsAuthenticated(true);
       setSaveMessage("");
     } else {
-      alert("Senha incorreta!");
+      alert("Acesso Negado. Credenciais inválidas.");
       setPassword("");
     }
   };
@@ -199,41 +199,38 @@ export const AdminVehiclesPage = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-950 flex items-center justify-center p-6">
-        <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full">
-          <div className="text-center mb-8">
-            <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-4xl">🔒</span>
-            </div>
-            <h1 className="text-3xl font-black text-blue-950 mb-2">Área Administrativa</h1>
-            <p className="text-gray-600">Gerenciamento de Veículos</p>
+      <div className="min-h-screen bg-[#050505] flex items-center justify-center p-6 font-sans selection:bg-[#C5A059] selection:text-black">
+        <div className="bg-[#121212] border border-white/10 rounded-sm p-12 max-w-md w-full text-center">
+          <div className="mb-8">
+            <span className="text-[#C5A059] text-[10px] tracking-[0.4em] uppercase block mb-4">
+              Grupo Nexi
+            </span>
+            <h1 className="font-serif text-3xl text-white mb-2">Portal Administrativo</h1>
+            <p className="text-[#A0A0A0] text-sm font-light tracking-wide">Gestão de Ativos & Frota</p>
           </div>
           
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Senha de Acesso
-              </label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all"
-                placeholder="Digite a senha"
+                className="w-full bg-transparent border-b border-white/20 py-3 text-white text-center placeholder:text-[#A0A0A0]/50 focus:border-[#C5A059] focus:outline-none transition-colors tracking-widest"
+                placeholder="SENHA DE ACESSO"
                 required
               />
             </div>
             
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-bold py-4 rounded-lg shadow-lg hover:shadow-xl transition-all cursor-pointer"
+              className="w-full py-4 bg-[#C5A059] text-black text-xs font-bold tracking-[0.2em] uppercase hover:bg-white transition-colors duration-300"
             >
-              Acessar Sistema
+              Entrar
             </button>
           </form>
           
-          <p className="text-xs text-gray-500 text-center mt-6">
-            Acesso restrito apenas para administradores autorizados
+          <p className="text-[10px] text-[#A0A0A0] mt-8 uppercase tracking-widest opacity-50">
+            Acesso Restrito • Monitorado
           </p>
         </div>
       </div>
@@ -241,23 +238,28 @@ export const AdminVehiclesPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
+    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#C5A059] selection:text-black">
+      <LuxuryHeader />
       
       {/* Admin Header */}
-      <section className="bg-gradient-to-r from-blue-600 to-cyan-600 pt-32 pb-12">
-        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
-          <div className="flex justify-between items-center">
+      <section className="pt-40 pb-12 px-6 border-b border-white/5">
+        <div className="max-w-[1600px] mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-end gap-8">
             <div>
-              <h1 className="text-4xl font-black text-white mb-2">Gerenciamento de Veículos</h1>
-              <p className="text-blue-100">Administração Use Carro • {Object.keys(vehicles).length} veículos cadastrados</p>
+              <span className="text-[#C5A059] text-[10px] tracking-[0.4em] uppercase block mb-4">
+                Backoffice
+              </span>
+              <h1 className="font-serif text-4xl text-white mb-2">Gestão de Veículos</h1>
+              <p className="text-[#A0A0A0] font-light tracking-wide text-sm">
+                {Object.keys(vehicles).length} ativos cadastrados no portfólio.
+              </p>
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-4">
               <button
                 onClick={handleCreate}
-                className="bg-green-500 text-white font-bold px-6 py-3 rounded-lg hover:bg-green-600 transition-colors cursor-pointer flex items-center gap-2"
+                className="px-6 py-3 border border-[#C5A059] text-[#C5A059] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#C5A059] hover:text-black transition-colors duration-300"
               >
-                <span className="text-xl">➕</span> Novo Veículo
+                + Novo Veículo
               </button>
               <button
                 onClick={() => {
@@ -266,7 +268,7 @@ export const AdminVehiclesPage = () => {
                   setEditingVehicle(null);
                   setFormData(null);
                 }}
-                className="bg-white text-blue-600 font-bold px-6 py-3 rounded-lg hover:bg-blue-50 transition-colors cursor-pointer"
+                className="px-6 py-3 border border-white/20 text-white text-xs font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-colors duration-300"
               >
                 Sair
               </button>
@@ -276,200 +278,196 @@ export const AdminVehiclesPage = () => {
       </section>
 
       {/* Vehicles List */}
-      <section className="py-12">
-        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
+      <section className="py-12 px-6">
+        <div className="max-w-[1600px] mx-auto">
           {saveMessage && (
-            <div className="bg-green-50 border-2 border-green-500 text-green-800 px-6 py-4 rounded-lg mb-6 font-semibold">
+            <div className="bg-[#C5A059]/10 border border-[#C5A059] text-[#C5A059] px-6 py-4 mb-8 text-sm tracking-wide">
               {saveMessage}
             </div>
           )}
           
-          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white">
-                  <tr>
-                    <th className="px-6 py-4 text-left font-bold">ID</th>
-                    <th className="px-6 py-4 text-left font-bold">Veículo</th>
-                    <th className="px-6 py-4 text-left font-bold">Marca</th>
-                    <th className="px-6 py-4 text-left font-bold">Tipo</th>
-                    <th className="px-6 py-4 text-left font-bold">Assinatura</th>
-                    <th className="px-6 py-4 text-left font-bold">Última Atualização</th>
-                    <th className="px-6 py-4 text-left font-bold">Ações</th>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="border-b border-white/10">
+                  <th className="py-4 px-4 text-[#A0A0A0] font-normal text-xs uppercase tracking-widest">ID</th>
+                  <th className="py-4 px-4 text-[#A0A0A0] font-normal text-xs uppercase tracking-widest">Veículo</th>
+                  <th className="py-4 px-4 text-[#A0A0A0] font-normal text-xs uppercase tracking-widest">Marca</th>
+                  <th className="py-4 px-4 text-[#A0A0A0] font-normal text-xs uppercase tracking-widest">Tipo</th>
+                  <th className="py-4 px-4 text-[#A0A0A0] font-normal text-xs uppercase tracking-widest">Assinatura</th>
+                  <th className="py-4 px-4 text-[#A0A0A0] font-normal text-xs uppercase tracking-widest">Atualizado em</th>
+                  <th className="py-4 px-4 text-[#A0A0A0] font-normal text-xs uppercase tracking-widest text-right">Ações</th>
+                </tr>
+              </thead>
+              <tbody className="text-sm font-light">
+                {Object.values(vehicles).map((vehicle, index) => (
+                  <tr key={vehicle.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                    <td className="py-4 px-4 text-[#A0A0A0] font-mono">{vehicle.id}</td>
+                    <td className="py-4 px-4 font-medium text-white">{vehicle.title}</td>
+                    <td className="py-4 px-4 text-[#CCCCCC]">{vehicle.brand}</td>
+                    <td className="py-4 px-4">
+                      <span className="border border-white/20 px-2 py-1 text-[10px] uppercase tracking-wider text-[#A0A0A0]">
+                        {vehicle.type}
+                      </span>
+                    </td>
+                    <td className="py-4 px-4 text-[#C5A059]">{vehicle.prices.assinatura.monthly}</td>
+                    <td className="py-4 px-4 text-[#A0A0A0] text-xs">
+                      {lastUpdated[vehicle.id] || "-"}
+                    </td>
+                    <td className="py-4 px-4 text-right">
+                      <div className="flex justify-end gap-4">
+                        <button
+                          onClick={() => handleEdit(vehicle.id)}
+                          className="text-white hover:text-[#C5A059] transition-colors text-xs uppercase tracking-wider"
+                        >
+                          Editar
+                        </button>
+                        <button
+                          onClick={() => handleDelete(vehicle.id)}
+                          className="text-[#A0A0A0] hover:text-red-500 transition-colors text-xs uppercase tracking-wider"
+                        >
+                          Excluir
+                        </button>
+                      </div>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {Object.values(vehicles).map((vehicle, index) => (
-                    <tr key={vehicle.id} className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}>
-                      <td className="px-6 py-4 font-mono text-sm">{vehicle.id}</td>
-                      <td className="px-6 py-4 font-semibold">{vehicle.title}</td>
-                      <td className="px-6 py-4">{vehicle.brand}</td>
-                      <td className="px-6 py-4">
-                        <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold">
-                          {vehicle.type}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 font-bold text-green-600">
-                        {vehicle.prices.assinatura.monthly}
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-600">
-                        {lastUpdated[vehicle.id] || "Não atualizado"}
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="flex gap-2">
-                          <button
-                            onClick={() => handleEdit(vehicle.id)}
-                            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors cursor-pointer font-semibold text-sm"
-                          >
-                            ✏️ Editar
-                          </button>
-                          <button
-                            onClick={() => handleDelete(vehicle.id)}
-                            className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors cursor-pointer font-semibold text-sm"
-                          >
-                            🗑️ Excluir
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
 
       {/* Edit/Create Modal */}
       {editingVehicle && formData && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-2xl max-w-4xl w-full my-8 shadow-2xl">
-            <div className="sticky top-0 bg-gradient-to-r from-blue-600 to-cyan-600 text-white p-6 rounded-t-2xl z-10">
-              <div className="flex justify-between items-center">
-                <h3 className="text-2xl font-bold">
-                  {isCreating ? "➕ Criar Novo Veículo" : `✏️ Editar Veículo #${editingVehicle}`}
+        <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-[#121212] border border-white/10 w-full max-w-5xl my-8 shadow-2xl relative">
+            
+            {/* Modal Header */}
+            <div className="sticky top-0 bg-[#121212] border-b border-white/10 p-8 z-10 flex justify-between items-center">
+              <div>
+                <span className="text-[#C5A059] text-[10px] tracking-[0.3em] uppercase block mb-2">
+                  Editor de Ativo
+                </span>
+                <h3 className="font-serif text-2xl text-white">
+                  {isCreating ? "Novo Cadastro" : `Editando: ${formData.title}`}
                 </h3>
-                <button 
-                  onClick={handleCancel}
-                  className="text-white hover:text-gray-200 text-3xl font-bold cursor-pointer"
-                >
-                  ×
-                </button>
               </div>
+              <button 
+                onClick={handleCancel}
+                className="text-[#A0A0A0] hover:text-white text-2xl transition-colors"
+              >
+                ✕
+              </button>
             </div>
 
-            <div className="p-6 max-h-[70vh] overflow-y-auto">
-              <form className="space-y-6">
+            <div className="p-8 max-h-[70vh] overflow-y-auto custom-scrollbar">
+              <form className="space-y-12">
+                
                 {/* Images Section */}
-                <div className="bg-purple-50 rounded-xl p-6 border-2 border-purple-200">
-                  <h4 className="text-lg font-bold text-blue-950 mb-4">🖼️ Imagens do Veículo</h4>
+                <div className="space-y-6">
+                  <h4 className="text-white font-serif text-xl border-b border-white/10 pb-2">Imagens & Visual</h4>
                   
-                  {/* Image Preview */}
-                  <div className="mb-4">
-                    <div className="bg-white rounded-lg p-4 border-2 border-dashed border-purple-300">
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div className="aspect-video bg-black/50 border border-white/10 flex items-center justify-center overflow-hidden">
                       <img
                         src={formData.images[0]}
                         alt="Preview"
-                        className="w-full h-64 object-contain rounded-lg"
+                        className="w-full h-full object-contain"
                         onError={(e) => {
-                          e.currentTarget.src = "https://via.placeholder.com/600x400?text=Imagem+não+disponível";
+                          e.currentTarget.src = "https://via.placeholder.com/600x400/000000/FFFFFF?text=Sem+Imagem";
                         }}
                       />
                     </div>
-                  </div>
-
-                  {/* Upload Image */}
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      📤 Upload de Imagem (Base64)
-                    </label>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageUpload}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-purple-600 file:text-white file:font-semibold hover:file:bg-purple-700 cursor-pointer"
-                    />
-                    <p className="text-xs text-gray-500 mt-2">
-                      A imagem será convertida em Base64 e armazenada diretamente
-                    </p>
-                  </div>
-
-                  {/* Image URL */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      🔗 URL da Imagem Principal
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.images[0]}
-                      onChange={(e) => handleImageUrlChange(0, e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600"
-                      placeholder="https://exemplo.com/imagem.png"
-                    />
+                    
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">
+                          Upload (Base64)
+                        </label>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageUpload}
+                          className="w-full text-sm text-[#A0A0A0] file:mr-4 file:py-2 file:px-4 file:border file:border-[#C5A059] file:text-[#C5A059] file:bg-transparent file:text-xs file:uppercase file:tracking-widest hover:file:bg-[#C5A059] hover:file:text-black transition-all cursor-pointer"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">
+                          URL da Imagem
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.images[0]}
+                          onChange={(e) => handleImageUrlChange(0, e.target.value)}
+                          className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none transition-colors"
+                          placeholder="https://..."
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
 
                 {/* Basic Info */}
-                <div className="bg-blue-50 rounded-xl p-6">
-                  <h4 className="text-lg font-bold text-blue-950 mb-4">📋 Informações Básicas</h4>
-                  <div className="grid md:grid-cols-2 gap-4">
+                <div className="space-y-6">
+                  <h4 className="text-white font-serif text-xl border-b border-white/10 pb-2">Dados Principais</h4>
+                  <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Título do Veículo *</label>
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Título *</label>
                       <input
                         type="text"
                         value={formData.title}
                         onChange={(e) => handleInputChange("title", e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
+                        className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none transition-colors"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Marca *</label>
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Marca *</label>
                       <input
                         type="text"
                         value={formData.brand}
                         onChange={(e) => handleInputChange("brand", e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
+                        className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none transition-colors"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Versão *</label>
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Versão *</label>
                       <input
                         type="text"
                         value={formData.version}
                         onChange={(e) => handleInputChange("version", e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
+                        className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none transition-colors"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Tipo *</label>
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Tipo *</label>
                       <input
                         type="text"
                         value={formData.type}
                         onChange={(e) => handleInputChange("type", e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
-                        placeholder="Ex: SUV Compacto, Hatch, Sedan"
+                        className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none transition-colors"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Ano *</label>
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Ano *</label>
                       <input
                         type="text"
                         value={formData.year}
                         onChange={(e) => handleInputChange("year", e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
+                        className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none transition-colors"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Tipo de Cliente *</label>
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Cliente *</label>
                       <select
                         value={formData.clientType}
                         onChange={(e) => handleInputChange("clientType", e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
+                        className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none transition-colors"
                       >
                         <option value="Pessoa Física">Pessoa Física</option>
                         <option value="Pessoa Jurídica">Pessoa Jurídica</option>
@@ -479,193 +477,159 @@ export const AdminVehiclesPage = () => {
                 </div>
 
                 {/* Specifications */}
-                <div className="bg-cyan-50 rounded-xl p-6">
-                  <h4 className="text-lg font-bold text-blue-950 mb-4">⚙️ Especificações</h4>
-                  <div className="grid md:grid-cols-3 gap-4">
+                <div className="space-y-6">
+                  <h4 className="text-white font-serif text-xl border-b border-white/10 pb-2">Especificações Técnicas</h4>
+                  <div className="grid md:grid-cols-3 gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Combustível</label>
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Combustível</label>
                       <input
                         type="text"
                         value={formData.fuelType}
                         onChange={(e) => handleInputChange("fuelType", e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
-                        placeholder="Ex: Flex, Gasolina"
+                        className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Transmissão</label>
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Câmbio</label>
                       <input
                         type="text"
                         value={formData.transmission}
                         onChange={(e) => handleInputChange("transmission", e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
-                        placeholder="Ex: Manual, Automático"
+                        className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Lugares</label>
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Lugares</label>
                       <input
                         type="text"
                         value={formData.seats}
                         onChange={(e) => handleInputChange("seats", e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
-                        placeholder="Ex: 5"
+                        className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Motor</label>
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Motor</label>
                       <input
                         type="text"
                         value={formData.engine}
                         onChange={(e) => handleInputChange("engine", e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
-                        placeholder="Ex: 1.0, 1.6 Turbo"
+                        className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Cor</label>
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Cor</label>
                       <input
                         type="text"
                         value={formData.color}
                         onChange={(e) => handleInputChange("color", e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
-                        placeholder="Ex: Branco, Prata"
+                        className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Portas</label>
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Portas</label>
                       <input
                         type="text"
                         value={formData.doors}
                         onChange={(e) => handleInputChange("doors", e.target.value)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
-                        placeholder="Ex: 4"
+                        className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none transition-colors"
                       />
                     </div>
                   </div>
                 </div>
 
-                {/* Prices - Assinatura */}
-                <div className="bg-blue-50 rounded-xl p-6 border-2 border-blue-200">
-                  <h4 className="text-lg font-bold text-blue-950 mb-4">💳 Assinatura</h4>
-                  <div className="grid md:grid-cols-3 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Valor Mensal *</label>
-                      <input
-                        type="text"
-                        value={formData.prices.assinatura.monthly}
-                        onChange={(e) => handleInputChange("prices", e.target.value, "assinatura", "monthly")}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
-                        placeholder="R$ 0,00"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Prazo</label>
-                      <input
-                        type="text"
-                        value={formData.prices.assinatura.term}
-                        onChange={(e) => handleInputChange("prices", e.target.value, "assinatura", "term")}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
-                        placeholder="36 meses"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Quilometragem</label>
-                      <input
-                        type="text"
-                        value={formData.prices.assinatura.mileage}
-                        onChange={(e) => handleInputChange("prices", e.target.value, "assinatura", "mileage")}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
-                        placeholder="1.000 km/mês"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Prices - Financiamento */}
-                <div className="bg-blue-900/5 rounded-xl p-6 border-2 border-blue-900/20">
-                  <h4 className="text-lg font-bold text-blue-950 mb-4">🏦 Financiamento</h4>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Valor Mensal *</label>
-                      <input
-                        type="text"
-                        value={formData.prices.financiamento.monthly}
-                        onChange={(e) => handleInputChange("prices", e.target.value, "financiamento", "monthly")}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
-                        placeholder="R$ 0,00"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Prazo</label>
-                      <input
-                        type="text"
-                        value={formData.prices.financiamento.term}
-                        onChange={(e) => handleInputChange("prices", e.target.value, "financiamento", "term")}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
-                        placeholder="60 meses"
-                      />
+                {/* Pricing */}
+                <div className="space-y-6">
+                  <h4 className="text-white font-serif text-xl border-b border-white/10 pb-2">Precificação</h4>
+                  
+                  {/* Assinatura */}
+                  <div className="bg-white/5 p-6 border border-white/10">
+                    <h5 className="text-[#C5A059] font-serif text-lg mb-4">Signature Experience (Assinatura)</h5>
+                    <div className="grid md:grid-cols-3 gap-6">
+                      <div>
+                        <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Mensalidade *</label>
+                        <input
+                          type="text"
+                          value={formData.prices.assinatura.monthly}
+                          onChange={(e) => handleInputChange("prices", e.target.value, "assinatura", "monthly")}
+                          className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none transition-colors"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Prazo</label>
+                        <input
+                          type="text"
+                          value={formData.prices.assinatura.term}
+                          onChange={(e) => handleInputChange("prices", e.target.value, "assinatura", "term")}
+                          className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none transition-colors"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Franquia</label>
+                        <input
+                          type="text"
+                          value={formData.prices.assinatura.mileage}
+                          onChange={(e) => handleInputChange("prices", e.target.value, "assinatura", "mileage")}
+                          className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none transition-colors"
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Prices - Consórcio */}
-                <div className="bg-green-50 rounded-xl p-6 border-2 border-green-200">
-                  <h4 className="text-lg font-bold text-blue-950 mb-4">🤝 Consórcio</h4>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Valor Mensal *</label>
-                      <input
-                        type="text"
-                        value={formData.prices.consorcio.monthly}
-                        onChange={(e) => handleInputChange("prices", e.target.value, "consorcio", "monthly")}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600"
-                        placeholder="R$ 0,00"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Prazo</label>
-                      <input
-                        type="text"
-                        value={formData.prices.consorcio.term}
-                        onChange={(e) => handleInputChange("prices", e.target.value, "consorcio", "term")}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600"
-                        placeholder="80 meses"
-                      />
+                  {/* Consórcio */}
+                  <div className="bg-white/5 p-6 border border-white/10">
+                    <h5 className="text-[#C5A059] font-serif text-lg mb-4">Equity Planning (Consórcio)</h5>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Mensalidade *</label>
+                        <input
+                          type="text"
+                          value={formData.prices.consorcio.monthly}
+                          onChange={(e) => handleInputChange("prices", e.target.value, "consorcio", "monthly")}
+                          className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none transition-colors"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Prazo</label>
+                        <input
+                          type="text"
+                          value={formData.prices.consorcio.term}
+                          onChange={(e) => handleInputChange("prices", e.target.value, "consorcio", "term")}
+                          className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none transition-colors"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Description */}
-                <div className="bg-gray-50 rounded-xl p-6">
-                  <h4 className="text-lg font-bold text-blue-950 mb-4">📝 Descrição</h4>
+                <div className="space-y-6">
+                  <h4 className="text-white font-serif text-xl border-b border-white/10 pb-2">Descrição Editorial</h4>
                   <textarea
                     value={formData.description}
                     onChange={(e) => handleInputChange("description", e.target.value)}
                     rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
-                    placeholder="Descrição detalhada do veículo..."
+                    className="w-full bg-black/30 border border-white/10 p-4 text-white text-sm focus:border-[#C5A059] focus:outline-none transition-colors leading-relaxed"
+                    placeholder="Texto descritivo para a página de detalhes..."
                   />
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex gap-4 pt-4">
+                <div className="flex gap-4 pt-8 border-t border-white/10">
                   <button
                     type="button"
                     onClick={handleCancel}
-                    className="flex-1 bg-gray-200 text-gray-700 font-bold py-4 rounded-lg hover:bg-gray-300 transition-colors cursor-pointer"
+                    className="flex-1 py-4 border border-white/20 text-white text-xs font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-colors duration-300"
                   >
-                    ❌ Cancelar
+                    Cancelar
                   </button>
                   <button
                     type="button"
                     onClick={handleSave}
-                    className="flex-1 bg-gradient-to-r from-green-600 to-blue-600 text-white font-bold py-4 rounded-lg shadow-lg hover:shadow-xl transition-all cursor-pointer"
+                    className="flex-1 py-4 bg-[#C5A059] text-black text-xs font-bold tracking-[0.2em] uppercase hover:bg-white transition-colors duration-300"
                   >
-                    {isCreating ? "➕ Criar Veículo" : "💾 Atualizar Online"}
+                    {isCreating ? "Cadastrar Ativo" : "Salvar Alterações"}
                   </button>
                 </div>
               </form>
@@ -674,7 +638,7 @@ export const AdminVehiclesPage = () => {
         </div>
       )}
 
-      <Footer />
+      <LuxuryFooter />
     </div>
   );
 };

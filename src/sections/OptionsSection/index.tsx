@@ -13,7 +13,7 @@ export const OptionsSection = () => {
             necessidades
           </p>
         </div>
-        <div className="box-border caret-transparent gap-x-8 grid grid-cols-none outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] gap-y-8 md:grid-cols-[repeat(3,minmax(0px,1fr))]">
+        <div className="box-border caret-transparent gap-x-8 grid grid-cols-none outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] gap-y-8 md:grid-cols-[repeat(2,minmax(0px,1fr))]">
           <OptionCard
             iconSrc="https://c.animaapp.com/mfxz26rhnSsSP4/assets/icon-6.svg"
             title="Assinatura"
@@ -27,13 +27,6 @@ export const OptionsSection = () => {
             description="Participe de um grupo e quite seu carro de forma planejada, sem juros abusivos."
             href="/consorcio"
             buttonText="Ver consórcio"
-          />
-          <OptionCard
-            iconSrc="https://c.animaapp.com/mfxz26rhnSsSP4/assets/icon-8.svg"
-            title="Financiamento"
-            description="Financie seu veículo com as melhores condições do mercado e taxas competitivas."
-            href="/financiamento"
-            buttonText="Ver financiamento"
           />
         </div>
       </div>

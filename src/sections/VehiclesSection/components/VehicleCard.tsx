@@ -134,18 +134,6 @@ export const VehicleCard = (props: VehicleCardProps) => {
             <button
               type="button"
               role="tab"
-              onClick={() => setActiveTab("Financiamento")}
-              className={`text-xs font-medium items-center caret-transparent gap-x-1.5 flex basis-[0%] grow h-[calc(100%_-_1px)] justify-center leading-4 outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] gap-y-1.5 text-nowrap border p-2 rounded-[14px] border-solid transition-all duration-200 ${
-                activeTab === "Financiamento" 
-                  ? "text-blue-900 bg-blue-900/10 border-blue-900/30 shadow-sm font-semibold" 
-                  : "text-blue-950 bg-transparent border-transparent hover:bg-blue-50"
-              }`}
-            >
-              Financiamento
-            </button>
-            <button
-              type="button"
-              role="tab"
               onClick={() => setActiveTab("Consórcio")}
               className={`text-xs font-medium items-center caret-transparent gap-x-1.5 flex basis-[0%] grow h-[calc(100%_-_1px)] justify-center leading-4 outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] gap-y-1.5 text-nowrap border p-2 rounded-[14px] border-solid transition-all duration-200 ${
                 activeTab === "Consórcio" 
@@ -157,8 +145,8 @@ export const VehicleCard = (props: VehicleCardProps) => {
             </button>
           </div>
           <div
-            role="tabpanel"
-            className="box-border caret-transparent basis-[0%] grow outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] mt-4"
+            role="tablist"
+            className="text-slate-500 items-center bg-slate-100 box-border caret-transparent grid grid-cols-[repeat(2,minmax(0px,1fr))] justify-center w-full p-1 rounded-[14px]"
           >
             <div className={`items-center box-border caret-transparent flex justify-between outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] p-3 rounded-[14px] border-2 transition-all duration-300 ${
               activeTab === "Assinatura" 

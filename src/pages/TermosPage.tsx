@@ -1,90 +1,92 @@
-import { Header } from "@/sections/Header";
-import { Footer } from "@/sections/Footer";
-import { FloatingButtons } from "@/components/FloatingButtons";
+import { LegalLayout } from "@/components/LegalLayout";
 
 export const TermosPage = () => {
+  const sections = [
+    { id: "intro", title: "1. Introdução e Aceitação" },
+    { id: "servicos", title: "2. Descrição dos Serviços" },
+    { id: "elegibilidade", title: "3. Elegibilidade e Cadastro" },
+    { id: "responsabilidades", title: "4. Responsabilidades" },
+    { id: "propriedade", title: "5. Propriedade Intelectual" },
+    { id: "limitacao", title: "6. Limitação de Responsabilidade" },
+    { id: "alteracoes", title: "7. Alterações e Vigência" },
+    { id: "foro", title: "8. Legislação e Foro" },
+  ];
+
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      
-      {/* Hero Section */}
-      <section className="bg-[linear-gradient(to_right_bottom,rgb(255,255,255)_0%,oklch(0.985_0.002_247.839)_100%)] pt-32 pb-20">
-        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-6xl font-black leading-tight mb-6">
-              Termos de <span className="text-green-600">Uso</span>
-            </h1>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-              Conheça os termos e condições para utilização dos serviços da Use Carro.
-            </p>
-          </div>
-        </div>
-      </section>
+    <LegalLayout
+      title="Compliance & Governança"
+      subtitle="Transparência e segurança jurídica garantidas pelo Grupo Nexi. Termos de Uso da Plataforma."
+      sections={sections}
+    >
+      <div id="intro" className="mb-16 scroll-mt-40">
+        <h2>1. Introdução e Aceitação</h2>
+        <p>
+          Bem-vindo à <strong>Use Carro</strong>, uma empresa do <strong>Grupo Nexi</strong>. Estes Termos de Uso regem o acesso e a utilização de nossa plataforma digital e serviços de curadoria automotiva.
+        </p>
+        <p>
+          Ao acessar ou utilizar nossos serviços, você concorda expressamente com estes termos. Nossa estrutura opera sob rigorosos padrões de compliance e governança corporativa, visando proteger os interesses de todas as partes envolvidas.
+        </p>
+      </div>
 
-      {/* Terms Content */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-6 md:px-8">
-          <div className="prose prose-lg max-w-none">
-            <h2 className="text-2xl font-bold mb-6">1. Aceitação dos Termos</h2>
-            <p className="mb-6">
-              Ao acessar e utilizar os serviços da Use Carro, você concorda em cumprir e estar vinculado aos seguintes termos e condições de uso. Se você não concordar com qualquer parte destes termos, não deve utilizar nossos serviços.
-            </p>
+      <div id="servicos" className="mb-16 scroll-mt-40">
+        <h2>2. Descrição dos Serviços</h2>
+        <p>
+          A Use Carro atua como uma boutique automotiva digital e intermediadora de negócios, oferecendo:
+        </p>
+        <ul>
+          <li><strong>Signature Experience:</strong> Gestão e intermediação de contratos de assinatura de veículos (Carro por Assinatura).</li>
+          <li><strong>Equity Planning:</strong> Consultoria em consórcios e planejamento financeiro para aquisição de ativos.</li>
+          <li><strong>Financiamento Premium:</strong> Estruturação de operações de crédito com instituições financeiras parceiras.</li>
+        </ul>
+      </div>
 
-            <h2 className="text-2xl font-bold mb-6">2. Descrição dos Serviços</h2>
-            <p className="mb-6">
-              A Use Carro oferece soluções automotivas incluindo assinatura de veículos, consórcio e financiamento. Nossos serviços são prestados através de nossa plataforma digital e parceiros credenciados.
-            </p>
+      <div id="elegibilidade" className="mb-16 scroll-mt-40">
+        <h2>3. Elegibilidade e Cadastro</h2>
+        <p>
+          Para utilizar nossos serviços, o usuário deve possuir capacidade civil plena. No caso de Pessoas Jurídicas, o representante deve ter poderes estatutários para assumir obrigações.
+        </p>
+        <p>
+          Todas as informações fornecidas durante o cadastro ou solicitação de "Concierge" devem ser precisas, verdadeiras e atuais. A Use Carro reserva-se o direito de solicitar documentação comprobatória para fins de <em>Know Your Customer</em> (KYC).
+        </p>
+      </div>
 
-            <h2 className="text-2xl font-bold mb-6">3. Elegibilidade</h2>
-            <p className="mb-6">
-              Para utilizar nossos serviços, você deve:
-            </p>
-            <ul className="list-disc pl-6 mb-6">
-              <li>Ter pelo menos 18 anos de idade</li>
-              <li>Possuir CPF válido</li>
-              <li>Fornecer informações verdadeiras e atualizadas</li>
-              <li>Ter capacidade legal para contratar</li>
-            </ul>
+      <div id="responsabilidades" className="mb-16 scroll-mt-40">
+        <h2>4. Responsabilidades</h2>
+        <p>
+          <strong>Do Usuário:</strong> Manter a confidencialidade de suas credenciais, utilizar a plataforma apenas para fins lícitos e não violar direitos de terceiros.
+        </p>
+        <p>
+          <strong>Da Use Carro:</strong> Empregar as melhores práticas de segurança da informação para proteger os dados dos usuários e garantir a disponibilidade da plataforma, ressalvadas interrupções por motivos técnicos ou de força maior.
+        </p>
+      </div>
 
-            <h2 className="text-2xl font-bold mb-6">4. Responsabilidades do Usuário</h2>
-            <p className="mb-6">
-              Você se compromete a:
-            </p>
-            <ul className="list-disc pl-6 mb-6">
-              <li>Fornecer informações precisas e atualizadas</li>
-              <li>Manter a confidencialidade de suas credenciais de acesso</li>
-              <li>Utilizar os serviços de forma legal e ética</li>
-              <li>Cumprir com todas as obrigações contratuais</li>
-            </ul>
+      <div id="propriedade" className="mb-16 scroll-mt-40">
+        <h2>5. Propriedade Intelectual</h2>
+        <p>
+          Todo o conteúdo, design, marcas, logotipos (incluindo "Use Carro" e "Grupo Nexi") e software presentes nesta plataforma são de propriedade exclusiva da Use Carro ou de seus licenciadores. É vedada a reprodução, distribuição ou modificação sem autorização prévia e expressa.
+        </p>
+      </div>
 
-            <h2 className="text-2xl font-bold mb-6">5. Propriedade Intelectual</h2>
-            <p className="mb-6">
-              Todo o conteúdo presente em nossa plataforma, incluindo textos, imagens, logotipos e software, é de propriedade da Use Carro ou de seus licenciadores e está protegido por leis de propriedade intelectual.
-            </p>
+      <div id="limitacao" className="mb-16 scroll-mt-40">
+        <h2>6. Limitação de Responsabilidade</h2>
+        <p>
+          A Use Carro atua como intermediadora e consultora. A aprovação de crédito, entrega dos veículos e serviços de manutenção (no caso de assinaturas) são de responsabilidade final das operadoras, montadoras e instituições financeiras contratadas, embora a Use Carro preste todo o suporte e <em>advocacy</em> ao cliente.
+        </p>
+      </div>
 
-            <h2 className="text-2xl font-bold mb-6">6. Limitação de Responsabilidade</h2>
-            <p className="mb-6">
-              A Use Carro não se responsabiliza por danos indiretos, incidentais ou consequenciais decorrentes do uso de nossos serviços, exceto nos casos previstos em lei.
-            </p>
+      <div id="alteracoes" className="mb-16 scroll-mt-40">
+        <h2>7. Alterações e Vigência</h2>
+        <p>
+          Estes termos podem ser atualizados periodicamente para refletir mudanças na legislação ou em nossos modelos de negócio. A versão mais recente estará sempre disponível nesta página.
+        </p>
+      </div>
 
-            <h2 className="text-2xl font-bold mb-6">7. Modificações dos Termos</h2>
-            <p className="mb-6">
-              Reservamo-nos o direito de modificar estes termos a qualquer momento. As alterações entrarão em vigor imediatamente após sua publicação em nossa plataforma.
-            </p>
-
-            <h2 className="text-2xl font-bold mb-6">8. Contato</h2>
-            <p className="mb-6">
-              Para dúvidas sobre estes termos, entre em contato conosco através do e-mail: juridico@usecarro.com.br ou telefone (12) 99109-5018.
-            </p>
-
-            <p className="text-sm text-gray-500 mt-8">
-              Última atualização: Janeiro de 2025
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <Footer />
-    </div>
+      <div id="foro" className="mb-16 scroll-mt-40">
+        <h2>8. Legislação e Foro</h2>
+        <p>
+          Estes Termos são regidos pelas leis da República Federativa do Brasil. Fica eleito o Foro da Comarca de São Paulo/SP para dirimir quaisquer controvérsias, com renúncia a qualquer outro, por mais privilegiado que seja.
+        </p>
+      </div>
+    </LegalLayout>
   );
 };

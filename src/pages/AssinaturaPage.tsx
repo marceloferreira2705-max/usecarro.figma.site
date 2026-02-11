@@ -1,138 +1,111 @@
-import { Header } from "@/sections/Header";
-import { Footer } from "@/sections/Footer";
-import { ChatSection } from "@/sections/ChatSection"; // Garante que ChatSection está importado
+import { LuxuryHeader } from "@/components/LuxuryHeader";
+import { LuxuryFooter } from "@/components/LuxuryFooter";
 
 export const AssinaturaPage = () => {
+  const handleWhatsAppClick = () => {
+    const message = encodeURIComponent("Olá, gostaria de falar com um Concierge Advisor sobre a Signature Experience.");
+    window.open(`https://api.whatsapp.com/send/?phone=5512982900169&text=${message}&type=phone_number&app_absent=0`, '_blank');
+  };
+
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
+    <div className="min-h-screen bg-luxury-black text-white font-sans selection:bg-luxury-gold selection:text-black">
+      <LuxuryHeader />
       
-      {/* Hero Section */}
-      <section className="bg-[linear-gradient(to_right_bottom,rgb(255,255,255)_0%,oklch(0.985_0.002_247.839)_100%)] pt-32 pb-20">
-        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-6xl font-black leading-tight mb-6">
-              Assinatura de <span className="text-green-600">Veículos</span>
-            </h1>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-              A forma mais inteligente de ter seu carro. Pague uma mensalidade fixa e tenha tudo incluso: seguro, manutenção, IPVA e assistência 24h.
-            </p>
+      {/* Hero Section Minimalista */}
+      <section className="pt-48 pb-24 px-6 relative overflow-hidden">
+        {/* Elemento Decorativo de Fundo */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-32 bg-gradient-to-b from-transparent to-luxury-gold/30"></div>
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10 animate-fade-in-up">
+          <span className="text-luxury-gold text-[10px] tracking-[0.4em] uppercase block mb-6">
+            Mobilidade como Serviço
+          </span>
+          <h1 className="font-serif text-4xl md:text-6xl text-white mb-8 leading-tight">
+            Signature Experience
+          </h1>
+          <p className="text-luxury-gray text-lg font-light tracking-wide max-w-2xl mx-auto leading-relaxed">
+            A liberdade de conduzir o excepcional. Posse blindada de depreciação com gestão completa de ativos.
+          </p>
+        </div>
+      </section>
+
+      {/* Service Pillars Section */}
+      <section className="pb-32 px-6 md:px-12">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            {/* Card 1: Curadoria de Frota */}
+            <div className="group bg-[#1A1A1A]/90 backdrop-blur-sm border border-white/5 hover:border-luxury-gold transition-all duration-500 p-10 flex flex-col h-full">
+              <div className="mb-8 text-luxury-gold opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+                {/* Icon: Abstract Car Silhouette */}
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="stroke-current stroke-[0.8]">
+                  <path d="M5 12H19M5 12L3 15H21L19 12M5 12V17H19V12M7 17V19M17 17V19" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M5 12L7 8H17L19 12" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              
+              <h3 className="font-serif text-2xl text-white mb-6 group-hover:text-luxury-gold transition-colors duration-500">
+                Acervo Premium
+              </h3>
+              
+              <p className="text-luxury-gray font-light text-sm leading-7 tracking-wide">
+                Atuamos como seu Concierge Pessoal, navegando entre as principais operadoras e montadoras premium do país, garantindo que você dirija adequado com as suas necessidades.
+              </p>
+            </div>
+
+            {/* Card 2: Blindagem & Segurança */}
+            <div className="group bg-[#1A1A1A]/90 backdrop-blur-sm border border-white/5 hover:border-luxury-gold transition-all duration-500 p-10 flex flex-col h-full">
+              <div className="mb-8 text-luxury-gold opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+                {/* Icon: Fine-line Shield */}
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="stroke-current stroke-[0.8]">
+                  <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              
+              <h3 className="font-serif text-2xl text-white mb-6 group-hover:text-luxury-gold transition-colors duration-500">
+                Proteção Sob Medida
+              </h3>
+              
+              <p className="text-luxury-gray font-light text-sm leading-7 tracking-wide">
+                Disponibilidade de veículos com Blindagem certificada, assegurando a integridade e tranquilidade que seu estilo de vida exige.
+              </p>
+            </div>
+
+            {/* Card 3: Consultoria Estratégica */}
+            <div className="group bg-[#1A1A1A]/90 backdrop-blur-sm border border-white/5 hover:border-luxury-gold transition-all duration-500 p-10 flex flex-col h-full relative overflow-hidden">
+              <div className="mb-8 text-luxury-gold opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+                {/* Icon: Abstract User/Advisor */}
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="stroke-current stroke-[0.8]">
+                  <circle cx="12" cy="8" r="4" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M20 21V19C20 16.7909 18.2091 15 16 15H8C5.79086 15 4 16.7909 4 19V21" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M12 11V15" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              
+              <h3 className="font-serif text-2xl text-white mb-6 group-hover:text-luxury-gold transition-colors duration-500">
+                Concierge Advisor
+              </h3>
+              
+              <p className="text-luxury-gray font-light text-sm leading-7 tracking-wide mb-8">
+                Mais que um atendimento, uma consultoria. Nosso especialista decodifica todas as vantagens tributárias, financeiras e operacionais da assinatura, provando na ponta do lápis por que este é o modelo mais inteligente para o seu perfil.
+              </p>
+
+              <div className="mt-auto">
+                <button 
+                  onClick={handleWhatsAppClick}
+                  className="text-luxury-gold text-xs tracking-[0.2em] uppercase font-bold hover:text-white transition-colors flex items-center gap-2 group-hover:translate-x-2 transition-transform duration-300"
+                >
+                  Whatsapp Concierge 
+                  <span className="text-lg leading-none">&rsaquo;</span>
+                </button>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* Section: Por que escolher a Use Carro? (3 cards) */}
-      <section className="py-20 bg-white">
-        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-            Por que escolher a Use Carro?
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white shadow-lg rounded-2xl p-8 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <span className="text-white text-2xl">🛡️</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-4">Tudo Incluso</h3>
-              <p className="text-gray-600">Seguro, manutenção, IPVA, licenciamento e assistência 24h inclusos na mensalidade.</p>
-            </div>
-            <div className="bg-white shadow-lg rounded-2xl p-8 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <span className="text-white text-2xl">🔄</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-4">Flexibilidade Total</h3>
-              <p className="text-gray-600">Troque de veículo a cada 12 meses ou cancele quando quiser, sem multas.</p>
-            </div>
-            <div className="bg-white shadow-lg rounded-2xl p-8 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <span className="text-white text-2xl">💰</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-4">Sem Entrada</h3>
-              <p className="text-gray-600">Comece a dirigir sem precisar dar entrada ou fazer grandes investimentos iniciais.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section: Benefícios da Assinatura de Carro (4 cards) */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-            Benefícios da Assinatura de Carro
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="bg-white shadow-lg rounded-2xl p-8 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <span className="text-white text-2xl">🐷</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-4">Economia</h3>
-              <p className="text-gray-600">Redução de custos com impostos, seguro e manutenção.</p>
-            </div>
-            <div className="bg-white shadow-lg rounded-2xl p-8 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <span className="text-white text-2xl">🔑</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-4">Conveniência</h3>
-              <p className="text-gray-600">Carro sempre novo, sem preocupações com desvalorização.</p>
-            </div>
-            <div className="bg-white shadow-lg rounded-2xl p-8 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <span className="text-white text-2xl">🗓️</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-4">Flexibilidade</h3>
-              <p className="text-gray-600">Planos adaptáveis às suas necessidades e tempo de uso.</p>
-            </div>
-            <div className="bg-white shadow-lg rounded-2xl p-8 text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <span className="text-white text-2xl">🔒</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-4">Segurança</h3>
-              <p className="text-gray-600">Veículos revisados e com assistência 24h.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section: Como funciona (4 etapas) */}
-      <section className="py-20 bg-white">
-        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
-            Como funciona
-          </h2>
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-white text-2xl font-bold">1</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-4">Escolha seu carro</h3>
-              <p className="text-gray-600">Selecione o modelo e o plano que mais combinam com você.</p>
-            </div>
-            <div className="text-center">
-              <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-white text-2xl font-bold">2</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-4">Personalize</h3>
-              <p className="text-gray-600">Defina a quilometragem, período e serviços adicionais.</p>
-            </div>
-            <div className="text-center">
-              <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-white text-2xl font-bold">3</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-4">Assine online</h3>
-              <p className="text-gray-600">Contrato digital, rápido e sem burocracia.</p>
-            </div>
-            <div className="text-center">
-              <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-white text-2xl font-bold">4</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-4">Retire seu carro</h3>
-              <p className="text-gray-600">Assim que seu carro estiver pronto, é só retirar e começar a aproveitar.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <ChatSection />
-      <Footer />
+      <LuxuryFooter />
     </div>
   );
 };

@@ -123,14 +123,6 @@ export const FooterLinks = () => {
           </li>
           <li className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] mb-3">
             <button
-              onClick={() => window.location.href = "/financiamento"}
-              className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] cursor-pointer hover:text-green-600"
-            >
-              Financiamento
-            </button>
-          </li>
-          <li className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] mb-3">
-            <button
               onClick={() => window.location.href = "/veiculos"}
               className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] cursor-pointer hover:text-green-600"
             >
@@ -241,10 +233,10 @@ export const FooterLinks = () => {
           </li>
           <li className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)]">
             <button
-              onClick={() => window.location.href = "/ofertas2026"}
+              onClick={() => window.location.href = "/blackfriday"}
               className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] cursor-pointer hover:text-green-600"
             >
-              Ofertas 2026
+              Black Friday
             </button>
           </li>
         </ul>

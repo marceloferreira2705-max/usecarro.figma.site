@@ -1,290 +1,81 @@
-import React, { useState } from 'react'; // Importa useState
-import { Header } from "@/sections/Header";
-import { Footer } from "@/sections/Footer";
+import { LuxuryHeader } from "@/components/LuxuryHeader";
+import { LuxuryFooter } from "@/components/LuxuryFooter";
 
 export const ContatoPage = () => {
-  const [submitted, setSubmitted] = useState(false); // Estado para controlar o envio
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-
-    try {
-      const response = await fetch(form.action, {
-        method: form.method,
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-
-      if (response.ok) {
-        setSubmitted(true); // Define o estado de sucesso
-        form.reset(); // Limpa o formulário
-      } else {
-        const data = await response.json();
-        if (data.errors) {
-          alert(data.errors.map((error: any) => error.message).join(", "));
-        } else {
-          alert("Ocorreu um erro ao enviar o formulário.");
-        }
-      }
-    } catch (error) {
-      alert("Ocorreu um erro de rede ao enviar o formulário.");
-      console.error("Erro de envio:", error);
-    }
+  const handleWhatsAppClick = () => {
+    window.open("https://api.whatsapp.com/send/?phone=5512982900169&text=Ol%C3%A1%2C+gostaria+de+falar+com+um+Advisor+Dedicado.&type=phone_number&app_absent=0", "_blank");
   };
 
-  if (submitted) {
-    return (
-      <div className="min-h-screen bg-white flex flex-col">
-        <Header />
-        <div className="flex-1 flex items-center justify-center p-6 text-center">
-          <div>
-            <h1 className="text-4xl font-bold text-green-600 mb-4">Sua Solicitação Chegou ao Use Carro! 🥳</h1>
-            <p className="text-gray-700 text-lg mb-6">
-              Olá!
-              <br /><br />
-              Obrigado pelo seu interesse! Recebemos seu pedido de informações e nossos especialistas (os "caçadores de detalhes automotivos") já estão analisando tudo com carinho. 🔎
-              <br /><br />
-              Enquanto preparamos a resposta perfeita, que tal continuar a navegar? O próximo carro dos seus sonhos pode estar a um clique de distância! 😉
-              <br /><br />
-              Voltamos em breve!
-              <br /><br />
-              Equipe Use Carro 🚗💨
+  return (
+    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-[#C5A059] selection:text-black">
+      <LuxuryHeader />
+      
+      <main className="pt-40 pb-24 px-6 flex flex-col items-center justify-center min-h-[80vh]">
+        
+        {/* Header */}
+        <div className="text-center mb-16 animate-fade-in-up">
+          <span className="text-[#C5A059] text-[10px] tracking-[0.4em] uppercase block mb-6">
+            Exclusive Access
+          </span>
+          <h1 className="font-serif text-5xl md:text-7xl text-white mb-6 leading-tight">
+            Atendimento Private
+          </h1>
+          <p className="text-[#A0A0A0] text-lg font-light tracking-wide max-w-xl mx-auto">
+            Um canal direto e blindado para clientes que valorizam discrição e eficiência.
+          </p>
+        </div>
+
+        {/* The Gold Card */}
+        <div className="relative group animate-fade-in-up" style={{ animationDelay: '200ms' }}>
+          {/* Glow Effect */}
+          <div className="absolute -inset-1 bg-gradient-to-r from-[#C5A059]/20 to-[#8A7038]/20 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+          
+          <div className="relative bg-[#111111] border border-[#C5A059] p-12 md:p-16 text-center max-w-md mx-auto rounded-sm">
+            <div className="mb-8 flex justify-center">
+              {/* Monochrome Gold WhatsApp Icon */}
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-[#C5A059]">
+                <path d="M17.472 14.382C17.175 14.233 15.714 13.515 15.442 13.415C15.169 13.316 14.971 13.267 14.772 13.565C14.575 13.862 14.005 14.531 13.832 14.729C13.659 14.928 13.485 14.952 13.188 14.804C12.891 14.654 11.933 14.341 10.798 13.329C9.915 12.541 9.318 11.568 9.145 11.27C8.972 10.973 9.127 10.812 9.275 10.664C9.409 10.531 9.573 10.317 9.721 10.144C9.87 9.97 9.919 9.846 10.019 9.647C10.118 9.449 10.069 9.276 9.994 9.127C9.919 8.978 9.325 7.515 9.078 6.92C8.836 6.341 8.591 6.42 8.409 6.412C8.236 6.404 8.038 6.402 7.839 6.402C7.641 6.402 7.319 6.476 7.047 6.774C6.775 7.071 6.007 7.79 6.007 9.253C6.007 10.715 7.072 12.128 7.22 12.327C7.369 12.525 9.316 15.527 12.297 16.814C13.006 17.12 13.559 17.303 13.991 17.439C14.703 17.666 15.351 17.634 15.862 17.557C16.433 17.472 17.62 16.838 17.868 16.144C18.116 15.45 18.116 14.855 18.041 14.731C17.967 14.607 17.769 14.533 17.472 14.382Z" fill="currentColor"/>
+                <path fillRule="evenodd" clipRule="evenodd" d="M12.05 0C5.495 0 0.16 5.335 0.157 11.892C0.157 13.988 0.704 16.034 1.745 17.837L0.057 24L6.362 22.346C8.087 23.285 10.046 23.78 12.055 23.78H12.06C18.609 23.78 23.945 18.445 23.948 11.887C23.948 8.712 22.713 5.725 20.468 3.477C18.222 1.228 15.238 0 12.05 0ZM12.055 21.797C10.27 21.797 8.522 21.318 7.012 20.422L6.651 20.208L2.91 21.19L3.908 17.542L3.673 17.168C2.71 15.64 2.203 13.86 2.203 12.03C2.203 6.58 6.638 2.145 12.09 2.145C14.73 2.145 17.192 3.175 19.058 5.043C20.923 6.911 21.95 9.392 21.947 12.033C21.944 17.483 17.509 21.797 12.055 21.797Z" fill="currentColor"/>
+              </svg>
+            </div>
+            
+            <h2 className="font-serif text-3xl text-white mb-4">Advisor Dedicado</h2>
+            <p className="text-[#A0A0A0] font-light text-sm mb-10 leading-relaxed">
+              Conecte-se instantaneamente com nossa equipe sênior para uma consultoria personalizada.
             </p>
-            <button
-              onClick={() => setSubmitted(false)} // Permite enviar novamente
-              className="bg-gradient-to-r from-green-600 to-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer text-sm"
+
+            <button 
+              onClick={handleWhatsAppClick}
+              className="w-full py-4 bg-[#C5A059] text-black text-xs font-bold tracking-[0.2em] uppercase hover:bg-white transition-colors duration-300"
             >
-              Enviar Nova Mensagem
+              Iniciar Conversa Blindada
             </button>
           </div>
         </div>
-        <Footer />
-      </div>
-    );
-  }
 
-  return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      
-      {/* Hero Section */}
-      <section className="bg-[linear-gradient(to_right_bottom,rgb(255,255,255)_0%,oklch(0.985_0.002_247.839)_100%)] pt-32 pb-20">
-        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-6xl font-black leading-tight mb-6">
-              Entre em <span className="text-green-600">Contato</span>
-            </h1>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-              Estamos aqui para ajudar você a encontrar a melhor solução automotiva. Fale conosco através dos canais abaixo.
-            </p>
-          </div>
+        {/* Corporate Details */}
+        <div className="mt-20 text-center animate-fade-in-up" style={{ animationDelay: '400ms' }}>
+          <div className="w-12 h-[1px] bg-[#C5A059] mx-auto mb-8 opacity-50"></div>
+          
+          <p className="text-white font-serif text-lg mb-4">
+            São Paulo | Rio de Janeiro | Vale do Paraíba
+          </p>
+          
+          <p className="text-[#8C8C8C] font-light text-sm tracking-wide mb-2">
+            Av. Nove de Julho, nº 95 - Sala 21, Vila Adyana
+          </p>
+          <p className="text-[#8C8C8C] font-light text-sm tracking-wide mb-6">
+            São José dos Campos - SP
+          </p>
+          
+          <a href="mailto:concierge@usecarro.com.br" className="text-[#C5A059] hover:text-white transition-colors text-sm tracking-widest uppercase border-b border-[#C5A059]/30 pb-1">
+            concierge@usecarro.com.br
+          </a>
         </div>
-      </section>
 
-      {/* Contact Info & Form */}
-      <section className="py-20 bg-white">
-        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
-          <div className="grid lg:grid-cols-2 gap-16">
-            {/* Contact Information */}
-            <div>
-              <h2 className="text-3xl font-bold mb-8">Fale Conosco</h2>
-              
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <span className="text-white text-xl">📞</span>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold mb-2">Telefone</h3>
-                    <p className="text-gray-600">(12) 99109-5018</p>
-                    <p className="text-sm text-gray-500">Segunda a Sexta: 8h às 18h</p>
-                  </div>
-                </div>
+      </main>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <span className="text-white text-xl">📧</span>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold mb-2">E-mail</h3>
-                    <p className="text-gray-600">vendas@usecarro.com.br</p>
-                    <p className="text-sm text-gray-500">Resposta em até 24h</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <span className="text-white text-xl">📍</span>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold mb-2">Endereço</h3>
-                    <p className="text-gray-600">
-                      Av. Nove de Julho, nº 95 - Sala 21<br />
-                      Vila Adyana, São José dos Campos - SP<br />
-                      CEP: 12243-000
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <span className="text-white text-xl">💬</span>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold mb-2">WhatsApp</h3>
-                    <a 
-                      href="https://api.whatsapp.com/send/?phone=5512982900169&text=Quero+saber+mais+sobre+as+condicoes+da+UseCarro&type=phone_number&app_absent=0" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-gray-600 hover:text-green-700 transition-colors"
-                    >
-                      (12) 99109-5018
-                    </a>
-                    <p className="text-sm text-gray-500">Atendimento rápido via WhatsApp</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Social Media */}
-              <div className="mt-8">
-                <h3 className="text-lg font-semibold mb-4">Redes Sociais</h3>
-                <div className="flex space-x-4">
-                  <a href="#" className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                    <span className="text-white">📘</span>
-                  </a>
-                  <a href="#" className="w-10 h-10 bg-pink-600 rounded-lg flex items-center justify-center">
-                    <span className="text-white">📷</span>
-                  </a>
-                  <a href="#" className="w-10 h-10 bg-blue-400 rounded-lg flex items-center justify-center">
-                    <span className="text-white">🐦</span>
-                  </a>
-                  <a href="#" className="w-10 h-10 bg-blue-700 rounded-lg flex items-center justify-center">
-                    <span className="text-white">💼</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Contact Form */}
-            <div className="bg-gray-50 rounded-2xl p-8">
-              <h2 className="text-2xl font-bold mb-6">Envie sua Mensagem</h2>
-              
-              <form onSubmit={handleSubmit} action="https://formspree.io/f/xgvndwrv" method="POST" className="space-y-6">
-                <input type="hidden" name="_subject" value="Nova Mensagem - Use Carro (Contato)" />
-                <input type="hidden" name="_next" value="/formulario-enviado" />
-                <input type="hidden" name="_gotcha" style={{display: 'none'}} /> {/* Campo honeypot para spam */}
-                <input type="hidden" name="Tipo de Manifestacao" value="Solicitação de Informação" /> {/* Campo oculto */}
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Nome Completo
-                    </label>
-                    <input
-                      type="text"
-                      name="Nome Completo"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                      placeholder="Seu nome completo"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      E-mail
-                    </label>
-                    <input
-                      type="email"
-                      name="Email"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                      placeholder="seu@email.com"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Telefone
-                    </label>
-                    <input
-                      type="tel"
-                      name="Telefone"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                      placeholder="(12) 99109-5018"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Assunto
-                    </label>
-                    <select 
-                      name="Assunto"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                      required
-                    >
-                      <option value="">Selecione um assunto</option>
-                      <option value="Assinatura de Veiculos">Assinatura de Veículos</option>
-                      <option value="Consorcio">Consórcio</option>
-                      <option value="Financiamento">Financiamento</option>
-                      <option value="Duvidas Gerais">Dúvidas Gerais</option>
-                      <option value="Suporte">Suporte</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Mensagem
-                  </label>
-                  <textarea
-                    rows={6}
-                    name="Mensagem"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-600 focus:border-transparent"
-                    placeholder="Descreva como podemos ajudar você..."
-                    required
-                  ></textarea>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white font-semibold py-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer"
-                >
-                  Enviar Mensagem
-                </button>
-
-                <p className="text-sm text-gray-500 text-center">
-                  Ao enviar, você concorda com nossa política de privacidade
-                </p>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Map Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-screen-xl mx-auto px-6 md:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">Nossa Localização</h2>
-          <div className="bg-gray-300 rounded-2xl h-96 flex items-center justify-center">
-            <div className="text-center">
-              <div className="text-6xl mb-4">🗺️</div>
-              <p className="text-gray-600">Mapa interativo em breve</p>
-              <p className="text-sm text-gray-500 mt-2">
-                Av. Nove de Julho, nº 95 - Sala 21<br />
-                Vila Adyana, São José dos Campos - SP
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <Footer />
+      <LuxuryFooter />
     </div>
   );
 };

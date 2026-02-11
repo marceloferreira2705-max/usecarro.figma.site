@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { App } from './App';
 import { AssinaturaPage } from './pages/AssinaturaPage';
 import { ConsorcioPage } from './pages/ConsorcioPage';
-import { FinanciamentoPage } from './pages/FinanciamentoPage';
 import { VeiculosPage } from './pages/VeiculosPage';
 import { SobrePage } from './pages/SobrePage';
 import { ContatoPage } from './pages/ContatoPage';
@@ -24,7 +23,6 @@ export const AppRouter = () => {
         <Route path="/" element={<App />} />
         <Route path="/assinatura" element={<AssinaturaPage />} />
         <Route path="/consorcio" element={<ConsorcioPage />} />
-        <Route path="/financiamento" element={<FinanciamentoPage />} />
         <Route path="/veiculos" element={<VeiculosPage />} />
         <Route path="/veiculo/:id/:name?" element={<VehicleDetailPage />} />
         <Route path="/sobre" element={<SobrePage />} />
@@ -36,7 +34,7 @@ export const AppRouter = () => {
         <Route path="/ouvidoria" element={<OuvidoriaPage />} />
         <Route path="/blackfriday" element={<Ofertas2026Page />} />
         <Route path="/ofertas2026" element={<Ofertas2026Page />} />
-        <Route path="/admin-xk9p2m7q" element={<AdminVehiclesPage />} />
+        <Route path="/admin-portal-nexi" element={<AdminVehiclesPage />} />
         <Route path="/especialista" element={<EspecialistaPage />} />
         <Route path="/formulario-enviado" element={<FormularioEnviadoPage />} />
       </Routes>
