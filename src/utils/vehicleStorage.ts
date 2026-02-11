@@ -1,8 +1,26 @@
 import { vehiclesData, VehicleData } from "@/data/vehiclesData";
 
-// Alterei a chave para forçar o reset e limpar o erro de armazenamento cheio
-const STORAGE_KEY = "useCarroVehicles_v2026_Clean";
-const UPDATE_DATE_KEY = "vehicleUpdateDates_v2026_Clean";
+// Chave de armazenamento
+const STORAGE_KEY = "useCarroVehicles_v2026_Optimized";
+const UPDATE_DATE_KEY = "vehicleUpdateDates_v2026_Optimized";
+
+// Função auxiliar para calcular o tamanho em KB
+const getSizeInKB = (str: string) => {
+  return (new Blob([str]).size / 1024).toFixed(2);
+};
+
+export const getStorageUsage = () => {
+  try {
+    let total = 0;
+    for (const x in localStorage) {
+      if (!localStorage.hasOwnProperty(x)) continue;
+      total += (localStorage[x].length * 2) / 1024 / 1024;
+    }
+    return total.toFixed(2); // Retorna em MB
+  } catch {
+    return "0";
+  }
+};
 
 export const getVehicles = (): Record<string, VehicleData> => {
   try {
@@ -13,24 +31,29 @@ export const getVehicles = (): Record<string, VehicleData> => {
   } catch (error) {
     console.error("Erro ao carregar veículos do storage:", error);
   }
-  // Retorna os dados padrão (apenas 32, 46, 47, 48) se não houver nada salvo na nova chave
+  // Retorna os dados padrão se não houver nada salvo
   return vehiclesData;
 };
 
 export const saveVehicles = (vehicles: Record<string, VehicleData>) => {
   try {
     const serialized = JSON.stringify(vehicles);
+    const sizeMB = (new Blob([serialized]).size / 1024 / 1024);
+    
+    console.log(`Tentando salvar ${sizeMB.toFixed(2)} MB de dados...`);
+
+    if (sizeMB > 4.5) {
+      throw new Error("O tamanho dos dados excede o limite do navegador (5MB). Tente excluir alguns veículos ou usar imagens menores.");
+    }
+
     localStorage.setItem(STORAGE_KEY, serialized);
-    // Dispara um evento para que outros componentes saibam que os dados mudaram
     window.dispatchEvent(new Event("vehiclesUpdated"));
     return true;
-  } catch (error) {
+  } catch (error: any) {
     console.error("Erro ao salvar veículos:", error);
-    // Se for erro de cota (armazenamento cheio)
-    if (error instanceof DOMException && 
-        (error.name === 'QuotaExceededError' || 
-         error.name === 'NS_ERROR_DOM_QUOTA_REACHED')) {
-      throw new Error("Armazenamento cheio! Imagens muito grandes. Tente usar URLs externas ou imagens menores.");
+    
+    if (error.name === 'QuotaExceededError' || error.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
+      throw new Error("Armazenamento cheio! As imagens são muito pesadas. O sistema tentará comprimi-las automaticamente na próxima vez.");
     }
     throw error;
   }
