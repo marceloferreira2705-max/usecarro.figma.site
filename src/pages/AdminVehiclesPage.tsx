@@ -71,8 +71,7 @@ export const AdminVehiclesPage = () => {
       year: "2026",
       prices: {
         assinatura: { monthly: "R$ 0,00", term: "36 meses", mileage: "1.000 km/mês", details: [] },
-        financiamento: { monthly: "R$ 0,00", term: "60 meses", details: [] },
-        consorcio: { monthly: "R$ 0,00", term: "80 meses", details: [] }
+        consorcio: { monthly: "R$ 0,00", term: "80 meses", credit: "R$ 0,00", details: [] }
       },
       images: ["https://via.placeholder.com/600x400?text=Sem+Imagem"],
       description: ""
@@ -139,7 +138,7 @@ export const AdminVehiclesPage = () => {
         img.src = event.target?.result as string;
         img.onload = () => {
           const canvas = document.createElement('canvas');
-          const MAX_WIDTH = 600; // Reduzido para economizar espaço
+          const MAX_WIDTH = 800; // Aumentado um pouco para melhor qualidade
           const scaleSize = MAX_WIDTH / img.width;
           const width = Math.min(MAX_WIDTH, img.width);
           const height = img.height * (width / img.width);
@@ -150,8 +149,8 @@ export const AdminVehiclesPage = () => {
           const ctx = canvas.getContext('2d');
           ctx?.drawImage(img, 0, 0, width, height);
           
-          // Comprime para JPEG com qualidade 0.5 (50%)
-          const compressedBase64 = canvas.toDataURL('image/jpeg', 0.5);
+          // Comprime para JPEG com qualidade 0.6 (60%)
+          const compressedBase64 = canvas.toDataURL('image/jpeg', 0.6);
           resolve(compressedBase64);
         };
         img.onerror = (error) => reject(error);
@@ -377,27 +376,27 @@ export const AdminVehiclesPage = () => {
                   <h4 className="text-white font-serif text-xl border-b border-white/10 pb-2">Dados Principais</h4>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Título *</label>
-                      <input type="text" value={formData.title} onChange={(e) => handleInputChange("title", e.target.value)} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" required />
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Título do Anúncio *</label>
+                      <input type="text" value={formData.title} onChange={(e) => handleInputChange("title", e.target.value)} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" required placeholder="Ex: Volvo XC60 T8 Ultimate" />
                     </div>
                     <div>
                       <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Marca *</label>
-                      <input type="text" value={formData.brand} onChange={(e) => handleInputChange("brand", e.target.value)} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" required />
+                      <input type="text" value={formData.brand} onChange={(e) => handleInputChange("brand", e.target.value)} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" required placeholder="Ex: Volvo" />
                     </div>
                     <div>
                       <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Versão *</label>
-                      <input type="text" value={formData.version} onChange={(e) => handleInputChange("version", e.target.value)} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" required />
+                      <input type="text" value={formData.version} onChange={(e) => handleInputChange("version", e.target.value)} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" required placeholder="Ex: T8 Ultimate Dark" />
                     </div>
                     <div>
-                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Tipo *</label>
-                      <input type="text" value={formData.type} onChange={(e) => handleInputChange("type", e.target.value)} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" required />
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Tipo (Categoria) *</label>
+                      <input type="text" value={formData.type} onChange={(e) => handleInputChange("type", e.target.value)} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" required placeholder="Ex: SUV Híbrido" />
                     </div>
                     <div>
-                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Ano *</label>
-                      <input type="text" value={formData.year} onChange={(e) => handleInputChange("year", e.target.value)} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" required />
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Ano Modelo *</label>
+                      <input type="text" value={formData.year} onChange={(e) => handleInputChange("year", e.target.value)} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" required placeholder="Ex: 2026" />
                     </div>
                     <div>
-                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Cliente *</label>
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Tipo de Cliente *</label>
                       <select value={formData.clientType} onChange={(e) => handleInputChange("clientType", e.target.value)} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded">
                         <option value="Pessoa Física">Pessoa Física</option>
                         <option value="Pessoa Jurídica">Pessoa Jurídica</option>
@@ -407,43 +406,85 @@ export const AdminVehiclesPage = () => {
                 </div>
 
                 <div className="space-y-6">
-                  <h4 className="text-white font-serif text-xl border-b border-white/10 pb-2">Descrição</h4>
+                  <h4 className="text-white font-serif text-xl border-b border-white/10 pb-2">Especificações Técnicas</h4>
+                  <div className="grid md:grid-cols-3 gap-6">
+                    <div>
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Combustível</label>
+                      <input type="text" value={formData.fuelType} onChange={(e) => handleInputChange("fuelType", e.target.value)} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" placeholder="Ex: Híbrido Plug-in" />
+                    </div>
+                    <div>
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Transmissão (Câmbio)</label>
+                      <input type="text" value={formData.transmission} onChange={(e) => handleInputChange("transmission", e.target.value)} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" placeholder="Ex: Automático 8 marchas" />
+                    </div>
+                    <div>
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Motorização</label>
+                      <input type="text" value={formData.engine} onChange={(e) => handleInputChange("engine", e.target.value)} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" placeholder="Ex: 2.0 Turbo + Elétrico" />
+                    </div>
+                    <div>
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Cor</label>
+                      <input type="text" value={formData.color} onChange={(e) => handleInputChange("color", e.target.value)} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" placeholder="Ex: Crystal White" />
+                    </div>
+                    <div>
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Portas</label>
+                      <input type="text" value={formData.doors} onChange={(e) => handleInputChange("doors", e.target.value)} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" placeholder="Ex: 4" />
+                    </div>
+                    <div>
+                      <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Lugares</label>
+                      <input type="text" value={formData.seats} onChange={(e) => handleInputChange("seats", e.target.value)} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" placeholder="Ex: 5" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-6">
+                  <h4 className="text-white font-serif text-xl border-b border-white/10 pb-2">Descrição Detalhada</h4>
                   <div>
                     <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Sobre o Veículo</label>
                     <textarea 
                       value={formData.description} 
                       onChange={(e) => handleInputChange("description", e.target.value)} 
                       className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded h-32 resize-y" 
-                      placeholder="Descreva os detalhes, diferenciais e equipamentos do veículo..."
+                      placeholder="Descreva os detalhes, diferenciais, equipamentos de série e destaques do veículo..."
                     />
                   </div>
                 </div>
 
                 <div className="space-y-6">
                   <h4 className="text-white font-serif text-xl border-b border-white/10 pb-2">Precificação</h4>
+                  
+                  {/* Assinatura */}
                   <div className="bg-white/5 p-6 border border-white/10 rounded">
                     <h5 className="text-[#C5A059] font-serif text-lg mb-4">Signature Experience (Assinatura)</h5>
                     <div className="grid md:grid-cols-3 gap-6">
                       <div>
                         <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Mensalidade *</label>
-                        <input type="text" value={formData.prices.assinatura.monthly} onChange={(e) => handleInputChange("prices", e.target.value, "assinatura", "monthly")} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" required />
+                        <input type="text" value={formData.prices.assinatura.monthly} onChange={(e) => handleInputChange("prices", e.target.value, "assinatura", "monthly")} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" required placeholder="Ex: R$ 12.900,00" />
                       </div>
                       <div>
                         <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Prazo</label>
-                        <input type="text" value={formData.prices.assinatura.term} onChange={(e) => handleInputChange("prices", e.target.value, "assinatura", "term")} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" />
+                        <input type="text" value={formData.prices.assinatura.term} onChange={(e) => handleInputChange("prices", e.target.value, "assinatura", "term")} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" placeholder="Ex: 24 meses" />
+                      </div>
+                      <div>
+                        <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Franquia KM</label>
+                        <input type="text" value={formData.prices.assinatura.mileage} onChange={(e) => handleInputChange("prices", e.target.value, "assinatura", "mileage")} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" placeholder="Ex: 1.000 km/mês" />
                       </div>
                     </div>
                   </div>
+
+                  {/* Consórcio */}
                   <div className="bg-white/5 p-6 border border-white/10 rounded">
                     <h5 className="text-[#C5A059] font-serif text-lg mb-4">Equity Planning (Consórcio)</h5>
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid md:grid-cols-3 gap-6">
                       <div>
                         <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Mensalidade *</label>
-                        <input type="text" value={formData.prices.consorcio.monthly} onChange={(e) => handleInputChange("prices", e.target.value, "consorcio", "monthly")} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" required />
+                        <input type="text" value={formData.prices.consorcio.monthly} onChange={(e) => handleInputChange("prices", e.target.value, "consorcio", "monthly")} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" required placeholder="Ex: R$ 3.500,00" />
                       </div>
                       <div>
                         <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Prazo</label>
-                        <input type="text" value={formData.prices.consorcio.term} onChange={(e) => handleInputChange("prices", e.target.value, "consorcio", "term")} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" />
+                        <input type="text" value={formData.prices.consorcio.term} onChange={(e) => handleInputChange("prices", e.target.value, "consorcio", "term")} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" placeholder="Ex: 80 meses" />
+                      </div>
+                      <div>
+                        <label className="block text-[#A0A0A0] text-xs uppercase tracking-widest mb-2">Crédito Estimado (Carta)</label>
+                        <input type="text" value={formData.prices.consorcio.credit || ""} onChange={(e) => handleInputChange("prices", e.target.value, "consorcio", "credit")} className="w-full bg-black/30 border border-white/10 p-3 text-white text-sm focus:border-[#C5A059] focus:outline-none rounded" placeholder="Ex: R$ 450.000,00" />
                       </div>
                     </div>
                   </div>

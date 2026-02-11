@@ -19,14 +19,10 @@ export type VehicleData = {
       mileage: string;
       details: string[];
     };
-    financiamento: {
-      monthly: string;
-      term: string;
-      details: string[];
-    };
     consorcio: {
       monthly: string;
       term: string;
+      credit: string; // Novo campo para Crédito Estimado
       details: string[];
     };
   };
@@ -35,144 +31,66 @@ export type VehicleData = {
 };
 
 export const vehiclesData: Record<string, VehicleData> = {
-  "32": {
-    id: "32",
-    title: "RAM Rampage Rebel 2.2 TB CD 4X4 Diesel Aut",
-    brand: "RAM",
-    version: "RAMPAGE REBEL 2.2 TB CD 4X4 DIESEL AUT",
-    type: "Picape Média",
-    clientType: "Pessoa Jurídica",
-    fuelType: "Diesel",
-    transmission: "Automático",
-    seats: "5",
-    engine: "2.2 Diesel",
-    color: "Diversas",
-    doors: "4",
-    year: "2025",
-    prices: {
-      assinatura: {
-        monthly: "R$ 5.369,00",
-        term: "18 meses",
-        mileage: "1.000 km/mês",
-        details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
-      },
-      financiamento: {
-        monthly: "R$ 4.687,50",
-        term: "60 meses",
-        details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
-      },
-      consorcio: {
-        monthly: "R$ 1.560,00",
-        term: "80 meses",
-        details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
-      }
-    },
-    images: ["https://c.animaapp.com/mfxz26rhnSsSP4/img/rambig.webp"],
-    description: "Picape média com motor diesel potente e design imponente."
-  },
-  "46": {
-    id: "46",
-    title: "VW Tera Comfort 1.0 TSI AT PJ",
-    brand: "VW",
-    version: "TERA COMFORT 1.0 TSI AT",
-    type: "SUV Compacto",
-    clientType: "Pessoa Jurídica",
-    fuelType: "Flex",
-    transmission: "Automático",
-    seats: "5",
-    engine: "1.0 TSI",
-    color: "Diversas",
-    doors: "4",
-    year: "2025",
-    prices: {
-      assinatura: {
-        monthly: "R$ 2.384,99",
-        term: "36 meses",
-        mileage: "1.000 km/mês",
-        details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
-      },
-      financiamento: {
-        monthly: "R$ 2.861,99",
-        term: "60 meses",
-        details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
-      },
-      consorcio: {
-        monthly: "R$ 1.907,99",
-        term: "120 meses",
-        details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
-      }
-    },
-    images: ["https://c.animaapp.com/mfxz26rhnSsSP4/img/tera.png"],
-    description: "Versão PJ do Tera Comfort, SUV moderno para frotas empresariais."
-  },
-  "47": {
-    id: "47",
-    title: "Novo Veículo 47 (Editar)",
-    brand: "Marca",
-    version: "VERSÃO DO VEÍCULO",
-    type: "Categoria",
+  "998": {
+    id: "998",
+    title: "Volvo XC60 T8 Ultimate Dark",
+    brand: "Volvo",
+    version: "XC60 T8 ULTIMATE DARK",
+    type: "SUV Híbrido",
     clientType: "Pessoa Física",
-    fuelType: "Flex",
-    transmission: "Automático",
+    fuelType: "Híbrido Plug-in",
+    transmission: "Automático 8 marchas",
     seats: "5",
-    engine: "1.0",
-    color: "Cor",
+    engine: "2.0 Turbo + Elétrico (462cv)",
+    color: "Crystal White",
     doors: "4",
     year: "2026",
     prices: {
       assinatura: {
-        monthly: "R$ 0,00",
-        term: "36 meses",
+        monthly: "R$ 14.900,00",
+        term: "24 meses",
         mileage: "1.000 km/mês",
-        details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
-      },
-      financiamento: {
-        monthly: "R$ 0,00",
-        term: "60 meses",
-        details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
+        details: ["Blindagem Nível III-A", "IPVA e Licenciamento", "Seguro Total", "Manutenção Preventiva"]
       },
       consorcio: {
-        monthly: "R$ 0,00",
+        monthly: "R$ 4.200,00",
         term: "80 meses",
-        details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
+        credit: "R$ 450.000,00",
+        details: ["Taxa Adm. Reduzida", "Sem Juros", "Lance Embutido"]
       }
     },
-    images: ["https://via.placeholder.com/600x400?text=Veiculo+47"],
-    description: "Descrição do veículo 47. Edite este veículo no painel administrativo."
+    images: ["https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=2070&auto=format&fit=crop"],
+    description: "O Volvo XC60 T8 Ultimate Dark é a expressão máxima do luxo escandinavo. Com motorização híbrida plug-in de 462cv, oferece performance esportiva com eficiência energética. Acabamento interno em couro Nappa, sistema de som Harman Kardon e teto solar panorâmico completam a experiência. Veículo blindado nível III-A com vidros AGP B33."
   },
-  "48": {
-    id: "48",
-    title: "Novo Veículo 48 (Editar)",
-    brand: "Marca",
-    version: "VERSÃO DO VEÍCULO",
-    type: "Categoria",
+  "999": {
+    id: "999",
+    title: "Veículo Teste Incompleto",
+    brand: "Marca Genérica",
+    version: "VERSÃO BASE",
+    type: "Sedan",
     clientType: "Pessoa Física",
-    fuelType: "Flex",
-    transmission: "Automático",
-    seats: "5",
-    engine: "1.0",
-    color: "Cor",
-    doors: "4",
+    fuelType: "",
+    transmission: "",
+    seats: "",
+    engine: "",
+    color: "",
+    doors: "",
     year: "2026",
     prices: {
       assinatura: {
-        monthly: "R$ 0,00",
-        term: "36 meses",
-        mileage: "1.000 km/mês",
-        details: ["Seguro incluso", "Manutenção inclusa", "IPVA incluso", "Assistência 24h"]
-      },
-      financiamento: {
-        monthly: "R$ 0,00",
-        term: "60 meses",
-        details: ["Taxas competitivas", "Aprovação rápida", "Processo 100% digital"]
+        monthly: "R$ 5.000,00",
+        term: "12 meses",
+        mileage: "",
+        details: []
       },
       consorcio: {
         monthly: "R$ 0,00",
-        term: "80 meses",
-        details: ["Sem juros", "Planejamento financeiro", "Flexibilidade de escolha"]
+        term: "",
+        credit: "R$ 0,00",
+        details: []
       }
     },
-    images: ["https://via.placeholder.com/600x400?text=Veiculo+48"],
-    description: "Descrição do veículo 48. Edite este veículo no painel administrativo."
+    images: ["https://via.placeholder.com/600x400?text=Teste+Incompleto"],
+    description: ""
   }
 };

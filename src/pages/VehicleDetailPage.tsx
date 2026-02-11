@@ -105,29 +105,7 @@ export const VehicleDetailPage = () => {
   // Safe access to prices
   const assinaturaPrice = vehicle.prices?.assinatura?.monthly || "Sob Consulta";
   const consorcioPrice = vehicle.prices?.consorcio?.monthly || "Sob Consulta";
-  const consorcioTermStr = vehicle.prices?.consorcio?.term || "80 meses";
-  
-  // Calculate estimated credit safely
-  let estimatedCreditValue = "Sob Consulta";
-  try {
-    if (consorcioPrice && consorcioPrice !== "Sob Consulta" && consorcioPrice !== "R$ 0,00") {
-      // Remove R$, pontos e troca vírgula por ponto
-      const cleanPrice = consorcioPrice.replace(/[^\d,]/g, '').replace(',', '.');
-      const numericPrice = parseFloat(cleanPrice);
-      
-      const cleanTerm = consorcioTermStr.replace(/\D/g, '');
-      const numericTerm = parseInt(cleanTerm) || 80;
-      
-      if (!isNaN(numericPrice) && !isNaN(numericTerm) && numericPrice > 0) {
-        // Estimativa: (Parcela * Prazo) * 0.85 (fator de correção aproximado para taxa adm)
-        const totalValue = numericPrice * numericTerm * 0.85;
-        estimatedCreditValue = totalValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-      }
-    }
-  } catch (e) {
-    console.error("Erro ao calcular crédito estimado", e);
-    estimatedCreditValue = "Sob Consulta";
-  }
+  const estimatedCreditValue = vehicle.prices?.consorcio?.credit || "Sob Consulta";
 
   return (
     <div className="min-h-screen bg-luxury-black text-white font-sans selection:bg-luxury-gold selection:text-black pb-40">

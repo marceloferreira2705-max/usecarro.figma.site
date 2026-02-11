@@ -31,9 +31,6 @@ export const VehicleCard = (props: VehicleCardProps) => {
       case "Assinatura":
         priceInfo = vehicleData.prices.assinatura;
         break;
-      case "Financiamento":
-        priceInfo = vehicleData.prices.financiamento;
-        break;
       case "Consórcio":
         priceInfo = vehicleData.prices.consorcio;
         break;
@@ -117,7 +114,7 @@ export const VehicleCard = (props: VehicleCardProps) => {
         <div className="box-border caret-transparent gap-x-2 flex flex-col outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] gap-y-2 w-full mb-4">
           <div
             role="tablist"
-            className="text-slate-500 items-center bg-slate-100 box-border caret-transparent grid grid-cols-[repeat(3,minmax(0px,1fr))] justify-center w-full p-1 rounded-[14px]"
+            className="text-slate-500 items-center bg-slate-100 box-border caret-transparent grid grid-cols-[repeat(2,minmax(0px,1fr))] justify-center w-full p-1 rounded-[14px]"
           >
             <button
               type="button"
@@ -146,23 +143,17 @@ export const VehicleCard = (props: VehicleCardProps) => {
           </div>
           <div
             role="tablist"
-            className="text-slate-500 items-center bg-slate-100 box-border caret-transparent grid grid-cols-[repeat(2,minmax(0px,1fr))] justify-center w-full p-1 rounded-[14px]"
+            className="text-slate-500 items-center bg-slate-100 box-border caret-transparent grid grid-cols-[repeat(1,minmax(0px,1fr))] justify-center w-full p-1 rounded-[14px]"
           >
             <div className={`items-center box-border caret-transparent flex justify-between outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] p-3 rounded-[14px] border-2 transition-all duration-300 ${
               activeTab === "Assinatura" 
                 ? "bg-blue-50 border-blue-300 shadow-lg shadow-blue-100" 
-                : activeTab === "Financiamento"
-                ? "bg-blue-900/5 border-blue-900/30 shadow-lg shadow-blue-900/10"
-                : activeTab === "Consórcio"
-                ? "bg-green-50 border-green-300 shadow-lg shadow-green-100"
-                : "bg-[linear-gradient(to_right,oklab(0.605781_-0.143492_0.0811708_/_0.1)_0%,oklab(0.674095_-0.17859_0.139068_/_0.1)_100%)] border-transparent"
+                : "bg-green-50 border-green-300 shadow-lg shadow-green-100"
             }`}>
               <div className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)]">
                 <p className={`text-sm box-border caret-transparent leading-5 outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] font-semibold ${
                   activeTab === "Assinatura" 
                     ? "text-blue-700" 
-                    : activeTab === "Financiamento"
-                    ? "text-blue-900"
                     : "text-green-700"
                 }`}>
                   {activeTab}
@@ -170,8 +161,6 @@ export const VehicleCard = (props: VehicleCardProps) => {
                 <p className={`text-sm box-border caret-transparent leading-5 outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] ${
                   activeTab === "Assinatura" 
                     ? "text-blue-600" 
-                    : activeTab === "Financiamento"
-                    ? "text-blue-800"
                     : "text-green-600"
                 }`}>
                   {currentPriceAndTerm.term}
@@ -180,8 +169,6 @@ export const VehicleCard = (props: VehicleCardProps) => {
               <p className={`text-lg font-bold box-border caret-transparent leading-7 outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] ${
                 activeTab === "Assinatura" 
                   ? "text-blue-700" 
-                  : activeTab === "Financiamento"
-                  ? "text-blue-900"
                   : "text-green-700"
               }`}>
                 {currentPriceAndTerm.monthly}

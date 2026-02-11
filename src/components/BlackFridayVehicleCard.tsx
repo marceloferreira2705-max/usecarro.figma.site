@@ -6,7 +6,6 @@ export type BlackFridayVehicleCardProps = {
   vehicleId: string;
   fipeValue: string;
   assinaturaPrice: string;
-  financiamentoPrice: string;
   consorcioCredit: string;
   consorcioTerm: string;
   consorcioPrice: string;
@@ -127,16 +126,7 @@ export const BlackFridayVehicleCard = (props: BlackFridayVehicleCardProps) => {
               </div>
             </div>
 
-            {/* Financiamento */}
-            <div className="bg-blue-900/5 border-2 border-blue-900/30 rounded-lg p-3">
-              <div className="flex justify-between items-center">
-                <div>
-                  <p className="text-sm font-semibold text-blue-900">Financiamento</p>
-                  <p className="text-xs text-blue-800">/mês</p>
-                </div>
-                <p className="text-xl font-bold text-blue-900">{props.financiamentoPrice}</p>
-              </div>
-            </div>
+            {/* Financiamento Removido */}
 
             {/* Consórcio */}
             <div className="bg-green-50 border-2 border-green-300 rounded-lg p-3">
@@ -253,7 +243,6 @@ export const BlackFridayVehicleCard = (props: BlackFridayVehicleCardProps) => {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                     >
                       <option value="Assinatura">Assinatura ({props.assinaturaPrice})</option>
-                      <option value="Financiamento">Financiamento ({props.financiamentoPrice})</option>
                       <option value="Consórcio">Consórcio ({props.consorcioPrice})</option>
                     </select>
                   </div>
