@@ -39,7 +39,20 @@ export const AdminVehiclesPage = () => {
   };
 
   const handleCreate = () => {
-    const newId = String(Math.max(...Object.keys(vehicles).map(Number)) + 1);
+    // Lógica inteligente para encontrar o menor ID disponível (reutiliza IDs excluídos)
+    const existingIds = Object.keys(vehicles).map(Number).sort((a, b) => a - b);
+    let nextId = 1;
+    
+    for (let i = 0; i < existingIds.length; i++) {
+      if (existingIds[i] === nextId) {
+        nextId++;
+      } else if (existingIds[i] > nextId) {
+        break; // Encontrou um buraco na sequência
+      }
+    }
+    
+    const newId = String(nextId);
+
     const newVehicle: VehicleData = {
       id: newId,
       title: "",
