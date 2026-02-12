@@ -1,37 +1,37 @@
 import { Header } from "@/sections/Header";
 import { Footer } from "@/sections/Footer";
-import { BlackFridayVehicleCard } from "@/components/BlackFridayVehicleCard";
+import { Ofertas2026VehicleCard } from "@/components/BlackFridayVehicleCard";
 import { ChatSection } from "@/sections/ChatSection";
 import { useState, useEffect } from "react";
 
 const ofertas2026VehiclesData = [
   {
     vehicleId: "1",
-    fipeValue: "R$ 68.657",
+    fipeValue: "R$ 72.990",
     assinaturaPrice: "R$ 1.749,99",
-    consorcioCredit: "R$ 72.500",
+    consorcioCredit: "R$ 75.000",
     consorcioTerm: "80m",
     consorcioPrice: "R$ 674,00",
   },
   {
     vehicleId: "14",
-    fipeValue: "R$ 105.484",
+    fipeValue: "R$ 109.990",
     assinaturaPrice: "R$ 2.247,99",
-    consorcioCredit: "R$ 102.500",
+    consorcioCredit: "R$ 110.000",
     consorcioTerm: "80m",
     consorcioPrice: "R$ 953,00",
   },
   {
     vehicleId: "10",
-    fipeValue: "R$ 95.620",
+    fipeValue: "R$ 102.990",
     assinaturaPrice: "R$ 2.388,99",
-    consorcioCredit: "R$ 92.500",
+    consorcioCredit: "R$ 105.000",
     consorcioTerm: "80m",
     consorcioPrice: "R$ 860,00",
   },
   {
     vehicleId: "19",
-    fipeValue: "R$ 145.000",
+    fipeValue: "R$ 146.990",
     assinaturaPrice: "R$ 3.139,99",
     consorcioCredit: "R$ 150.000",
     consorcioTerm: "120m",
@@ -39,49 +39,49 @@ const ofertas2026VehiclesData = [
   },
   {
     vehicleId: "31",
-    fipeValue: "R$ 172.477",
+    fipeValue: "R$ 184.990",
     assinaturaPrice: "R$ 3.845,99",
-    consorcioCredit: "R$ 170.000",
+    consorcioCredit: "R$ 185.000",
     consorcioTerm: "90m",
     consorcioPrice: "R$ 1.090,00",
   },
   {
     vehicleId: "17",
-    fipeValue: "R$ 135.000",
+    fipeValue: "R$ 125.990",
     assinaturaPrice: "R$ 2.899,99",
-    consorcioCredit: "R$ 140.000",
+    consorcioCredit: "R$ 130.000",
     consorcioTerm: "120m",
     consorcioPrice: "R$ 2.360,00",
   },
   {
     vehicleId: "22",
-    fipeValue: "R$ 119.780",
+    fipeValue: "R$ 149.990",
     assinaturaPrice: "R$ 3.169,00",
-    consorcioCredit: "R$ 122.500",
+    consorcioCredit: "R$ 150.000",
     consorcioTerm: "80m",
     consorcioPrice: "R$ 1.084,00",
   },
   {
     vehicleId: "7",
-    fipeValue: "R$ 112.155",
+    fipeValue: "R$ 105.990",
     assinaturaPrice: "R$ 2.059,00",
-    consorcioCredit: "R$ 112.500",
+    consorcioCredit: "R$ 110.000",
     consorcioTerm: "80m",
     consorcioPrice: "R$ 995,00",
   },
   {
     vehicleId: "32",
-    fipeValue: "R$ 207.189",
+    fipeValue: "R$ 264.990",
     assinaturaPrice: "R$ 5.369,00",
-    consorcioCredit: "R$ 200.000",
+    consorcioCredit: "R$ 265.000",
     consorcioTerm: "80m",
     consorcioPrice: "R$ 1.560,00",
   },
   {
     vehicleId: "9",
-    fipeValue: "R$ 99.999",
+    fipeValue: "R$ 107.990",
     assinaturaPrice: "R$ 2.359,00",
-    consorcioCredit: "R$ 102.500",
+    consorcioCredit: "R$ 110.000",
     consorcioTerm: "80m",
     consorcioPrice: "R$ 907,00",
   },
@@ -272,7 +272,7 @@ export const Ofertas2026Page = () => {
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {ofertas2026VehiclesData.map((vehicle, index) => (
-              <BlackFridayVehicleCard key={index} {...vehicle} />
+              <Ofertas2026VehicleCard key={index} {...vehicle} />
             ))}
           </div>
           

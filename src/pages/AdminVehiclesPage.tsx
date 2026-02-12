@@ -232,8 +232,19 @@ export const AdminVehiclesPage = () => {
   };
 
   const handleExport = () => {
-    const dataStr = JSON.stringify(vehicles, null, 2);
-    setExportData(dataStr);
+    // Gera o código TypeScript exato para o arquivo vehiclesData.ts
+    const vehiclesList = Object.values(vehicles);
+    const jsonContent = JSON.stringify(vehicles, null, 2);
+    
+    // Cria uma versão simplificada para o chat se for muito grande
+    const codeString = `
+// COPIE TUDO ABAIXO E ENVIE NO CHAT
+import { VehicleData } from "./vehiclesData";
+
+export const vehiclesData: Record<string, VehicleData> = ${jsonContent};
+    `;
+
+    setExportData(codeString);
     setShowExportModal(true);
   };
 
@@ -356,9 +367,13 @@ export const AdminVehiclesPage = () => {
       {showExportModal && (
         <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-[#121212] border border-[#C5A059] w-full max-w-3xl shadow-2xl relative rounded-lg p-8">
-            <h3 className="font-serif text-2xl text-white mb-4">Exportar Dados para Publicação</h3>
+            <h3 className="font-serif text-2xl text-white mb-4">Publicar Alterações no Site</h3>
             <p className="text-[#A0A0A0] text-sm mb-6">
-              Copie o código abaixo e envie no chat para que eu possa atualizar o site oficial com seus veículos cadastrados.
+              Para que seus novos veículos apareçam para <strong>todos os usuários</strong> e em <strong>outros computadores</strong>, o código do site precisa ser atualizado.
+              <br/><br/>
+              1. Clique em <strong>COPIAR CÓDIGO</strong> abaixo.<br/>
+              2. Cole o texto no chat com a Inteligência Artificial.<br/>
+              3. Ela atualizará o arquivo oficial do site com seus dados.
             </p>
             <textarea 
               readOnly 
