@@ -2,6 +2,7 @@ import { LuxuryHeader } from "@/components/LuxuryHeader";
 import { LuxuryHero } from "@/components/LuxuryHero";
 import { LuxuryCuratorship } from "@/components/LuxuryCuratorship";
 import { LuxuryVehicleList } from "@/components/LuxuryVehicleList";
+import { BespokeSourcingBanner } from "@/components/BespokeSourcingBanner";
 import { LuxuryServices } from "@/components/LuxuryServices";
 import { LuxuryFooter } from "@/components/LuxuryFooter";
 
@@ -12,6 +13,7 @@ export const App = () => {
       <LuxuryHero />
       <LuxuryCuratorship />
       <LuxuryVehicleList />
+      <BespokeSourcingBanner />
       <LuxuryServices />
       <LuxuryFooter />
     </div>

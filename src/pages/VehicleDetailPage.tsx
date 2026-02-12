@@ -154,19 +154,7 @@ export const VehicleDetailPage = () => {
             </div>
           </div>
 
-          {/* 4. 4 Fotos Pequenas */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full mb-24 animate-fade-in-up" style={{ animationDelay: '300ms' }}>
-            {thumbnails.map((thumb, index) => (
-              <div key={index} className="aspect-[4/3] bg-luxury-card border border-white/5 overflow-hidden cursor-pointer hover:border-luxury-gold/50 transition-colors">
-                <img 
-                  src={thumb} 
-                  alt={`Detalhe ${index + 1}`} 
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
-                  onError={(e) => { e.currentTarget.src = "https://via.placeholder.com/400x300?text=Detalhe"; }}
-                />
-              </div>
-            ))}
-          </div>
+          {/* 4. Fotos Pequenas (Removido) */}
 
           {/* 5. Duas Caixas Elegantes (Seleção) */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full mb-12 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
