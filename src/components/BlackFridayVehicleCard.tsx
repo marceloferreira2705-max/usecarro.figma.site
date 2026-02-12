@@ -11,7 +11,7 @@ export type BlackFridayVehicleCardProps = {
   consorcioPrice: string;
 };
 
-export const BlackFridayVehicleCard = (props: BlackFridayVehicleCardProps) => {
+export const Ofertas2026VehicleCard = (props: BlackFridayVehicleCardProps) => {
   const [showOfferForm, setShowOfferForm] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
   
@@ -108,9 +108,9 @@ export const BlackFridayVehicleCard = (props: BlackFridayVehicleCardProps) => {
           </div>
 
           {/* FIPE Value */}
-          <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-2 border-purple-200 rounded-lg p-3 mb-4">
-            <p className="text-xs text-purple-700 font-semibold mb-1">Valor FIPE</p>
-            <p className="text-xl font-black text-purple-900">{props.fipeValue}</p>
+          <div className="bg-gradient-to-r from-blue-50 to-cyan-50 border-2 border-blue-200 rounded-lg p-3 mb-4">
+            <p className="text-xs text-blue-700 font-semibold mb-1">Valor FIPE</p>
+            <p className="text-xl font-black text-blue-900">{props.fipeValue}</p>
           </div>
 
           {/* Prices */}
@@ -151,7 +151,7 @@ export const BlackFridayVehicleCard = (props: BlackFridayVehicleCardProps) => {
             
             <button
               onClick={() => window.location.href = `/veiculo/${props.vehicleId}/${formattedTitle}`}
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-3 rounded-lg hover:shadow-lg transition-all cursor-pointer"
+              className="w-full bg-gradient-to-r from-cyan-400 to-blue-400 text-blue-950 font-bold py-3 rounded-lg hover:shadow-lg transition-all cursor-pointer"
             >
               Ver Detalhes da Oferta
             </button>
@@ -196,7 +196,7 @@ export const BlackFridayVehicleCard = (props: BlackFridayVehicleCardProps) => {
                       <input
                         type="text"
                         name="Nome Completo"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                         placeholder="Seu nome completo"
                         required
                       />
@@ -206,7 +206,7 @@ export const BlackFridayVehicleCard = (props: BlackFridayVehicleCardProps) => {
                       <input
                         type="email"
                         name="Email"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                         placeholder="seu@email.com"
                         required
                       />
@@ -219,7 +219,7 @@ export const BlackFridayVehicleCard = (props: BlackFridayVehicleCardProps) => {
                       <input
                         type="tel"
                         name="Telefone"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                         placeholder="(12) 99109-5018"
                         required
                       />
@@ -228,7 +228,7 @@ export const BlackFridayVehicleCard = (props: BlackFridayVehicleCardProps) => {
                       <label className="block text-sm font-medium text-gray-700 mb-2">Tipo de Pessoa</label>
                       <select
                         name="Tipo de Pessoa"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                       >
                         <option value="Pessoa Física">Pessoa Física</option>
                         <option value="Pessoa Jurídica">Pessoa Jurídica</option>
@@ -240,7 +240,7 @@ export const BlackFridayVehicleCard = (props: BlackFridayVehicleCardProps) => {
                     <label className="block text-sm font-medium text-gray-700 mb-2">Interesse Principal</label>
                     <select
                       name="Interesse"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                     >
                       <option value="Assinatura">Assinatura ({props.assinaturaPrice})</option>
                       <option value="Consórcio">Consórcio ({props.consorcioPrice})</option>
@@ -252,7 +252,7 @@ export const BlackFridayVehicleCard = (props: BlackFridayVehicleCardProps) => {
                     <textarea
                       name="Mensagem"
                       rows={4}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                       placeholder="Deixe uma mensagem ou dúvida..."
                     ></textarea>
                   </div>

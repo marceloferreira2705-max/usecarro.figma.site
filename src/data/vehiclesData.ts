@@ -1,34 +1,6 @@
-export type VehicleData = {
-  id: string;
-  title: string;
-  brand: string;
-  version: string;
-  type: string;
-  clientType: string;
-  fuelType: string;
-  transmission: string;
-  seats: string;
-  engine: string;
-  color: string;
-  doors: string;
-  year: string;
-  prices: {
-    assinatura: {
-      monthly: string;
-      term: string;
-      mileage: string;
-      details: string[];
-    };
-    consorcio: {
-      monthly: string;
-      term: string;
-      credit: string; // Novo campo para Crédito Estimado
-      details: string[];
-    };
-  };
-  images: string[];
-  description: string;
-};
+import { VehicleData } from "./vehiclesData";
+
+export type { VehicleData };
 
 export const vehiclesData: Record<string, VehicleData> = {
   "1": {
@@ -233,7 +205,7 @@ export const vehiclesData: Record<string, VehicleData> = {
     "id": "7",
     "title": "Strada Endurance 1.3",
     "brand": "FIAT",
-    "version": "Strada Endurance 1.3 Flex 8V CP",
+    "version": "Strada Endurance 1.3 Flex 8V CP PJ",
     "type": "Picape Compacta",
     "clientType": "Pessoa Jurídica",
     "fuelType": "FLEX",
@@ -299,7 +271,7 @@ export const vehiclesData: Record<string, VehicleData> = {
     "id": "9",
     "title": "Pulse Drive 1.3 MT",
     "brand": "FIAT",
-    "version": "Pulse Drive 1.3 MT",
+    "version": "Pulse Drive 1.3 MT PJ",
     "type": "SUV Compacto",
     "clientType": "Pessoa Jurídica",
     "fuelType": "FLEX",
@@ -588,7 +560,7 @@ export const vehiclesData: Record<string, VehicleData> = {
       }
     },
     "images": [
-      "https://production.autoforce.com/uploads/version/profile_image/5705/model_main_comprar-audace-turbo-200-flex_f746f93905.png"
+      "https://production.autoforce.com/uploads/version/profile_image/5705/model_main_comprar-audace-turbo-200-flex-at_f746f93905.png"
     ],
     "description": "Potência do motor Turbo 200 com câmbio CVT. O Pulse Audace entrega performance e conforto superiores."
   },
@@ -728,7 +700,7 @@ export const vehiclesData: Record<string, VehicleData> = {
     "id": "22",
     "title": "Fastback Audace T200",
     "brand": "FIAT",
-    "version": "Fastback Audace 200 TB Aut (Hibrído)",
+    "version": "Fastback Audace 200 TB Aut (Hibrído) PJ",
     "type": "SUV Coupé",
     "clientType": "Pessoa Jurídica",
     "fuelType": "FLEX",
@@ -1058,7 +1030,7 @@ export const vehiclesData: Record<string, VehicleData> = {
     "id": "32",
     "title": "RAMPAGE REBEL 2.2",
     "brand": "RAM",
-    "version": "RAMPAGE REBEL 2.2 TB CD 4X4 Diesel Aut.",
+    "version": "RAMPAGE REBEL 2.2 TB CD 4X4 Diesel Aut. PJ",
     "type": "Picape Média",
     "clientType": "Pessoa Jurídica",
     "fuelType": "DIESEL",

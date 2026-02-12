@@ -1,8 +1,8 @@
 import { vehiclesData, VehicleData } from "@/data/vehiclesData";
 
-// Chave de armazenamento atual
-const STORAGE_KEY = "useCarroVehicles_v2026_Final";
-const UPDATE_DATE_KEY = "vehicleUpdateDates_v2026_Final";
+// Chave de armazenamento atual - ALTERADA PARA FORÇAR SINCRONIZAÇÃO
+const STORAGE_KEY = "useCarroVehicles_v2026_Sync_Final";
+const UPDATE_DATE_KEY = "vehicleUpdateDates_v2026_Sync_Final";
 
 // Lista de chaves antigas para limpeza automática se necessário
 const OLD_KEYS = [
