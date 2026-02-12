@@ -15,6 +15,8 @@ export const AdminVehiclesPage = () => {
   const [lastUpdated, setLastUpdated] = useState<Record<string, string>>({});
   const [storageUsage, setStorageUsage] = useState("0");
   const [isCompressing, setIsCompressing] = useState(false);
+  const [showExportModal, setShowExportModal] = useState(false);
+  const [exportData, setExportData] = useState("");
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -229,6 +231,17 @@ export const AdminVehiclesPage = () => {
     }
   };
 
+  const handleExport = () => {
+    const dataStr = JSON.stringify(vehicles, null, 2);
+    setExportData(dataStr);
+    setShowExportModal(true);
+  };
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(exportData);
+    alert("Dados copiados! Agora cole no chat com a IA para atualizar o site oficial.");
+  };
+
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-[#050505] flex items-center justify-center p-6 font-sans selection:bg-[#C5A059] selection:text-black">
@@ -289,6 +302,7 @@ export const AdminVehiclesPage = () => {
               <p className="text-[#A0A0A0] text-sm mt-2">{Object.keys(vehicles).length} veículos ativos.</p>
             </div>
             <div className="flex gap-4">
+              <button onClick={handleExport} className="px-6 py-3 bg-blue-900/30 border border-blue-500/50 text-blue-400 text-xs font-bold tracking-[0.2em] uppercase hover:bg-blue-500 hover:text-white transition-colors">Exportar para Publicação</button>
               <button onClick={handleCreate} className="px-6 py-3 border border-[#C5A059] text-[#C5A059] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#C5A059] hover:text-black transition-colors">+ Novo Veículo</button>
               <button onClick={() => setIsAuthenticated(false)} className="px-6 py-3 border border-white/20 text-white text-xs font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-colors">Sair</button>
             </div>
@@ -337,6 +351,27 @@ export const AdminVehiclesPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Modal de Exportação */}
+      {showExportModal && (
+        <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-[#121212] border border-[#C5A059] w-full max-w-3xl shadow-2xl relative rounded-lg p-8">
+            <h3 className="font-serif text-2xl text-white mb-4">Exportar Dados para Publicação</h3>
+            <p className="text-[#A0A0A0] text-sm mb-6">
+              Copie o código abaixo e envie no chat para que eu possa atualizar o site oficial com seus veículos cadastrados.
+            </p>
+            <textarea 
+              readOnly 
+              value={exportData} 
+              className="w-full h-64 bg-black/50 border border-white/10 p-4 text-xs font-mono text-green-400 rounded mb-6 focus:outline-none"
+            />
+            <div className="flex justify-end gap-4">
+              <button onClick={() => setShowExportModal(false)} className="px-6 py-3 border border-white/20 text-white text-xs font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-colors">Fechar</button>
+              <button onClick={copyToClipboard} className="px-6 py-3 bg-[#C5A059] text-black text-xs font-bold tracking-[0.2em] uppercase hover:bg-white transition-colors">Copiar Código</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {editingVehicle && formData && (
         <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
