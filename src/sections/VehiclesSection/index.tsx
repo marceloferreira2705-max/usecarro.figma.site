@@ -80,10 +80,10 @@ export const VehiclesSection = () => {
         <div className="box-border caret-transparent outline-[oklab(0.636981_-0.0629281_-0.121936_/_0.5)] text-center mt-12">
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              onClick={() => window.location.href = "/ofertas2026"}
+              onClick={() => window.location.href = "/veiculos"}
               className="bg-gradient-to-r from-cyan-400 to-blue-400 text-blue-950 font-bold px-8 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all cursor-pointer"
             >
-              Ver Todas as Ofertas 2026
+              Ver Estoque Completo
             </button>
             <button
               onClick={() => window.location.href = "/veiculos"}

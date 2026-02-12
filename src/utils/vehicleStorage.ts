@@ -1,17 +1,8 @@
 import { vehiclesData, VehicleData } from "@/data/vehiclesData";
 
-// Chave de armazenamento atual - ALTERADA PARA FORÇAR SINCRONIZAÇÃO
-const STORAGE_KEY = "useCarroVehicles_v2026_Sync_Final_v2";
-const UPDATE_DATE_KEY = "vehicleUpdateDates_v2026_Sync_Final_v2";
-
-// Lista de chaves antigas para limpeza automática se necessário
-const OLD_KEYS = [
-  "useCarroVehicles",
-  "useCarroVehicles_v2026",
-  "useCarroVehicles_v2026_Clean",
-  "useCarroVehicles_v2026_Optimized",
-  "vehicleUpdateDates_v2026_Optimized"
-];
+// NOVA CHAVE PARA FORÇAR O RESET TOTAL E LIMPEZA DE DADOS ANTIGOS
+const STORAGE_KEY = "useCarro_Clean_Start_v1";
+const UPDATE_DATE_KEY = "useCarro_Clean_Dates_v1";
 
 export const getStorageUsage = () => {
   try {
@@ -35,7 +26,7 @@ export const getVehicles = (): Record<string, VehicleData> => {
   } catch (error) {
     console.error("Erro ao carregar veículos do storage:", error);
   }
-  // Retorna os dados padrão se não houver nada salvo
+  // Retorna os dados padrão (apenas o Volvo) se não houver nada salvo
   return vehiclesData;
 };
 

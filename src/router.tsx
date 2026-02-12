@@ -11,17 +11,16 @@ import { LGPDPage } from './pages/LGPDPage';
 import { CookiesPage } from './pages/CookiesPage';
 import { OuvidoriaPage } from './pages/OuvidoriaPage';
 import { VehicleDetailPage } from './pages/VehicleDetailPage';
-import { Ofertas2026Page } from './pages/Ofertas2026Page';
 import { AdminVehiclesPage } from './pages/AdminVehiclesPage';
 import { EspecialistaPage } from './pages/EspecialistaPage';
-import { FormularioEnviadoPage } from './pages/FormularioEnviadoPage';
+    import { FormularioEnviadoPage } from './pages/FormularioEnviadoPage';
 
-export const AppRouter = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/assinatura" element={<AssinaturaPage />} />
+    export const AppRouter = () => {
+      return (
+        <Router>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/assinatura" element={<AssinaturaPage />} />
         <Route path="/consorcio" element={<ConsorcioPage />} />
         <Route path="/veiculos" element={<VeiculosPage />} />
         <Route path="/veiculo/:id/:name?" element={<VehicleDetailPage />} />
@@ -32,7 +31,6 @@ export const AppRouter = () => {
         <Route path="/lgpd" element={<LGPDPage />} />
         <Route path="/cookies" element={<CookiesPage />} />
         <Route path="/ouvidoria" element={<OuvidoriaPage />} />
-        <Route path="/ofertas2026" element={<Ofertas2026Page />} />
         <Route path="/admin-portal-nexi" element={<AdminVehiclesPage />} />
         <Route path="/especialista" element={<EspecialistaPage />} />
         <Route path="/formulario-enviado" element={<FormularioEnviadoPage />} />

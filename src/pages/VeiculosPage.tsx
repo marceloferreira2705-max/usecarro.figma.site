@@ -138,10 +138,10 @@ export const VeiculosPage = () => {
                 {selectedFilter !== "Todos" && ` em ${selectedFilter}`}.
               </p>
               <button
-                onClick={() => window.location.href = "/ofertas2026"}
+                onClick={() => window.location.href = "/contato"}
                 className="mt-6 bg-gradient-to-r from-cyan-400 to-blue-400 text-blue-950 font-bold px-8 py-4 rounded-2xl text-lg shadow-lg hover:shadow-xl transition-all cursor-pointer"
               >
-                Ver Página Ofertas 2026 Completa
+                Falar com Consultor
               </button>
             </div>
           )}

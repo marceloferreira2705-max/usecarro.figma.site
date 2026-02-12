@@ -248,6 +248,39 @@ export const vehiclesData: Record<string, VehicleData> = ${jsonContent};
     setShowExportModal(true);
   };
 
+  const handleExtractJSON = () => {
+    // Extração limpa conforme solicitado (apenas texto, sem imagens reais)
+    const extractedData = Object.values(vehicles).map(v => ({
+      titulo: v.title,
+      marca: v.brand,
+      versao: v.version,
+      categoria: v.type,
+      ano: v.year,
+      tipoCliente: v.clientType,
+      combustivel: v.fuelType,
+      transmissao: v.transmission,
+      motorizacao: v.engine,
+      cor: v.color,
+      portas: v.doors,
+      lugares: v.seats,
+      descricao: v.description,
+      assinatura: {
+        mensalidade: v.prices.assinatura.monthly,
+        prazo: v.prices.assinatura.term,
+        franquiaKm: v.prices.assinatura.mileage
+      },
+      consorcio: {
+        mensalidade: v.prices.consorcio.monthly,
+        prazo: v.prices.consorcio.term,
+        creditoEstimado: v.prices.consorcio.credit
+      },
+      imagem: "" // Placeholder vazio conforme regra
+    }));
+
+    setExportData(JSON.stringify(extractedData, null, 2));
+    setShowExportModal(true);
+  };
+
   const copyToClipboard = () => {
     navigator.clipboard.writeText(exportData);
     alert("Dados copiados! Agora cole no chat com a IA para atualizar o site oficial.");
@@ -313,6 +346,7 @@ export const vehiclesData: Record<string, VehicleData> = ${jsonContent};
               <p className="text-[#A0A0A0] text-sm mt-2">{Object.keys(vehicles).length} veículos ativos.</p>
             </div>
             <div className="flex gap-4">
+              <button onClick={handleExtractJSON} className="px-6 py-3 bg-green-900/30 border border-green-500/50 text-green-400 text-xs font-bold tracking-[0.2em] uppercase hover:bg-green-500 hover:text-white transition-colors">Extrair Dados (JSON)</button>
               <button onClick={handleExport} className="px-6 py-3 bg-blue-900/30 border border-blue-500/50 text-blue-400 text-xs font-bold tracking-[0.2em] uppercase hover:bg-blue-500 hover:text-white transition-colors">Exportar para Publicação</button>
               <button onClick={handleCreate} className="px-6 py-3 border border-[#C5A059] text-[#C5A059] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#C5A059] hover:text-black transition-colors">+ Novo Veículo</button>
               <button onClick={() => setIsAuthenticated(false)} className="px-6 py-3 border border-white/20 text-white text-xs font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-colors">Sair</button>
