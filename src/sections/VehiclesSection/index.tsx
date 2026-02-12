@@ -6,7 +6,7 @@ import { VehicleData } from "@/data/vehiclesData";
 export const VehiclesSection = () => {
   const [featuredVehicles, setFeaturedVehicles] = useState<VehicleData[]>([]);
 
-  useEffect(() => {
+  const loadVehicles = () => {
     const vehicles = getVehicles();
     const vehiclesList = Object.values(vehicles);
     
@@ -15,16 +15,31 @@ export const VehiclesSection = () => {
     let selected = featuredIds.map(id => vehicles[id]).filter(Boolean);
     
     // Se não encontrar os destaques específicos, ou se tivermos poucos, 
-    // completa com os últimos veículos cadastrados (novidades)
-    if (selected.length < 3) {
-      // Pega os últimos 3 veículos adicionados (assumindo que IDs maiores são mais novos)
+    // completa com os últimos veículos cadastrados (novidades) para garantir que a Home não fique vazia
+    // e mostre as novidades cadastradas pelo usuário
+    if (selected.length < 3 || vehiclesList.length > 0) {
+      // Prioriza mostrar os últimos 3 veículos adicionados/editados
       const latest = vehiclesList
         .sort((a, b) => Number(b.id) - Number(a.id))
         .slice(0, 3);
-      selected = latest;
+      
+      // Se tivermos veículos novos suficientes, usamos eles como destaque
+      if (latest.length > 0) {
+        selected = latest;
+      }
     }
     
     setFeaturedVehicles(selected);
+  };
+
+  useEffect(() => {
+    loadVehicles();
+
+    // Escuta eventos de atualização do storage (disparados pelo Admin)
+    window.addEventListener("vehiclesUpdated", loadVehicles);
+    return () => {
+      window.removeEventListener("vehiclesUpdated", loadVehicles);
+    };
   }, []);
 
   return (

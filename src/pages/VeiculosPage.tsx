@@ -10,10 +10,17 @@ export const VeiculosPage = () => {
   const [visibleVehicles, setVisibleVehicles] = useState(9);
   const [allVehicles, setAllVehicles] = useState<VehicleData[]>([]);
 
-  useEffect(() => {
+  const loadVehicles = () => {
     const vehicles = getVehicles();
-    // Carrega todos os veículos disponíveis no storage
     setAllVehicles(Object.values(vehicles));
+  };
+
+  useEffect(() => {
+    loadVehicles();
+    
+    // Escuta atualizações em tempo real
+    window.addEventListener("vehiclesUpdated", loadVehicles);
+    return () => window.removeEventListener("vehiclesUpdated", loadVehicles);
   }, []);
 
   const filters = ["Todos", "Econômico", "Hatch Compacto", "SUV Compacto", "SUV Médio", "SUV Coupé", "Picape Compacta", "Picape Média"];
