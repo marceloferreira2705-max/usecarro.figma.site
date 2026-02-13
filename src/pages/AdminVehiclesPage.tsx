@@ -248,6 +248,30 @@ export const vehiclesData: Record<string, VehicleData> = ${jsonContent};
     setShowExportModal(true);
   };
 
+  const handleExportTextOnly = () => {
+    // Cria uma cópia dos veículos removendo as imagens pesadas (Base64)
+    const vehiclesLight = Object.entries(vehicles).reduce((acc, [key, vehicle]) => {
+      acc[key] = {
+        ...vehicle,
+        images: ["https://via.placeholder.com/800x600?text=Foto+Pendente"] // Placeholder leve
+      };
+      return acc;
+    }, {} as Record<string, VehicleData>);
+
+    const jsonContent = JSON.stringify(vehiclesLight, null, 2);
+    
+    const codeString = `
+// DADOS LEVES (SEM FOTOS PESADAS) PARA NÃO TRAVAR O CHAT
+// Copie e cole isso no chat
+import { VehicleData } from "./vehiclesData";
+
+export const vehiclesData: Record<string, VehicleData> = ${jsonContent};
+    `;
+
+    setExportData(codeString);
+    setShowExportModal(true);
+  };
+
   const handleExtractJSON = () => {
     // Extração limpa conforme solicitado (apenas texto, sem imagens reais)
     const extractedData = Object.values(vehicles).map(v => ({
@@ -274,7 +298,7 @@ export const vehiclesData: Record<string, VehicleData> = ${jsonContent};
         prazo: v.prices.consorcio.term,
         creditoEstimado: v.prices.consorcio.credit
       },
-      imagem: "" // Placeholder vazio conforme regra
+      imagem: v.images[0] || "" // Incluindo a foto conforme solicitado
     }));
 
     setExportData(JSON.stringify(extractedData, null, 2));
@@ -346,8 +370,8 @@ export const vehiclesData: Record<string, VehicleData> = ${jsonContent};
               <p className="text-[#A0A0A0] text-sm mt-2">{Object.keys(vehicles).length} veículos ativos.</p>
             </div>
             <div className="flex gap-4">
-              <button onClick={handleExtractJSON} className="px-6 py-3 bg-green-900/30 border border-green-500/50 text-green-400 text-xs font-bold tracking-[0.2em] uppercase hover:bg-green-500 hover:text-white transition-colors">Extrair Dados (JSON)</button>
-              <button onClick={handleExport} className="px-6 py-3 bg-blue-900/30 border border-blue-500/50 text-blue-400 text-xs font-bold tracking-[0.2em] uppercase hover:bg-blue-500 hover:text-white transition-colors">Exportar para Publicação</button>
+              <button onClick={handleExportTextOnly} className="px-6 py-3 bg-yellow-600/30 border border-yellow-500/50 text-yellow-400 text-xs font-bold tracking-[0.2em] uppercase hover:bg-yellow-500 hover:text-black transition-colors">Exportar (Leve/Sem Fotos)</button>
+              <button onClick={handleExport} className="px-6 py-3 bg-blue-900/30 border border-blue-500/50 text-blue-400 text-xs font-bold tracking-[0.2em] uppercase hover:bg-blue-500 hover:text-white transition-colors">Exportar Completo</button>
               <button onClick={handleCreate} className="px-6 py-3 border border-[#C5A059] text-[#C5A059] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#C5A059] hover:text-black transition-colors">+ Novo Veículo</button>
               <button onClick={() => setIsAuthenticated(false)} className="px-6 py-3 border border-white/20 text-white text-xs font-bold tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-colors">Sair</button>
             </div>

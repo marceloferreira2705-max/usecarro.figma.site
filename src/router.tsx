@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { App } from './App';
 import { AssinaturaPage } from './pages/AssinaturaPage';
 import { ConsorcioPage } from './pages/ConsorcioPage';
-import { VeiculosPage } from './pages/VeiculosPage';
 import { SobrePage } from './pages/SobrePage';
 import { ContatoPage } from './pages/ContatoPage';
 import { TermosPage } from './pages/TermosPage';
@@ -22,7 +21,6 @@ import { EspecialistaPage } from './pages/EspecialistaPage';
             <Route path="/" element={<App />} />
             <Route path="/assinatura" element={<AssinaturaPage />} />
         <Route path="/consorcio" element={<ConsorcioPage />} />
-        <Route path="/veiculos" element={<VeiculosPage />} />
         <Route path="/veiculo/:id/:name?" element={<VehicleDetailPage />} />
         <Route path="/sobre" element={<SobrePage />} />
         <Route path="/contato" element={<ContatoPage />} />

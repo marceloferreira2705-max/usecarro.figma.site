@@ -152,6 +152,14 @@ export const VehicleDetailPage = () => {
               <span className="text-white/20">•</span>
               <span>{vehicle.fuelType || "Combustível"}</span>
             </div>
+            
+            <div className="flex flex-wrap justify-center gap-8 mt-4 text-xs tracking-widest uppercase text-luxury-gray">
+              <span>Cor: {vehicle.color || "Não informada"}</span>
+              <span className="text-white/20">•</span>
+              <span>{vehicle.doors || "4"} Portas</span>
+              <span className="text-white/20">•</span>
+              <span>{vehicle.seats || "5"} Lugares</span>
+            </div>
           </div>
 
           {/* 4. Fotos Pequenas (Removido) */}
