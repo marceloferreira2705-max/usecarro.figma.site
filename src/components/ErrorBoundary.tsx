@@ -26,7 +26,10 @@ export class ErrorBoundary extends Component<Props, State> {
   private handleReset = () => {
     // Tenta limpar dados corrompidos que podem estar causando o erro
     try {
-      localStorage.removeItem("useCarroVehicles_v2026_Final");
+      // Limpa todas as chaves possíveis para garantir
+      localStorage.removeItem("useCarro_Clean_Start_v13_FINAL_COLLECTION");
+      localStorage.removeItem("useCarro_Clean_Dates_v13_FINAL_COLLECTION");
+      localStorage.clear(); // Reset total em caso de emergência
       window.location.href = "/";
     } catch (e) {
       window.location.reload();

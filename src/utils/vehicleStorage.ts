@@ -1,8 +1,8 @@
 import { vehiclesData, VehicleData } from "@/data/vehiclesData";
 
 // NOVA CHAVE PARA FORÇAR O RESET TOTAL E LIMPEZA DE DADOS ANTIGOS
-const STORAGE_KEY = "useCarro_Clean_Start_v11_FINAL_COLLECTION";
-const UPDATE_DATE_KEY = "useCarro_Clean_Dates_v11_FINAL_COLLECTION";
+const STORAGE_KEY = "useCarro_Clean_Start_v13_FINAL_COLLECTION";
+const UPDATE_DATE_KEY = "useCarro_Clean_Dates_v13_FINAL_COLLECTION";
 
 export const getStorageUsage = () => {
   try {
