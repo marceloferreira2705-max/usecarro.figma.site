@@ -56,11 +56,15 @@ export const LuxuryVehicleList = () => {
                     {vehicle.version}
                   </h3>
                   
-                  <div className="flex items-center gap-4 text-luxury-gray text-sm font-light tracking-widest uppercase mb-8">
+                  {/* Ano e Motor - Ocultos em mobile (< 480px) */}
+                  <div className="hidden min-[480px]:flex items-center gap-4 text-luxury-gray text-sm font-light tracking-widest uppercase mb-8">
                     <span>{vehicle.year}</span>
                     <span className="w-1 h-1 bg-luxury-gold rounded-full"></span>
                     <span>{vehicle.engine}</span>
                   </div>
+
+                  {/* Espaçamento alternativo para mobile quando ano/motor estão ocultos */}
+                  <div className="min-[480px]:hidden mb-8"></div>
 
                   <a
                     href={`/veiculo/${vehicle.id}/${vehicle.title.replace(/\s+/g, '-')}`}
