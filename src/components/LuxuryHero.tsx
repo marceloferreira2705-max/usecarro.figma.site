@@ -19,8 +19,18 @@ export const LuxuryHero = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-20 h-full flex flex-col justify-end items-center pb-24 px-6">
-        <div className="text-center animate-fade-in-up">
+      <div className="relative z-20 h-full flex flex-col justify-center items-center px-6">
+        <div className="text-center animate-fade-in-up max-w-4xl">
+          <span className="text-[#C5A059] text-[10px] tracking-[0.4em] uppercase block mb-6 font-medium">
+            O Legado
+          </span>
+          <h1 className="font-serif text-5xl md:text-7xl text-white mb-8 leading-tight">
+            Muito Além da Posse.
+          </h1>
+          <p className="text-[#A0A0A0] text-lg md:text-xl font-light tracking-wide max-w-2xl mx-auto leading-relaxed mb-12">
+            Nossa divisão de alta renda, desenhada para quem exige exclusividade.
+          </p>
+          
           <button
             onClick={scrollToCollection}
             className="group relative px-8 py-4 overflow-hidden rounded-none bg-transparent transition-all duration-300"

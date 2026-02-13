@@ -68,8 +68,8 @@ export const LuxuryHeader = () => {
           <nav className="flex flex-col gap-8 text-center">
             {[
               { name: "A Coleção", href: "/" },
-              { name: "Signature Experience", href: "/assinatura" },
-              { name: "Equity Planning", href: "/consorcio" },
+              { name: "Assinatura Exclusive", href: "/assinatura" },
+              { name: "Inteligência Patrimonial", href: "/consorcio" },
               { name: "Sobre Nós", href: "/sobre" },
             ].map((item, index) => (
               <a

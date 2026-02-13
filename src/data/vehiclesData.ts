@@ -176,7 +176,7 @@ export const vehiclesData: Record<string, VehicleData> = {
       assinatura: { monthly: "R$ 6.299,00", term: "36 Meses", mileage: "1000 km", details: [] },
       consorcio: { monthly: "R$ 2.760,00", term: "80 Meses", credit: "R$ 190.990,00", details: [] }
     },
-    images: ["https://images.unsplash.com/photo-1551830820-330a71b99659?q=80&w=1200&auto=format&fit=crop"]
+    images: ["https://c.animaapp.com/mfxz26rhnSsSP4/img/uploaded-asset-1771011866654-0.png"]
   },
   "V8": {
     id: "V8",

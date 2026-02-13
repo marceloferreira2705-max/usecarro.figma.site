@@ -3,7 +3,7 @@ import { LuxuryFooter } from "@/components/LuxuryFooter";
 
 export const ConsorcioPage = () => {
   const handleWhatsAppClick = () => {
-    const message = encodeURIComponent("Olá, gostaria de solicitar um Estudo de Viabilidade sobre o Equity Planning.");
+    const message = encodeURIComponent("Olá, gostaria de solicitar um Estudo de Viabilidade sobre a Inteligência Patrimonial.");
     window.open(`https://api.whatsapp.com/send/?phone=5512982900169&text=${message}&type=phone_number&app_absent=0`, '_blank');
   };
 
@@ -31,11 +31,11 @@ export const ConsorcioPage = () => {
         <div className="max-w-[1400px] mx-auto relative z-10">
           <div className="max-w-4xl animate-fade-in-up">
             <span className="text-[#C5A059] text-[10px] tracking-[0.4em] uppercase block mb-6 font-medium">
-              Financial Strategy
+              Estratégia Financeira
             </span>
             <h1 className="font-serif text-5xl md:text-7xl text-white mb-8 leading-tight">
-              Equity Planning: <br />
-              <span className="text-[#8C8C8C]">Inteligência Patrimonial.</span>
+              Inteligência Patrimonial: <br />
+              <span className="text-[#8C8C8C]">Estratégia Financeira.</span>
             </h1>
             <p className="text-[#8C8C8C] text-lg md:text-xl font-light tracking-wide max-w-2xl leading-relaxed border-l border-[#C5A059] pl-6">
               Por que descapitalizar? Utilize a alavancagem programada para a aquisição do seu veículo de alta performance.
@@ -161,14 +161,14 @@ export const ConsorcioPage = () => {
               Solicite um Estudo de Viabilidade
             </h2>
             <p className="text-[#8C8C8C] font-light text-sm md:text-base tracking-wide mb-10 max-w-2xl mx-auto">
-              Receba uma projeção comparativa entre o custo de oportunidade do seu capital vs. a taxa administrativa do Equity Planning.
+              Receba uma projeção comparativa entre o custo de oportunidade do seu capital vs. a taxa administrativa da Inteligência Patrimonial.
             </p>
 
             <button 
               onClick={handleWhatsAppClick}
               className="bg-[#C5A059] text-black font-bold text-xs tracking-[0.2em] uppercase py-4 px-10 hover:bg-white transition-colors duration-300"
             >
-              Falar com Advisor (WhatsApp)
+              Falar com Concierge
             </button>
           </div>
         </div>

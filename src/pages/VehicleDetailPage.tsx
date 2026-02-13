@@ -185,7 +185,7 @@ export const VehicleDetailPage = () => {
               
               <div className="flex justify-between items-start mb-4">
                 <h3 className={`font-serif text-2xl transition-colors ${selectedPlan === "Assinatura" ? "text-[#C5A059]" : "text-white group-hover:text-[#C5A059]"}`}>
-                  Signature Experience
+                  Assinatura Exclusive
                 </h3>
                 {selectedPlan === "Assinatura" && <span className="text-[#C5A059] text-xl">✓</span>}
               </div>
@@ -224,7 +224,7 @@ export const VehicleDetailPage = () => {
               
               <div className="flex justify-between items-start mb-4">
                 <h3 className={`font-serif text-2xl transition-colors ${selectedPlan === "Consórcio" ? "text-[#C5A059]" : "text-white group-hover:text-[#C5A059]"}`}>
-                  Equity Planning
+                  Inteligência Patrimonial
                 </h3>
                 {selectedPlan === "Consórcio" && <span className="text-[#C5A059] text-xl">✓</span>}
               </div>
