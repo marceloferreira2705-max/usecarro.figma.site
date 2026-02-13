@@ -24,12 +24,9 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   private handleReset = () => {
-    // Tenta limpar dados corrompidos que podem estar causando o erro
     try {
-      // Limpa todas as chaves possíveis para garantir
-      localStorage.removeItem("useCarro_Clean_Start_v13_FINAL_COLLECTION");
-      localStorage.removeItem("useCarro_Clean_Dates_v13_FINAL_COLLECTION");
-      localStorage.clear(); // Reset total em caso de emergência
+      // Limpa TODAS as chaves do localStorage para garantir reset total
+      localStorage.clear();
       window.location.href = "/";
     } catch (e) {
       window.location.reload();
@@ -46,7 +43,7 @@ export class ErrorBoundary extends Component<Props, State> {
             </div>
             <h1 className="font-serif text-2xl text-white mb-4">Algo deu errado</h1>
             <p className="text-[#A0A0A0] text-sm mb-8 leading-relaxed">
-              Identificamos um problema técnico ao carregar esta página. Isso geralmente ocorre devido a dados incompletos de um veículo novo.
+              Identificamos um problema técnico. Clique no botão abaixo para voltar ao início.
             </p>
             
             <div className="flex flex-col gap-3">
@@ -61,7 +58,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 onClick={this.handleReset}
                 className="w-full py-3 border border-red-900/50 text-red-500 text-xs font-bold tracking-[0.2em] uppercase hover:bg-red-900/20 transition-colors rounded"
               >
-                Resetar Sistema (Correção)
+                Resetar Sistema
               </button>
             </div>
             
