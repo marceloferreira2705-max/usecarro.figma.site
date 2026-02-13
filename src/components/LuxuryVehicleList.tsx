@@ -52,7 +52,7 @@ export const LuxuryVehicleList = () => {
                     {vehicle.brand}
                   </span>
                   
-                  <h3 className="font-serif text-3xl md:text-5xl text-white mb-2 leading-tight">
+                  <h3 className="font-serif text-2xl md:text-5xl text-white mb-2 leading-tight">
                     {vehicle.version}
                   </h3>
                   
